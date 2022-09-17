@@ -1,0 +1,76 @@
+:root {
+  --white-color: #ffffff;
+  --error-color: #ea2027;
+  --success-color: #19ce65;
+  --primary-color: #00a8ff;
+  --primary-bold-color: #0081c1;
+  --warning-color: #f1c40f;
+  --grey-bold-color: rgb(97, 97, 97);
+  --grey-light-color: rgb(198, 198, 198);
+
+  --text-color: #03486b;
+
+  --main-bg: rgb(244, 241, 241);
+
+  //height
+  --header-height: 60px;
+  --sidebar-width: 96px;
+  --sidebar-width-close: 60px;
+
+  --z-index-header: 10;
+
+  // Font size
+  --font-sm: 14px;
+  --font-md: 16px;
+  --font-lg: 18px;
+  --font-xl: 20px;
+  --font-2xl: 24px;
+  --font-3xl: 32px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + 20px);
+}
+
+html *::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: var(--main-bg);
+}
+html *::-webkit-scrollbar {
+  width: 8px;
+  height: 5px;
+  background-color: var(--main-bg);
+}
+html *::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: var(--primary-color);
+}
+
+body {
+  font-size: 1.6rem;
+  background-color: var(--main-bg);
+  color: var(--text-color);
+  line-height: 1.3;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+}
+
+button,
+input,
+[tabindex] {
+  outline: none;
+  border: none;
+}
