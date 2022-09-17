@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 interface Props {
   children: JSX.Element;
 }
-const IS_AUTHENTICATE = false;
+const IS_AUTHENTICATE = true;
 
 export const AuthRouter: React.FC<Props> = ({ children }) => {
   if (IS_AUTHENTICATE) {

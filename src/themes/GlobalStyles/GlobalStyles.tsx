@@ -1,9 +1,6 @@
 import { FC } from 'react';
-import classnames from 'classnames/bind';
 
-import styles from './GlobalStyles.module.scss';
-
-const cx = classnames.bind(styles);
+import './GlobalStyles.scss';
 
 interface Props {}
 
