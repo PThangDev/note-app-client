@@ -1,0 +1,91 @@
+.input-group {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  overflow: hidden;
+  flex-shrink: 0;
+
+  &:not(:first-child) {
+    margin-top: 15px;
+  }
+  &.error {
+    input {
+      border-bottom-color: var(--error-color);
+      &:focus,
+      &:not(:placeholder-shown) {
+        $color-active: var(--error-color);
+        border-bottom-color: $color-active;
+        & ~ .icon {
+          color: $color-active;
+        }
+      }
+    }
+    .icon {
+      color: var(--error-color);
+    }
+    .helper-text {
+      color: var(--error-color);
+    }
+  }
+  &.disabled {
+    input {
+      cursor: not-allowed;
+    }
+  }
+}
+.input-field {
+  position: relative;
+  height: 50px;
+  &.without-icon {
+    input {
+      padding: 0 10px;
+    }
+  }
+  input {
+    width: 100%;
+    height: 100%;
+    border-bottom: 2px solid #ccc;
+    border-top: 2px solid transparent;
+    padding: 0 35px;
+    font-size: 1.6rem;
+    transition: all 0.2s ease;
+    &:focus,
+    &:not(:placeholder-shown) {
+      $color-active: #4070f4;
+      border-bottom-color: $color-active;
+      & ~ .icon {
+        color: $color-active;
+      }
+    }
+  }
+}
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 2.3rem;
+  color: #999;
+  padding: 0 5px;
+}
+
+.eye {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 2rem;
+  color: #999;
+  z-index: 2;
+  &:hover {
+    color: #4070f4;
+  }
+}
+
+.helper-text {
+  font-size: 1.3rem;
+  margin-top: 5px;
+}

@@ -1,0 +1,13 @@
+.wrapper {
+  font-size: 25px;
+  animation: animateSpin 1.5s infinite linear;
+}
+
+@keyframes animateSpin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
