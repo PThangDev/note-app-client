@@ -1,6 +1,6 @@
 const storage = {
   get<T = any>(key: string): T {
-    let value = sessionStorage.getItem(key);
+    let value = localStorage.getItem(key);
     try {
       value = JSON.parse(value || '""');
       return value as unknown as T;
@@ -13,13 +13,13 @@ const storage = {
     if (typeof value !== 'string' || value === undefined || value === null) {
       _value = JSON.stringify(_value);
     }
-    return sessionStorage.setItem(key, _value);
+    return localStorage.setItem(key, _value);
   },
   remove(key: string) {
-    return sessionStorage.removeItem(key);
+    return localStorage.removeItem(key);
   },
   clear() {
-    return sessionStorage.clear();
+    return localStorage.clear();
   },
 };
 export default storage;

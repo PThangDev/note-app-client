@@ -1,0 +1,73 @@
+.button {
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.4s;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+  &:hover {
+    opacity: 0.85;
+  }
+  & > a {
+    color: inherit;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  & + .button {
+    margin-left: 10px;
+  }
+  .icon,
+  .icon-loading {
+    font-size: 1.8rem;
+  }
+  span + .text {
+    margin-left: 8px;
+  }
+  .text {
+    font-size: inherit !important;
+  }
+
+  &--primary {
+    background-color: #3498db;
+    color: var(--white-color);
+  }
+  &--disabled {
+    background-color: #7f8c8d;
+    cursor: not-allowed;
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &--loading {
+    background-color: #7f8c8d;
+    cursor: not-allowed;
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &--full-width {
+    width: 100%;
+  }
+
+  &--error {
+    background-color: #d60101;
+  }
+}
+.icon-loading {
+  animation: animateSpin 1s infinite linear;
+}
+@keyframes animateSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
