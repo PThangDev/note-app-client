@@ -1,10 +1,18 @@
-import { AccessToken, BaseDataResponse, MessageResponse, RefreshToken, Token } from 'src/types';
+import {
+  AccessToken,
+  ActiveToken,
+  BaseDataResponse,
+  MessageResponse,
+  RefreshToken,
+  Token,
+} from 'src/types';
 import {
   ForgotPasswordResponse,
   User,
   UserForgotPassword,
   UserLogin,
   UserRegister,
+  UserRegisterResponse,
 } from 'src/types/User';
 import axiosInstance from './axiosInstance';
 
@@ -17,7 +25,7 @@ const authAPI = {
     const url = '/auth/logout';
     return axiosInstance.get(url);
   },
-  register(data: UserRegister): Promise<MessageResponse> {
+  register(data: UserRegister): Promise<BaseDataResponse<null, UserRegisterResponse>> {
     const url = '/auth/register';
     return axiosInstance.post(url, data);
   },

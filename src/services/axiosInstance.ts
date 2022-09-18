@@ -1,5 +1,4 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { UserResponse } from 'src/types';
 import storage from 'src/utils/storage';
 
 const axiosInstance = axios.create({

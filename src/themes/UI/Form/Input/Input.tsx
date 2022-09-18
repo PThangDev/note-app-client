@@ -1,3 +1,5 @@
+import { faEye, faEyeLowVision } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import {
   ChangeEvent,
@@ -70,9 +72,9 @@ const Input = (
         {type === 'password' && (
           <span className={cx('eye')} onClick={() => setIsShowValue(!isShowValue)}>
             {!isShowValue ? (
-              <i className="fa-solid fa-eye-low-vision"></i>
+              <FontAwesomeIcon icon={faEyeLowVision} />
             ) : (
-              <i className="fa-solid fa-eye"></i>
+              <FontAwesomeIcon icon={faEye} />
             )}
           </span>
         )}
