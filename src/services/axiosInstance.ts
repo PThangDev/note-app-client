@@ -12,10 +12,10 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   function (config: AxiosRequestConfig) {
     // Do something before request is sent
-    const user = storage.get<UserResponse>('user');
-    if (user.access_token) {
+    const access_token = storage.get('access_token');
+    if (access_token) {
       config.headers = {
-        Authorization: `Bearer ${user.access_token}`,
+        Authorization: `Bearer ${access_token}`,
       };
     }
     return config;

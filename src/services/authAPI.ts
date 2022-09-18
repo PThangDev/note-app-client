@@ -1,15 +1,15 @@
-import { BaseDataResponse, MessageResponse } from 'src/types';
+import { AccessToken, BaseDataResponse, MessageResponse, RefreshToken, Token } from 'src/types';
 import {
   ForgotPasswordResponse,
+  User,
   UserForgotPassword,
   UserLogin,
   UserRegister,
-  UserResponse,
 } from 'src/types/User';
 import axiosInstance from './axiosInstance';
 
 const authAPI = {
-  login(data: UserLogin): Promise<BaseDataResponse<UserResponse>> {
+  login(data: UserLogin): Promise<BaseDataResponse<User, AccessToken & RefreshToken>> {
     const url = '/auth/login';
     return axiosInstance.post(url, data);
   },
@@ -21,7 +21,7 @@ const authAPI = {
     const url = '/auth/register';
     return axiosInstance.post(url, data);
   },
-  verifyAccount(activeToken: string): Promise<BaseDataResponse<UserResponse>> {
+  verifyAccount(activeToken: string): Promise<BaseDataResponse<User>> {
     const url = `/auth/active/${activeToken}`;
     return axiosInstance.get(url);
   },

@@ -1,0 +1,45 @@
+.wrapper {
+  margin-top: 25px;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item {
+  list-style: none;
+  & ~ & {
+    margin-left: 20px;
+  }
+}
+
+.icon {
+  $size: 40px;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #34495e;
+  font-size: 2rem;
+  color: var(--white-color);
+  cursor: pointer;
+  transition: transform 0.5s;
+  &:hover {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
+  &--google {
+    &:hover {
+      background-color: #e74c3c;
+    }
+  }
+  &--facebook {
+    &:hover {
+      background-color: #3498db;
+    }
+  }
+}
