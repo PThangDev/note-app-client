@@ -1,0 +1,45 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.heading {
+  font-size: 3.8rem;
+}
+.form {
+  margin-top: 20px;
+  width: 100%;
+  .btn-submit {
+    margin-top: 20px;
+  }
+
+  .note {
+    text-align: center;
+    margin-top: 20px;
+    & > * {
+      margin-left: 5px;
+    }
+  }
+  .policy {
+    margin-top: 25px;
+  }
+}
+.register-success {
+  .icon-success {
+    margin: 10px 0;
+    text-align: center;
+    font-size: 10rem;
+    color: var(--primary-color);
+  }
+  .description {
+    text-align: center;
+    margin: 5px 0;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  .btn-back {
+    margin: 0 auto;
+    margin-top: 20px;
+    background-color: var(--success-color);
+  }
+}

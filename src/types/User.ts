@@ -1,3 +1,5 @@
+import { ActiveToken } from './Common';
+
 export type UserRole = 'customer' | 'admin';
 export type UserStatus = 'pending' | 'active' | 'banned';
 export interface User {
@@ -24,13 +26,12 @@ export interface UserRegister {
   password: string;
 }
 
-export interface UserResponse extends User {
-  access_token: string;
-  refresh_token: string;
+export interface UserRegisterResponse extends ActiveToken {
+  url: string;
 }
 
 export interface UserForgotPassword {
   email: string;
 }
 
-export type ForgotPasswordResponse = Pick<UserResponse, 'access_token'>;
+export type ForgotPasswordResponse = User;
