@@ -5,14 +5,18 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import PageLoading from './pages/page-loading';
+import { Provider } from 'react-redux';
+import store from './app/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <React.Suspense fallback={<PageLoading />}>
-      <Router>
-        <App />
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <App />
+        </Router>
+      </Provider>
     </React.Suspense>
   </React.StrictMode>
 );
