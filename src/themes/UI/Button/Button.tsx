@@ -1,12 +1,15 @@
+import { faFan } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
-import { FC, ReactNode } from 'react';
+import { FC, ReactElement, ReactNode } from 'react';
+
 import styles from './Button.module.scss';
 
 interface Props {
   children?: ReactNode;
   type?: string;
   primary?: boolean;
-  icon?: FC;
+  icon?: ReactElement;
   fullWidth?: boolean;
   disabled?: boolean;
   isLoading?: boolean;
@@ -20,7 +23,7 @@ const cx = classNames.bind(styles);
 const Button: FC<Props> = ({
   children = '',
   primary = true,
-  icon: Icon,
+  icon,
   fullWidth = false,
   disabled = false,
   isLoading = false,
@@ -44,14 +47,10 @@ const Button: FC<Props> = ({
       onClick={onClick}
       disabled={disabled || isLoading}
     >
-      {Icon && !isLoading && (
-        <span className={cx('icon')}>
-          <Icon />
-        </span>
-      )}
+      {icon && !isLoading && <span className={cx('icon')}>{icon}</span>}
       {isLoading && (
         <span className={cx('icon-loading')}>
-          <i className="fa-solid fa-fan"></i>
+          <FontAwesomeIcon icon={faFan} />
         </span>
       )}
       {children && <p className={cx('text')}>{children}</p>}

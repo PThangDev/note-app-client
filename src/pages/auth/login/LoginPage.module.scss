@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.heading {
+  text-align: center;
+  font-size: 3.8rem;
+}
+.form {
+  margin-top: 35px;
+}
+.options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+
+.btn-login {
+  margin-top: 30px;
+}
+
+.note {
+  text-align: center;
+  margin-top: 20px;
+  & > * {
+    margin-left: 5px;
+  }
+}
