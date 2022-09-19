@@ -13,6 +13,7 @@ const routePaths = {
     detailSlug: '/notes/:id/:slug',
   },
   pins: '/pins',
+  trashs: '/trashs',
   profile: '/profile',
   search: '/search',
 };

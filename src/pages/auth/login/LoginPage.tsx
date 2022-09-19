@@ -1,9 +1,10 @@
+import { faEnvelope, faLock, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { yupResolver } from '@hookform/resolvers/yup';
 import classnames from 'classnames/bind';
 import { FC } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Controller, useForm } from 'react-hook-form';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useAppDispatch } from 'src/app/hooks';
 import { routePaths } from 'src/configs';
@@ -13,7 +14,6 @@ import { fetchLogin } from '../authActions';
 import SocialAuth from '../components/SocialAuth';
 import styles from './LoginPage.module.scss';
 import loginSchema from './loginSchema';
-import { faEnvelope, faLock, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {}
 
