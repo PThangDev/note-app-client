@@ -1,0 +1,70 @@
+// React Mark down
+.wmde-markdown h2 {
+  border: none !important;
+}
+.w-md-editor-text {
+  // Remove padding in editor
+
+  code[class*='language-'],
+  pre[class*='language-'] {
+    line-height: auto !important;
+  }
+  .wmde-markdown-color {
+    pre[class*='language-'] {
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    :not(pre) > code[class*='language-'] {
+      padding: 0 !important;
+    }
+  }
+}
+.wmde-markdown {
+  color: inherit !important;
+}
+
+.md-editor-preview {
+  min-height: 100px;
+  background: transparent !important;
+  span.code-line {
+    color: var(--white-color);
+  }
+}
+// Sweet alert
+.swal2-container {
+  font-size: 1.6rem;
+  .swal2-popup {
+    font-size: 1.6rem;
+  }
+}
+
+.swal2-loader {
+  $size: 6em;
+  width: $size !important;
+  height: $size !important;
+}
+.swal2 {
+  &-icon-content {
+    width: 100% !important;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &-icon-sad {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150%;
+    height: 150%;
+    border-radius: 50%;
+    background: var(--white-color) url('../../assets/images/frog-sad.gif') center;
+    background-size: cover;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -1,5 +1,6 @@
 import { faThumbTack } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import MDEditor from '@uiw/react-md-editor';
 import classnames from 'classnames/bind';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
@@ -7,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { routePaths } from 'src/configs';
 import { Spin } from 'src/themes/UI/Loading';
 import { Note } from 'src/types';
+import { formatDate } from 'src/utils';
 import styles from './CardNote.module.scss';
 
 interface Props {
@@ -55,16 +57,16 @@ const Template: FC<Props> = ({ note, isTrash = false, isShowSelect = false, onTo
           </div>
         </div>
         <div className={cx('content')} data-color-mode="dark">
-          {/* <MDEditor.Markdown
-        className="md-editor-preview"
-        source={content}
-        style={{ whiteSpace: 'pre-wrap' }}
-      /> */}
+          <MDEditor.Markdown
+            className="md-editor-preview"
+            source={content}
+            style={{ whiteSpace: 'pre-wrap' }}
+          />
           <Link to={`${routePaths.notes.path}/${_id}`} />
         </div>
         <div className={cx('options')}>
-          {/* <div className={cx('time')}>{formatDate(createdAt)}</div>
-      <div className={cx('buttons')}>{renderActionButtons()}</div> */}
+          <div className={cx('time')}>{formatDate(createdAt)}</div>
+          {/* <div className={cx('buttons')}>{renderActionButtons()}</div> */}
         </div>
       </div>
 

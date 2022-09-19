@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 import { User } from 'src/types';
-import storage from 'src/utils/storage';
+import { storage } from 'src/utils';
 import { fetchLogin } from './authActions';
 
 interface InitialState {
