@@ -28,7 +28,7 @@ const Header: FC<Props> = (props) => {
           <Search />
         </div>
         <div id="target"></div>
-        <Link to="/profile" className={cx('user')}>
+        <Link to={routePaths.profile.path} className={cx('user')}>
           <img className={cx('avatar')} src={user?.avatar || images.avatarDefault} alt="" />
           <p className={cx('username')}>{user?.username}</p>
         </Link>
