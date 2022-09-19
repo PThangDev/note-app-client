@@ -29,6 +29,14 @@ const routePaths = {
     path: '/notes',
     label: 'Notes',
   },
+  noteDetail: {
+    path: '/notes/:id/:slug',
+    label: 'Note Detail',
+  },
+  noteDetailRouter: {
+    path: '/notes/:id',
+    label: 'Note Detail Router',
+  },
   pins: {
     path: '/pins',
     label: 'Pins',
@@ -45,5 +53,5 @@ const routePaths = {
     path: '/search',
     label: 'Search',
   },
-};
+} as const;
 export default routePaths;

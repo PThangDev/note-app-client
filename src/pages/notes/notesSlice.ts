@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { noteAPI } from 'src/services';
 import {
   BaseDataResponse,
-  MessageResponse,
+  ErrorResponse,
   MetaPagination,
   Note,
   Pagination,
@@ -35,7 +35,7 @@ export const fetchGetNotes = createAsyncThunk<
     const response = await noteAPI.getNotes();
     return response;
   } catch (error) {
-    return thunkAPI.rejectWithValue(error as MessageResponse);
+    return thunkAPI.rejectWithValue(error as ErrorResponse);
   }
 });
 
@@ -49,9 +49,11 @@ const notesSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchGetNotes.fulfilled, (state, action) => {
+        const { data, meta } = action.payload;
+
         state.isLoading = false;
-        state.data = action.payload?.data || [];
-        state.pagination = action.payload.meta.pagination;
+        state.data = data;
+        state.pagination = meta?.pagination as Pagination;
       })
       .addCase(fetchGetNotes.rejected, (state, action) => {
         state.isLoading = false;

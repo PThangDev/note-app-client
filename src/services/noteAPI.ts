@@ -6,5 +6,9 @@ const noteAPI = {
     const url = '/notes';
     return axiosInstance.get(url);
   },
+  getNoteDetail(id: string): Promise<BaseDataResponse<Note>> {
+    const url = `/notes/${id}`;
+    return axiosInstance.get(url);
+  },
 };
 export default noteAPI;

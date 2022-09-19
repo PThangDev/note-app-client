@@ -1,0 +1,25 @@
+.wrapper {
+  padding: 20px;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .heading {
+    margin-right: 30px;
+    margin-bottom: 8px;
+  }
+}
+.actions {
+  display: flex;
+  align-items: center;
+}
+.info {
+  margin-bottom: 20px;
+  font-size: var(--font-sm);
+  text-decoration: underline;
+}
+.content {
+  color: var(--text-color);
+  min-height: 150vh;
+}
