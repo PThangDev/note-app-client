@@ -32,7 +32,7 @@ const Modal: FC<Props> = ({
 }) => {
   const id = useId();
   return (
-    <Portal id={id} targetId="no-root">
+    <Portal id={id}>
       <AnimatePresence initial={false} onExitComplete={() => null} mode="wait">
         {isOpen && (
           <Backdrop
