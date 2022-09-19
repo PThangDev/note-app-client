@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind';
 import { FC, ReactNode } from 'react';
 
+import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import styles from './DefaultLayout.module.scss';
 
@@ -11,7 +12,7 @@ const cx = classNames.bind(styles);
 const DefaultLayout: FC<Props> = ({ children }) => {
   return (
     <div className={cx('wrapper')}>
-      {/* <Header /> */}
+      <Header />
       <div className={cx('inner')}>
         <Sidebar />
         <main className={cx('main')}>{children}</main>
