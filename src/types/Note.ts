@@ -14,3 +14,5 @@ export interface Note {
   updatedAt: string;
   __v: number;
 }
+
+export type NewNote = Pick<Note, 'title' | 'content' | 'background' | 'topics'>;

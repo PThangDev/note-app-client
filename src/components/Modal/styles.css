@@ -12,7 +12,8 @@
   z-index: 100;
 }
 .modal {
-  width: clamp(40%, 600px, 85%);
+  /* width: clamp(40%, 600px, 85%); */
+  min-width: min(50%, 450px);
   min-height: min(50%, 300px);
 
   margin: auto;
