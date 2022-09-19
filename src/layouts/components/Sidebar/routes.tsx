@@ -12,33 +12,33 @@ import { routePaths } from 'src/configs';
 
 const routes = [
   {
-    to: routePaths.home,
-    label: 'Home',
+    to: routePaths.home.path,
+    label: routePaths.home.label,
     icon: <FontAwesomeIcon icon={faHouseUser} />,
   },
   {
-    to: routePaths.notes.main,
-    label: 'Notes',
+    to: routePaths.notes.path,
+    label: routePaths.notes.label,
     icon: <FontAwesomeIcon icon={faBook} />,
   },
   {
-    to: routePaths.topics,
-    label: 'Topics',
+    to: routePaths.topics.path,
+    label: routePaths.topics.label,
     icon: <FontAwesomeIcon icon={faBiohazard} />,
   },
   {
-    to: routePaths.pins,
-    label: 'Pins',
+    to: routePaths.pins.path,
+    label: routePaths.pins.label,
     icon: <PinIcon />,
   },
   {
-    to: routePaths.profile,
-    label: 'Profile',
+    to: routePaths.profile.path,
+    label: routePaths.profile.label,
     icon: <FontAwesomeIcon icon={faIdCard} />,
   },
   {
-    to: routePaths.trashs,
-    label: 'Trashs',
+    to: routePaths.trashs.path,
+    label: routePaths.trashs.label,
     icon: <FontAwesomeIcon icon={faTrash} />,
   },
 ];

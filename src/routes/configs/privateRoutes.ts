@@ -12,37 +12,37 @@ const ProfilePage = lazy(() => import('src/pages/profile'));
 
 const privateRoutes = [
   {
-    path: routePaths.home,
+    path: routePaths.home.path,
     component: HomePage,
     layout: DefaultLayout,
     outer: PrivateRouter,
   },
   {
-    path: routePaths.notes.main,
+    path: routePaths.notes.path,
     component: NotesPage,
     layout: DefaultLayout,
     outer: PrivateRouter,
   },
   {
-    path: routePaths.topics,
+    path: routePaths.topics.path,
     component: TopicsPage,
     layout: DefaultLayout,
     outer: PrivateRouter,
   },
   {
-    path: routePaths.pins,
+    path: routePaths.pins.path,
     component: PinsPage,
     layout: DefaultLayout,
     outer: PrivateRouter,
   },
   {
-    path: routePaths.profile,
+    path: routePaths.profile.path,
     component: ProfilePage,
     layout: DefaultLayout,
     outer: PrivateRouter,
   },
   {
-    path: routePaths.trashs,
+    path: routePaths.trashs.path,
     component: TrashsPage,
     layout: DefaultLayout,
     outer: PrivateRouter,
