@@ -43,7 +43,7 @@ const LoginPage: FC<Props> = (props) => {
       {/* Head */}
       <Helmet>
         <title>Login</title>
-        <meta name="description" content="Home page note app - PThangDev"></meta>
+        <meta name="description" content="Login Note App - PThangDev"></meta>
       </Helmet>
       {/* Body */}
       <div className={cx('wrapper')}>

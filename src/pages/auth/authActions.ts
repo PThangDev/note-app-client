@@ -3,6 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { authAPI } from 'src/services';
 import {
   AccessToken,
+  ActiveToken,
   BaseDataResponse,
   MessageResponse,
   RefreshToken,
@@ -10,7 +11,6 @@ import {
   User,
   UserLogin,
   UserRegister,
-  UserRegisterResponse,
 } from 'src/types';
 
 export const fetchLogin = createAsyncThunk<
@@ -28,7 +28,7 @@ export const fetchLogin = createAsyncThunk<
 });
 
 export const fetchRegister = createAsyncThunk<
-  BaseDataResponse<null, UserRegisterResponse>,
+  BaseDataResponse<null, ActiveToken>,
   UserRegister,
   RejectValue
 >('/auth/register', async (payload, thunkAPI) => {

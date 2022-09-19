@@ -165,7 +165,7 @@ const RegisterPage: FC<Props> = (props) => {
       {/* Head */}
       <Helmet>
         <title>Register</title>
-        <meta name="description" content="Home page note app - PThangDev"></meta>
+        <meta name="description" content="Register note app - PThangDev"></meta>
       </Helmet>
       {/* Body */}
       <div className={cx('wrapper')}>{renderUIRegister()}</div>
