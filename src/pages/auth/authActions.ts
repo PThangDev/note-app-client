@@ -5,7 +5,7 @@ import {
   AccessToken,
   ActiveToken,
   BaseDataResponse,
-  MessageResponse,
+  ErrorResponse,
   RefreshToken,
   RejectValue,
   User,
@@ -23,7 +23,7 @@ export const fetchLogin = createAsyncThunk<
 
     return response;
   } catch (error) {
-    return thunkAPI.rejectWithValue(error as MessageResponse);
+    return thunkAPI.rejectWithValue(error as ErrorResponse);
   }
 });
 
@@ -37,6 +37,6 @@ export const fetchRegister = createAsyncThunk<
 
     return response;
   } catch (error) {
-    return thunkAPI.rejectWithValue(error as MessageResponse);
+    return thunkAPI.rejectWithValue(error as ErrorResponse);
   }
 });

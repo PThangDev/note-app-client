@@ -1,6 +1,7 @@
 import { Action, configureStore, Middleware, ThunkAction } from '@reduxjs/toolkit';
 
 import authSlice from 'src/pages/auth/authSlice';
+import noteDetailSlice from 'src/pages/note-detail/noteDetailSlice';
 import notesSlice from 'src/pages/notes/notesSlice';
 
 const checkUnAuthorization: Middleware = (store) => (next) => (action) => {
@@ -16,6 +17,7 @@ const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
     notes: notesSlice.reducer,
+    noteDetail: noteDetailSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }).concat(checkUnAuthorization),

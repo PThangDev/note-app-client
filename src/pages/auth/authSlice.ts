@@ -55,15 +55,14 @@ const authSlice = createSlice({
           state.isAuthenticate = true;
           // Save data to storage
           storage.set('user', data);
-          storage.set('access_token', meta.access_token);
-          storage.set('refresh_token', meta.refresh_token);
+          storage.set('access_token', meta?.access_token);
+          storage.set('refresh_token', meta?.refresh_token);
 
           toast.success(message);
         }
       })
       .addCase(fetchLogin.rejected, (state, action) => {
         state.isLoading = false;
-
         toast.error(action.payload?.message);
       });
   },

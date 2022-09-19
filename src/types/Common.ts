@@ -25,22 +25,21 @@ export interface Pagination {
 export interface MetaPagination {
   pagination: Pagination;
 }
-export interface BaseDataResponse<T = any, M = undefined> extends MessageResponse {
-  data?: T;
-  success: boolean;
+export interface BaseDataResponse<T = unknown, M = unknown> extends MessageResponse {
+  data: T;
+  success: true;
   status: number;
-  meta: M;
+  meta?: M;
 }
-export interface ErrorResponse {
-  errors: {
-    message: string;
-    [key: string]: string;
-  };
-  status?: number;
+export interface ErrorResponse<T = unknown> {
+  data?: T;
+  message: string;
+  status: number;
+  success: false;
 }
 export interface QueryParams {
   [key: string]: string | boolean;
 }
-export interface RejectValue {
-  rejectValue: MessageResponse;
+export interface RejectValue<T = unknown> {
+  rejectValue: ErrorResponse<T>;
 }
