@@ -6,7 +6,8 @@ import { Col, Container, Row } from 'react-grid-system';
 import { Helmet } from 'react-helmet-async';
 
 import CardNote from 'src/components/CardNote';
-import { ModalFormNote } from 'src/components/Modals';
+import { FormNote } from 'src/components/Form';
+import Modal from 'src/components/Modal';
 import useGetNotes from 'src/hooks/useGetNotes';
 import { Button } from 'src/themes/UI';
 import styles from './NotesPage.module.scss';
@@ -18,7 +19,11 @@ const cx = classnames.bind(styles);
 const NotesPage: FC<Props> = (props) => {
   const { data, isLoading, pagination } = useGetNotes();
 
-  const [isOpenModalCreateNote, setIsOpenModalCreateNote] = useState<boolean>(false);
+  const [isOpenFormNote, setIsOpenFormNote] = useState<boolean>(false);
+
+  const handleCloseFormNote = () => {
+    setIsOpenFormNote(false);
+  };
 
   return (
     <>
@@ -29,7 +34,7 @@ const NotesPage: FC<Props> = (props) => {
         <div className={cx('actions')}>
           <Button
             icon={<FontAwesomeIcon icon={faCirclePlus} />}
-            onClick={() => setIsOpenModalCreateNote(true)}
+            onClick={() => setIsOpenFormNote(true)}
           >
             Create a new note
           </Button>
@@ -47,10 +52,9 @@ const NotesPage: FC<Props> = (props) => {
         </Container>
       </div>
       {/* Modal */}
-      <ModalFormNote
-        isOpen={isOpenModalCreateNote}
-        onClose={() => setIsOpenModalCreateNote(false)}
-      />
+      <Modal isOpen={isOpenFormNote} onClose={handleCloseFormNote} closeWhenClickOnOverlay>
+        <FormNote onClose={handleCloseFormNote} />
+      </Modal>
     </>
   );
 };

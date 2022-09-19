@@ -4,6 +4,7 @@ import {
   BaseDataResponse,
   ErrorResponse,
   MetaPagination,
+  NewNote,
   Note,
   Pagination,
   RejectValue,
@@ -38,6 +39,18 @@ export const fetchGetNotes = createAsyncThunk<
     return thunkAPI.rejectWithValue(error as ErrorResponse);
   }
 });
+
+export const fetchCreateNote = createAsyncThunk<BaseDataResponse<Note>, NewNote, RejectValue>(
+  '/notes/create',
+  async (payload, thunkAPI) => {
+    try {
+      const response = await noteAPI.createNote(payload);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error as ErrorResponse);
+    }
+  }
+);
 
 const notesSlice = createSlice({
   name: 'notes',
