@@ -16,7 +16,7 @@ const cx = classnames.bind(styles);
 const NoteDetailPage: FC<Props> = (props) => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { isLoading, data } = useAppSelector((state) => state.noteDetail);
+  const { data } = useAppSelector((state) => state.noteDetail);
 
   useEffect(() => {
     if (!data) {
