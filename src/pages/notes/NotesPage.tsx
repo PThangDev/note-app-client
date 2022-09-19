@@ -18,7 +18,7 @@ const NotesPage: FC<Props> = (props) => {
         <Row gutterWidth={15}>
           {data.map((note) => {
             return (
-              <Col key={note._id} xl={3} xxxl={2.4}>
+              <Col key={note._id} xs={12} sm={6} md={6} lg={4} xl={3} xxxl={2.4}>
                 <CardNote note={note} />
               </Col>
             );
