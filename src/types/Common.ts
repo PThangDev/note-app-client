@@ -16,10 +16,14 @@ export interface MessageResponse {
   message: string;
 }
 export interface Pagination {
-  limit: string | null;
+  limit: number;
   page_count: number;
   page_size: number;
   total: number;
+}
+
+export interface MetaPagination {
+  pagination: Pagination;
 }
 export interface BaseDataResponse<T = any, M = undefined> extends MessageResponse {
   data?: T;

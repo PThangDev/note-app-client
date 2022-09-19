@@ -1,0 +1,129 @@
+.wrapper {
+  width: 100%;
+  min-height: 200px;
+  background-color: rgb(177, 177, 177);
+  border-radius: 10px;
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.2);
+  color: var(--white-color);
+  cursor: pointer;
+  transition: all 0.5s;
+
+  &:hover {
+    transform: translateY(-3px) scale(1.03);
+  }
+  &:nth-child(2) {
+    background-color: #e74c3c;
+  }
+  &:nth-child(3) {
+    background-color: #a55eea;
+  }
+  &:nth-child(4) {
+    background-color: #a5b1c2;
+  }
+}
+.header {
+  border-bottom: 1px solid rgb(253, 225, 225);
+  &-inner {
+    padding-top: 24px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    input {
+      $size: 20px;
+      width: $size;
+      height: $size;
+      position: absolute;
+      top: 3px;
+      left: 3px;
+    }
+  }
+}
+.title {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  line-height: 1.2;
+  height: 48px;
+  flex: 1;
+  label {
+    display: -webkit-box;
+    overflow: hidden;
+    width: 100%;
+    cursor: pointer;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    max-height: 100%;
+    display: -webkit-box;
+  }
+}
+.content {
+  width: 100%;
+  padding: 20px;
+  height: 188px;
+  overflow: hidden;
+  position: relative;
+  overflow: hidden;
+  a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  // white-space: nowrap;
+  // word-wrap: break-word;
+  // text-overflow: ellipsis;
+  // -webkit-line-clamp: 4;
+  // -webkit-box-orient: vertical;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  flex-shrink: 0;
+  span {
+    cursor: pointer;
+    display: inline-block;
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  .btn-pin {
+    margin-left: 5px;
+    object-fit: cover;
+  }
+}
+.options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  .time {
+    text-decoration: underline;
+  }
+}
+.buttons {
+  display: flex;
+  align-items: center;
+  .btn-edit {
+  }
+  .btn-delete {
+    background-color: rgb(214, 1, 1);
+  }
+}
+
+.custom-modal {
+  width: 100%;
+  height: 100%;
+}
+.custom-overlay {
+  padding: 100px;
+}
