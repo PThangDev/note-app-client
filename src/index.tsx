@@ -1,26 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { ErrorBoundary } from 'react-error-boundary';
+import { HelmetProvider } from 'react-helmet-async';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
 
-import PageLoading from './pages/page-loading';
-import { Provider } from 'react-redux';
 import store from './app/store';
+import ErrorBoundaryPage from './pages/error-boundary';
+import LoadingPage from './pages/loading';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+
 root.render(
   <React.StrictMode>
-    <React.Suspense fallback={<PageLoading />}>
-      <HelmetProvider>
-        <Provider store={store}>
-          <Router>
-            <App />
-          </Router>
-        </Provider>
-      </HelmetProvider>
-    </React.Suspense>
+    <ErrorBoundary fallback={<ErrorBoundaryPage />}>
+      <React.Suspense fallback={<LoadingPage />}>
+        <HelmetProvider>
+          <Provider store={store}>
+            <Router>
+              <App />
+            </Router>
+          </Provider>
+        </HelmetProvider>
+      </React.Suspense>
+    </ErrorBoundary>
   </React.StrictMode>
 );
 
