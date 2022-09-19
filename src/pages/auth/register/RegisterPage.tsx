@@ -148,8 +148,8 @@ const RegisterPage: FC<Props> = (props) => {
             <SocialAuth disabled={isSubmitting} />
             <div className={cx('note')}>
               Already have an account?
-              <Link to={routePaths.auth.login} disabled={isSubmitting}>
-                Login
+              <Link to={routePaths.auth.login.path} disabled={isSubmitting}>
+                {routePaths.auth.login.label}
               </Link>
             </div>
           </form>
