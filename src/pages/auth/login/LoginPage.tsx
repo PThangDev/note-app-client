@@ -1,9 +1,10 @@
+import { faEnvelope, faLock, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { yupResolver } from '@hookform/resolvers/yup';
 import classnames from 'classnames/bind';
 import { FC } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Controller, useForm } from 'react-hook-form';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useAppDispatch } from 'src/app/hooks';
 import { routePaths } from 'src/configs';
@@ -13,7 +14,6 @@ import { fetchLogin } from '../authActions';
 import SocialAuth from '../components/SocialAuth';
 import styles from './LoginPage.module.scss';
 import loginSchema from './loginSchema';
-import { faEnvelope, faLock, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {}
 
@@ -43,7 +43,7 @@ const LoginPage: FC<Props> = (props) => {
       {/* Head */}
       <Helmet>
         <title>Login</title>
-        <meta name="description" content="Home page note app - PThangDev"></meta>
+        <meta name="description" content="Login Note App - PThangDev"></meta>
       </Helmet>
       {/* Body */}
       <div className={cx('wrapper')}>
@@ -89,8 +89,8 @@ const LoginPage: FC<Props> = (props) => {
 
           <div className={cx('options')}>
             <Checkbox className={cx('checkbox')} label="Remember me" name="remember" />
-            <Link to={routePaths.auth.forgotPassword} disabled={isSubmitting}>
-              Forgot Password ?
+            <Link to={routePaths.auth.forgotPassword.path} disabled={isSubmitting}>
+              {routePaths.auth.forgotPassword.label} ?
             </Link>
           </div>
 
@@ -106,8 +106,8 @@ const LoginPage: FC<Props> = (props) => {
           <SocialAuth />
           <div className={cx('note')}>
             Don't have an account?
-            <Link to={routePaths.auth.register} disabled={isSubmitting}>
-              Register
+            <Link to={routePaths.auth.register.path} disabled={isSubmitting}>
+              {routePaths.auth.register.label}
             </Link>
           </div>
         </form>
