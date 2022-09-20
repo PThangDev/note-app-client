@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import { noteAPI } from 'src/services';
 import {
   BaseDataResponse,
@@ -9,6 +10,7 @@ import {
   Pagination,
   RejectValue,
 } from 'src/types';
+import sweetAlert from 'src/utils/sweetAlert';
 
 interface InitialState {
   isLoading: boolean;
@@ -70,6 +72,16 @@ const notesSlice = createSlice({
       })
       .addCase(fetchGetNotes.rejected, (state, action) => {
         state.isLoading = false;
+      })
+      // Create a new note
+      .addCase(fetchCreateNote.pending, (state, action) => {
+        sweetAlert.loading();
+      })
+      .addCase(fetchCreateNote.fulfilled, (state, action) => {
+        sweetAlert.success(action.payload.message);
+      })
+      .addCase(fetchCreateNote.rejected, (state, action) => {
+        sweetAlert.error(action.payload?.message);
       });
   },
 });

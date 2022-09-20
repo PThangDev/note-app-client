@@ -44,8 +44,6 @@ const FormNote: FC<Props> = ({ onClose }) => {
   };
 
   return (
-    // <Modal isOpen={isOpen} onClose={onClose} closeWhenClickOnOverlay>
-    // </Modal>
     <div className={cx('wrapper')}>
       <h3 className={cx('heading')}>Create Note</h3>
       <div className={cx('form')}>
@@ -70,7 +68,8 @@ const FormNote: FC<Props> = ({ onClose }) => {
             <HeadlessTippy
               interactive
               placement="bottom-start"
-              delay={[0, 800]}
+              delay={[300, 500]}
+              hideOnClick={false}
               render={(attrs) => (
                 <ColorPicker
                   color={backgroundColor}
