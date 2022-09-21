@@ -39,7 +39,6 @@ const FormNote: FC<Props> = ({ onClose }) => {
     await dispatch(
       fetchCreateNote({ title, content, background: backgroundColor, topics: null })
     ).unwrap();
-    await dispatch(fetchGetNotes()).unwrap();
     onClose();
   };
 

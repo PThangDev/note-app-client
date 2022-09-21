@@ -16,3 +16,13 @@ export interface Note {
 }
 
 export type NewNote = Pick<Note, 'title' | 'content' | 'background' | 'topics'>;
+
+export interface NoteParams {
+  is_trash?: boolean;
+  is_pin?: boolean;
+}
+
+export type GetNotePayload = {
+  endpoint?: string;
+  params?: NoteParams;
+};
