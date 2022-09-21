@@ -10,6 +10,7 @@ import {
   Pagination,
   RejectValue,
 } from 'src/types';
+import { sweetAlert } from 'src/utils';
 
 interface InitialState {
   isLoading: boolean;
@@ -84,6 +85,18 @@ const notesSlice = createSlice({
       })
       .addCase(fetchGetNotes.rejected, (state, action) => {
         state.isLoading = false;
+      })
+      // Create a new note
+      .addCase(fetchCreateNote.pending, (state, action) => {
+        sweetAlert.loading();
+      })
+      .addCase(fetchCreateNote.fulfilled, (state, action) => {
+        const { data, message } = action.payload;
+        state.data = [data, ...state.data];
+        sweetAlert.success(message);
+      })
+      .addCase(fetchCreateNote.rejected, (state, action) => {
+        sweetAlert.error(action.payload?.message);
       });
   },
 });
