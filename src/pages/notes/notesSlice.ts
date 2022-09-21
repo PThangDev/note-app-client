@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
 import { noteAPI } from 'src/services';
 import {
   BaseDataResponse,
@@ -66,6 +67,31 @@ export const fetchMoveNoteToTrash = createAsyncThunk<BaseDataResponse<Note>, str
   }
 );
 
+export const fetchRestoreNoteFromTrash = createAsyncThunk<
+  BaseDataResponse<Note>,
+  string,
+  RejectValue
+>('/notes/:id-[restore-note]', async (payload, thunkAPI) => {
+  try {
+    const response = await noteAPI.restoreNoteFromTrash(payload);
+    return response;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error as ErrorResponse);
+  }
+});
+
+export const fetchDeleteNote = createAsyncThunk<BaseDataResponse<Note>, string, RejectValue>(
+  '/notes/:id-[delete-note]',
+  async (payload, thunkAPI) => {
+    try {
+      const response = await noteAPI.deleteNote(payload);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error as ErrorResponse);
+    }
+  }
+);
+
 const notesSlice = createSlice({
   name: 'notes',
   initialState,
@@ -96,6 +122,42 @@ const notesSlice = createSlice({
         sweetAlert.success(message);
       })
       .addCase(fetchCreateNote.rejected, (state, action) => {
+        sweetAlert.error(action.payload?.message);
+      })
+      // Move note to trash
+      .addCase(fetchMoveNoteToTrash.pending, (state, action) => {
+        sweetAlert.loading();
+      })
+      .addCase(fetchMoveNoteToTrash.fulfilled, (state, action) => {
+        const { data, message } = action.payload;
+        state.data = state.data.filter((note) => note._id !== data._id);
+        sweetAlert.success(message);
+      })
+      .addCase(fetchMoveNoteToTrash.rejected, (state, action) => {
+        sweetAlert.error(action.payload?.message);
+      })
+      // Restore note from trash
+      .addCase(fetchRestoreNoteFromTrash.pending, (state, action) => {
+        sweetAlert.loading();
+      })
+      .addCase(fetchRestoreNoteFromTrash.fulfilled, (state, action) => {
+        const { data, message } = action.payload;
+        state.data = state.data.filter((note) => note._id !== data._id);
+        sweetAlert.success(message);
+      })
+      .addCase(fetchRestoreNoteFromTrash.rejected, (state, action) => {
+        sweetAlert.error(action.payload?.message);
+      })
+      // Delete Note
+      .addCase(fetchDeleteNote.pending, (state, action) => {
+        sweetAlert.loading();
+      })
+      .addCase(fetchDeleteNote.fulfilled, (state, action) => {
+        const { data, message } = action.payload;
+        state.data = state.data.filter((note) => note._id !== data._id);
+        sweetAlert.success(message);
+      })
+      .addCase(fetchDeleteNote.rejected, (state, action) => {
         sweetAlert.error(action.payload?.message);
       });
   },

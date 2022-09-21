@@ -31,5 +31,9 @@ const noteAPI = {
     const url = `/notes/${id}`;
     return axiosInstance.put(url, { is_trash: false });
   },
+  deleteNote(id: string): Promise<BaseDataResponse<Note>> {
+    const url = `/notes/${id}`;
+    return axiosInstance.delete(url);
+  },
 };
 export default noteAPI;
