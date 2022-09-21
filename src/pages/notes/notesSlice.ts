@@ -53,12 +53,25 @@ export const fetchCreateNote = createAsyncThunk<BaseDataResponse<Note>, NewNote,
   }
 );
 
+export const fetchMoveNoteToTrash = createAsyncThunk<BaseDataResponse<Note>, string, RejectValue>(
+  '/notes/:id-[move-note-to-trash]',
+  async (payload, thunkAPI) => {
+    try {
+      const response = await noteAPI.moveNoteToTrash(payload);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error as ErrorResponse);
+    }
+  }
+);
+
 const notesSlice = createSlice({
   name: 'notes',
   initialState,
   reducers: {},
   extraReducers(builder) {
     builder
+      // Get Notes
       .addCase(fetchGetNotes.pending, (state, action) => {
         state.isLoading = true;
       })
