@@ -3,6 +3,7 @@ import { noteAPI } from 'src/services';
 import {
   BaseDataResponse,
   ErrorResponse,
+  GetNotePayload,
   MetaPagination,
   NewNote,
   Note,
@@ -29,11 +30,11 @@ const initialState: InitialState = {
 
 export const fetchGetNotes = createAsyncThunk<
   BaseDataResponse<Note[], MetaPagination>,
-  undefined,
+  GetNotePayload | undefined,
   RejectValue
 >('/notes', async (payload, thunkAPI) => {
   try {
-    const response = await noteAPI.getNotes();
+    const response = await noteAPI.getNotes(payload);
     return response;
   } catch (error) {
     return thunkAPI.rejectWithValue(error as ErrorResponse);

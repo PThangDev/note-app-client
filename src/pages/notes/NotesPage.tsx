@@ -17,7 +17,7 @@ interface Props {}
 const cx = classnames.bind(styles);
 
 const NotesPage: FC<Props> = (props) => {
-  const { data, isLoading, pagination } = useGetNotes();
+  const { data, isLoading, pagination } = useGetNotes({ params: { is_trash: false } });
 
   const [isOpenFormNote, setIsOpenFormNote] = useState<boolean>(false);
 
