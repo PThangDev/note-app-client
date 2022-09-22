@@ -1,7 +1,9 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  max-width: 200px;
+  max-width: 210px;
+  border: 2px solid var(--grey-light-color);
+  border-radius: 8px;
 }
 
 .options {
@@ -9,7 +11,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
-  padding: 10px 0;
+  padding: 10px 5px;
 }
 .color {
   $size: 20px;
