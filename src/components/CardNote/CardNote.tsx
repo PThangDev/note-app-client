@@ -1,14 +1,27 @@
-import { faThumbTack } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPenToSquare,
+  faThumbTack,
+  faTrash,
+  faTrashCan,
+  faTrashCanArrowUp,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MDEditor from '@uiw/react-md-editor';
 import classnames from 'classnames/bind';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
+import { useAppDispatch } from 'src/app/hooks';
 import { routePaths } from 'src/configs';
+import {
+  fetchDeleteNote,
+  fetchMoveNoteToTrash,
+  fetchRestoreNoteFromTrash,
+} from 'src/pages/notes/notesSlice';
+import { Button } from 'src/themes/UI';
 import { Spin } from 'src/themes/UI/Loading';
 import { Note } from 'src/types';
-import { formatDate } from 'src/utils';
+import { formatDate, sweetAlert } from 'src/utils';
 import styles from './CardNote.module.scss';
 
 interface Props {
@@ -23,8 +36,53 @@ const cx = classnames.bind(styles);
 const isLoading = false;
 
 const Template: FC<Props> = ({ note, isTrash = false, isShowSelect = false, onToggleCheckbox }) => {
+  const dispatch = useAppDispatch();
   const { _id, content, title, topics, background, user, createdAt, slug, is_pin } = note;
 
+  const handleMoveNoteToTrash = async () => {
+    const result = await sweetAlert.confirm({ text: 'Do you want to move note to trash!' });
+    if (result.isConfirmed) {
+      dispatch(fetchMoveNoteToTrash(_id));
+    }
+  };
+  const handleRestoreNote = async () => {
+    const result = await sweetAlert.confirm({ text: 'Do you want to restore note!' });
+    if (result.isConfirmed) {
+      dispatch(fetchRestoreNoteFromTrash(_id));
+    }
+  };
+
+  const handleDeleteNote = async () => {
+    const result = await sweetAlert.confirm({ text: 'Do you want to hard delete note!' });
+    if (result.isConfirmed) {
+      dispatch(fetchDeleteNote(_id));
+    }
+  };
+
+  const renderButtonOptions = () => {
+    if (isTrash) {
+      return (
+        <>
+          <Button onClick={handleRestoreNote}>
+            <FontAwesomeIcon className={cx('icon')} icon={faTrashCanArrowUp} />
+          </Button>
+          <Button status="error" onClick={handleDeleteNote}>
+            <FontAwesomeIcon className={cx('icon')} icon={faTrashCan} />
+          </Button>
+        </>
+      );
+    }
+    return (
+      <>
+        <Button>
+          <FontAwesomeIcon className={cx('icon')} icon={faPenToSquare} />
+        </Button>
+        <Button status="error" onClick={handleMoveNoteToTrash}>
+          <FontAwesomeIcon className={cx('icon')} icon={faTrash} />
+        </Button>
+      </>
+    );
+  };
   return (
     <>
       <div className={cx('wrapper')} style={{ background }}>
@@ -66,7 +124,7 @@ const Template: FC<Props> = ({ note, isTrash = false, isShowSelect = false, onTo
         </div>
         <div className={cx('options')}>
           <div className={cx('time')}>{formatDate(createdAt)}</div>
-          {/* <div className={cx('buttons')}>{renderActionButtons()}</div> */}
+          <div className={cx('buttons')}>{renderButtonOptions()}</div>
         </div>
       </div>
 

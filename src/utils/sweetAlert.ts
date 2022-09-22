@@ -22,7 +22,6 @@ const sweetAlert = {
       iconHtml: '<p class="swal2-icon-sad"></p>',
       title: 'Error...',
       text: message,
-      customClass: 'custom-swal2-error',
       // footer: '<a href="">Why do I have this issue?</a>',
     });
   },
