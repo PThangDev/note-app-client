@@ -1,18 +1,17 @@
+import { faArrowsSpin } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
-import { FC } from 'react';
+import { CSSProperties, FC } from 'react';
 
 import styles from './Spin.module.scss';
 
-interface Props {}
+interface Props {
+  style?: CSSProperties;
+}
 
 const cx = classNames.bind(styles);
 
-const Spin: FC<Props> = (props) => {
-  return (
-    <p className={cx('wrapper')}>
-      {/* <i className="fa-solid fa-atom"></i> */}
-      <i className="fa-solid fa-arrows-spin"></i>
-    </p>
-  );
+const Spin: FC<Props> = ({ style }) => {
+  return <FontAwesomeIcon style={style} className={cx('icon')} icon={faArrowsSpin} />;
 };
 export default Spin;
