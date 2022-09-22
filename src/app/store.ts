@@ -3,6 +3,7 @@ import { Action, configureStore, Middleware, ThunkAction } from '@reduxjs/toolki
 import authSlice from 'src/pages/auth/authSlice';
 import noteDetailSlice from 'src/pages/note-detail/noteDetailSlice';
 import notesSlice from 'src/pages/notes/notesSlice';
+import topicsSlice from 'src/pages/topics/topicsSlice';
 
 const checkUnAuthorization: Middleware = (store) => (next) => (action) => {
   if (action.payload?.status === 401) {
@@ -18,6 +19,7 @@ const store = configureStore({
     auth: authSlice.reducer,
     notes: notesSlice.reducer,
     noteDetail: noteDetailSlice.reducer,
+    topics: topicsSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }).concat(checkUnAuthorization),

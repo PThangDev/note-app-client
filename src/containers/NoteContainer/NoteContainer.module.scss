@@ -1,0 +1,21 @@
+.heading {
+  display: inline-flex;
+  align-items: center;
+  font-size: 3rem;
+  font-weight: 500;
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  &-link {
+    position: relative;
+    span {
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background-color: rgb(237, 17, 237);
+      transition: all 0.5s;
+    }
+  }
+}

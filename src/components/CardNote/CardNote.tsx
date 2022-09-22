@@ -119,6 +119,7 @@ const CardNote: FC<Props> = ({
       </>
     );
   };
+
   return (
     <>
       <div className={cx('wrapper')} style={{ background }}>
