@@ -54,7 +54,6 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
     }
     onClose();
   };
-
   return (
     <div className={cx('wrapper')}>
       <h3 className={cx('heading')}>{data ? 'Update Note' : 'Create Note'}</h3>
@@ -68,7 +67,7 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
           icon={<FontAwesomeIcon icon={faHeading} />}
         />
         <div className={cx('editor')} data-color-mode="dark">
-          <MDEditor content={content} onChange={handleChangeContent} />
+          <MDEditor value={content} onChange={handleChangeContent} />
         </div>
         <div className={cx('background')}>
           <h3 className={cx('background-heading')}>Choose background card :</h3>
