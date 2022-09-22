@@ -4,9 +4,10 @@ interface Props {
   width?: number;
   height?: number;
   className?: string;
+  onClick?: () => void;
 }
 
-const PinIcon: FC<Props> = ({ className, width = 24, height = 24 }) => {
+const PinIcon: FC<Props> = ({ className, width = 24, height = 24, onClick }) => {
   return (
     <svg
       className={className}
@@ -14,6 +15,7 @@ const PinIcon: FC<Props> = ({ className, width = 24, height = 24 }) => {
       width={width}
       height={height}
       viewBox={`0 0 ${width} ${height}`}
+      onClick={onClick}
     >
       <path fill="none" d="M0 0h24v24H0z" />
       <path

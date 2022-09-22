@@ -9,6 +9,7 @@ import {
   Note,
   Pagination,
   RejectValue,
+  ToggleNoteToTrash,
 } from 'src/types';
 import { sweetAlert } from 'src/utils';
 
@@ -54,25 +55,18 @@ export const fetchCreateNote = createAsyncThunk<BaseDataResponse<Note>, NewNote,
   }
 );
 
-export const fetchMoveNoteToTrash = createAsyncThunk<BaseDataResponse<Note>, string, RejectValue>(
-  '/notes/:id-[move-note-to-trash]',
-  async (payload, thunkAPI) => {
-    try {
-      const response = await noteAPI.moveNoteToTrash(payload);
-      return response;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error as ErrorResponse);
-    }
-  }
-);
-
-export const fetchRestoreNoteFromTrash = createAsyncThunk<
+export const fetchToggleNoteToTrash = createAsyncThunk<
   BaseDataResponse<Note>,
-  string,
+  ToggleNoteToTrash & { message?: string },
   RejectValue
->('/notes/:id-[restore-note]', async (payload, thunkAPI) => {
+>('/notes/:id-[toggle-note-to-trash]', async (payload, thunkAPI) => {
   try {
-    const response = await noteAPI.restoreNoteFromTrash(payload);
+    const { message } = payload;
+    const response = await noteAPI.toggleNoteToTrash(payload);
+
+    if (message) {
+      return { ...response, message };
+    }
     return response;
   } catch (error) {
     return thunkAPI.rejectWithValue(error as ErrorResponse);
@@ -100,7 +94,6 @@ const notesSlice = createSlice({
       // Get Notes
       .addCase(fetchGetNotes.pending, (state, action) => {
         state.isLoading = true;
-        state.data = [];
       })
       .addCase(fetchGetNotes.fulfilled, (state, action) => {
         const { data, meta } = action.payload;
@@ -124,30 +117,6 @@ const notesSlice = createSlice({
       .addCase(fetchCreateNote.rejected, (state, action) => {
         sweetAlert.error(action.payload?.message);
       })
-      // Move note to trash
-      .addCase(fetchMoveNoteToTrash.pending, (state, action) => {
-        sweetAlert.loading();
-      })
-      .addCase(fetchMoveNoteToTrash.fulfilled, (state, action) => {
-        const { data, message } = action.payload;
-        state.data = state.data.filter((note) => note._id !== data._id);
-        sweetAlert.success(message);
-      })
-      .addCase(fetchMoveNoteToTrash.rejected, (state, action) => {
-        sweetAlert.error(action.payload?.message);
-      })
-      // Restore note from trash
-      .addCase(fetchRestoreNoteFromTrash.pending, (state, action) => {
-        sweetAlert.loading();
-      })
-      .addCase(fetchRestoreNoteFromTrash.fulfilled, (state, action) => {
-        const { data, message } = action.payload;
-        state.data = state.data.filter((note) => note._id !== data._id);
-        sweetAlert.success(message);
-      })
-      .addCase(fetchRestoreNoteFromTrash.rejected, (state, action) => {
-        sweetAlert.error(action.payload?.message);
-      })
       // Delete Note
       .addCase(fetchDeleteNote.pending, (state, action) => {
         sweetAlert.loading();
@@ -158,6 +127,18 @@ const notesSlice = createSlice({
         sweetAlert.success(message);
       })
       .addCase(fetchDeleteNote.rejected, (state, action) => {
+        sweetAlert.error(action.payload?.message);
+      })
+      // Toggle note to trash
+      .addCase(fetchToggleNoteToTrash.pending, (state, action) => {
+        sweetAlert.loading();
+      })
+      .addCase(fetchToggleNoteToTrash.fulfilled, (state, action) => {
+        const { data, message } = action.payload;
+        state.data = state.data.filter((note) => note._id !== data._id);
+        sweetAlert.success(message);
+      })
+      .addCase(fetchToggleNoteToTrash.rejected, (state, action) => {
         sweetAlert.error(action.payload?.message);
       });
   },

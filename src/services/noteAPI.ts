@@ -1,4 +1,11 @@
-import { BaseDataResponse, GetNotePayload, MetaPagination, NewNote, Note } from 'src/types';
+import {
+  BaseDataResponse,
+  GetNotePayload,
+  MetaPagination,
+  NewNote,
+  Note,
+  ToggleNoteToTrash,
+} from 'src/types';
 import axiosInstance from './axiosInstance';
 
 const noteAPI = {
@@ -23,13 +30,15 @@ const noteAPI = {
     const url = '/notes';
     return axiosInstance.post(url, data);
   },
-  moveNoteToTrash(id: string): Promise<BaseDataResponse<Note>> {
+  updateNote(payload: any): Promise<BaseDataResponse<Note>> {
+    const { id, data } = payload;
     const url = `/notes/${id}`;
-    return axiosInstance.put(url, { is_trash: true });
+    return axiosInstance.put(url, data);
   },
-  restoreNoteFromTrash(id: string): Promise<BaseDataResponse<Note>> {
+  toggleNoteToTrash(payload: ToggleNoteToTrash): Promise<BaseDataResponse<Note>> {
+    const { id, is_trash } = payload;
     const url = `/notes/${id}`;
-    return axiosInstance.put(url, { is_trash: false });
+    return axiosInstance.put(url, { is_trash });
   },
   deleteNote(id: string): Promise<BaseDataResponse<Note>> {
     const url = `/notes/${id}`;

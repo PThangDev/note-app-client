@@ -7,11 +7,14 @@ import styles from './Spin.module.scss';
 
 interface Props {
   style?: CSSProperties;
+  onClick?: () => void;
 }
 
 const cx = classNames.bind(styles);
 
-const Spin: FC<Props> = ({ style }) => {
-  return <FontAwesomeIcon style={style} className={cx('icon')} icon={faArrowsSpin} />;
+const Spin: FC<Props> = ({ style, onClick }) => {
+  return (
+    <FontAwesomeIcon style={style} className={cx('icon')} icon={faArrowsSpin} onClick={onClick} />
+  );
 };
 export default Spin;
