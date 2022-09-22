@@ -1,3 +1,4 @@
+import { Topic } from './Topic';
 import { User } from './User';
 
 export interface Note {
@@ -5,7 +6,7 @@ export interface Note {
   title: string;
   content: string;
   background: string;
-  topics: string[] | null;
+  topics: Topic[];
   user: User;
   is_trash: boolean;
   is_pin: boolean;
@@ -26,3 +27,16 @@ export type GetNotePayload = {
   endpoint?: string;
   params?: NoteParams;
 };
+export interface NoteUpdateRequierd
+  extends Pick<Note, 'title' | 'content' | 'background' | 'is_trash' | 'is_pin'> {
+  topics: string[];
+}
+
+export type NoteUpdate = {
+  [Property in keyof NoteUpdateRequierd]?: NoteUpdateRequierd[Property];
+};
+
+export interface ToggleNoteToTrash {
+  id: string;
+  is_trash: boolean;
+}

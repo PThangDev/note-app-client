@@ -8,7 +8,7 @@ import { ChangeEvent, FC, useState } from 'react';
 import { useAppDispatch } from 'src/app/hooks';
 import ColorPicker from 'src/components/ColorPicker';
 import backgrounds from 'src/components/ColorPicker/backgrounds';
-import { fetchCreateNote, fetchGetNotes } from 'src/pages/notes/notesSlice';
+import { fetchCreateNote } from 'src/pages/notes/notesSlice';
 import { Button, Input } from 'src/themes/UI';
 import styles from './FormNote.module.scss';
 
@@ -37,7 +37,7 @@ const FormNote: FC<Props> = ({ onClose }) => {
 
   const handleSubmitNote = async () => {
     await dispatch(
-      fetchCreateNote({ title, content, background: backgroundColor, topics: null })
+      fetchCreateNote({ title, content, background: backgroundColor, topics: [] })
     ).unwrap();
     onClose();
   };
