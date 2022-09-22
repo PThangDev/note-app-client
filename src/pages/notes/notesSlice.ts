@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
 import { noteAPI } from 'src/services';
 import {
   BaseDataResponse,
