@@ -10,20 +10,24 @@ import ColorPicker from 'src/components/ColorPicker';
 import backgrounds from 'src/components/ColorPicker/backgrounds';
 import { fetchCreateNote } from 'src/pages/notes/notesSlice';
 import { Button, Input } from 'src/themes/UI';
+import { Note } from 'src/types';
+import TopicBox from '../TopicBox';
 import styles from './FormNote.module.scss';
 
 interface Props {
   onClose: () => void;
+  data?: Note;
 }
 
 const cx = classnames.bind(styles);
 
-const FormNote: FC<Props> = ({ onClose }) => {
+const FormNote: FC<Props> = ({ data, onClose }) => {
   const dispatch = useAppDispatch();
 
-  const [title, setTitle] = useState<string>('');
-  const [content, setContent] = useState<string>('');
-  const [backgroundColor, setBackgroundColor] = useState(backgrounds[0]);
+  const [title, setTitle] = useState<string>(data?.title || '');
+  const [content, setContent] = useState<string>(data?.content || '');
+  const [backgroundColor, setBackgroundColor] = useState(data?.background || backgrounds[0]);
+  const [topicIds, setTopicIds] = useState<string[]>([]);
 
   const handleChangeInputTitle = (e: ChangeEvent<HTMLInputElement>) => {
     const titleValue = e.target.value;
@@ -92,17 +96,7 @@ const FormNote: FC<Props> = ({ onClose }) => {
           </h3>
 
           <div className={cx('topic-group')}>
-            {/* {topics.data.map((topic) => (
-                <div className={cx('topic')} key={topic._id}>
-                  <input
-                    type="checkbox"
-                    id={topic._id}
-                    checked={topicIds.includes(topic._id)}
-                    onChange={() => handleChooseTopics(topic._id)}
-                  />
-                  <label htmlFor={topic._id}>{topic.name}</label>
-                </div>
-              ))} */}
+            <TopicBox />
           </div>
         </div>
 
