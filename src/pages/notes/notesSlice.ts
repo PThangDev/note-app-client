@@ -100,6 +100,7 @@ const notesSlice = createSlice({
       // Get Notes
       .addCase(fetchGetNotes.pending, (state, action) => {
         state.isLoading = true;
+        state.data = [];
       })
       .addCase(fetchGetNotes.fulfilled, (state, action) => {
         const { data, meta } = action.payload;

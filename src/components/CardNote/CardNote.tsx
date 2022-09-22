@@ -35,7 +35,7 @@ const cx = classnames.bind(styles);
 
 const isLoading = false;
 
-const Template: FC<Props> = ({ note, isTrash = false, isShowSelect = false, onToggleCheckbox }) => {
+const CardNote: FC<Props> = ({ note, isTrash = false, isShowSelect = false, onToggleCheckbox }) => {
   const dispatch = useAppDispatch();
   const { _id, content, title, topics, background, user, createdAt, slug, is_pin } = note;
 
@@ -133,4 +133,4 @@ const Template: FC<Props> = ({ note, isTrash = false, isShowSelect = false, onTo
   );
 };
 
-export default Template;
+export default CardNote;
