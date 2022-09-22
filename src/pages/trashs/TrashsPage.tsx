@@ -2,6 +2,7 @@ import classnames from 'classnames/bind';
 import { FC } from 'react';
 import { Helmet } from 'react-helmet-async';
 
+import Pagination from 'src/components/Pagination';
 import NoteContainer from 'src/containers/NoteContainer';
 import useGetNotes from 'src/hooks/useGetNotes';
 import styles from './TrashsPage.module.scss';
@@ -11,7 +12,7 @@ interface Props {}
 const cx = classnames.bind(styles);
 
 const TrashsPage: FC<Props> = (props) => {
-  const { data, isLoading } = useGetNotes({ endpoint: '/trashs' });
+  const { data, isLoading, pagination } = useGetNotes({ endpoint: '/trashs' });
 
   return (
     <>
@@ -21,6 +22,7 @@ const TrashsPage: FC<Props> = (props) => {
       <div className={cx('wrapper')}>
         <h3 className={cx('heading')}>Trashs</h3>
         <NoteContainer notes={data} isLoading={isLoading} isTrash />
+        <Pagination pagination={pagination} />
       </div>
     </>
   );

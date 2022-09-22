@@ -7,6 +7,7 @@ import {
   MetaPagination,
   NewNote,
   Note,
+  NoteUpdate,
   Pagination,
   RejectValue,
   ToggleNoteToTrash,
@@ -48,6 +49,18 @@ export const fetchCreateNote = createAsyncThunk<BaseDataResponse<Note>, NewNote,
   async (payload, thunkAPI) => {
     try {
       const response = await noteAPI.createNote(payload);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error as ErrorResponse);
+    }
+  }
+);
+
+export const fetchUpdateNote = createAsyncThunk<BaseDataResponse<Note>, NoteUpdate, RejectValue>(
+  '/notes/:id/updated',
+  async (payload, thunkAPI) => {
+    try {
+      const response = await noteAPI.updateNote(payload);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error as ErrorResponse);
@@ -115,6 +128,23 @@ const notesSlice = createSlice({
         sweetAlert.success(message);
       })
       .addCase(fetchCreateNote.rejected, (state, action) => {
+        sweetAlert.error(action.payload?.message);
+      })
+      // Update note
+      .addCase(fetchUpdateNote.pending, (state, action) => {
+        sweetAlert.loading();
+      })
+      .addCase(fetchUpdateNote.fulfilled, (state, action) => {
+        const { data, message } = action.payload;
+        state.data = state.data.map((note) => {
+          if (note._id === data._id) {
+            return data;
+          }
+          return note;
+        });
+        sweetAlert.success(message);
+      })
+      .addCase(fetchUpdateNote.rejected, (state, action) => {
         sweetAlert.error(action.payload?.message);
       })
       // Delete Note

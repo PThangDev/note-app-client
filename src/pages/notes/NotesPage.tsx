@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet-async';
 
 import { FormNote } from 'src/components/Form';
 import Modal from 'src/components/Modal';
+import Pagination from 'src/components/Pagination';
 import NoteContainer from 'src/containers/NoteContainer';
 import useGetNotes from 'src/hooks/useGetNotes';
 import { Button } from 'src/themes/UI';
@@ -39,6 +40,7 @@ const NotesPage: FC<Props> = (props) => {
           </Button>
         </div>
         <NoteContainer notes={data} isLoading={isLoading} />
+        <Pagination pageRangeDisplay={5} pagination={pagination} />
       </div>
       {/* Modal */}
       <Modal isOpen={isOpenFormNote} onClose={handleCloseFormNote} closeWhenClickOnOverlay>
