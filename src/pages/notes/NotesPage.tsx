@@ -2,12 +2,11 @@ import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames/bind';
 import { FC, useState } from 'react';
-import { Col, Container, Row } from 'react-grid-system';
 import { Helmet } from 'react-helmet-async';
 
-import CardNote from 'src/components/CardNote';
 import { FormNote } from 'src/components/Form';
 import Modal from 'src/components/Modal';
+import NoteContainer from 'src/containers/NoteContainer';
 import useGetNotes from 'src/hooks/useGetNotes';
 import { Button } from 'src/themes/UI';
 import styles from './NotesPage.module.scss';
@@ -39,17 +38,7 @@ const NotesPage: FC<Props> = (props) => {
             Create a new note
           </Button>
         </div>
-        <Container fluid style={{ padding: 0 }}>
-          <Row gutterWidth={15}>
-            {data.map((note) => {
-              return (
-                <Col key={note._id} xs={12} sm={6} md={6} lg={4} xl={3} xxxl={2.4}>
-                  <CardNote note={note} />
-                </Col>
-              );
-            })}
-          </Row>
-        </Container>
+        <NoteContainer notes={data} isLoading={isLoading} />
       </div>
       {/* Modal */}
       <Modal isOpen={isOpenFormNote} onClose={handleCloseFormNote} closeWhenClickOnOverlay>
