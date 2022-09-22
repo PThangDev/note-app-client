@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react';
 import MDEditor from '@uiw/react-md-editor';
 import classnames from 'classnames/bind';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAppDispatch } from 'src/app/hooks';
@@ -19,7 +19,9 @@ import { Button } from 'src/themes/UI';
 import { Spin } from 'src/themes/UI/Loading';
 import { Note } from 'src/types';
 import { formatDate, sweetAlert } from 'src/utils';
+import { FormNote } from '../Form';
 import { PinIcon } from '../Icons';
+import Modal from '../Modal';
 import styles from './CardNote.module.scss';
 
 interface Props {
@@ -41,6 +43,7 @@ const CardNote: FC<Props> = ({
 }) => {
   const dispatch = useAppDispatch();
   const { _id, content, title, topics, background, user, createdAt, slug, is_pin } = note;
+  const [isOpenFormEdit, setIsOpenFormEdit] = useState<boolean>(false);
 
   const handleMoveNoteToTrash = async () => {
     const result = await sweetAlert.confirm({ text: 'Do you want to move note to trash!' });
@@ -76,6 +79,10 @@ const CardNote: FC<Props> = ({
 
   const handlePinNote = async () => {};
 
+  const handleCloseFormEdit = () => {
+    setIsOpenFormEdit(false);
+  };
+
   const renderPinIcon = () => {
     if (isLoading) {
       return <Spin />;
@@ -107,7 +114,7 @@ const CardNote: FC<Props> = ({
     return (
       <>
         <Tippy content="Edit">
-          <Button>
+          <Button onClick={() => setIsOpenFormEdit(true)}>
             <FontAwesomeIcon className={cx('icon')} icon={faPenToSquare} />
           </Button>
         </Tippy>
@@ -148,6 +155,9 @@ const CardNote: FC<Props> = ({
       </div>
 
       {/* Modals */}
+      <Modal isOpen={isOpenFormEdit} onClose={handleCloseFormEdit} closeWhenClickOnOverlay>
+        <FormNote data={note} onClose={handleCloseFormEdit} />
+      </Modal>
     </>
   );
 };

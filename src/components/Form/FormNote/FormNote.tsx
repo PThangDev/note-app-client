@@ -1,18 +1,18 @@
 import { faHeading } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeadlessTippy from '@tippyjs/react/headless';
-import MDEditor from '@uiw/react-md-editor';
 import classnames from 'classnames/bind';
-import { ChangeEvent, FC, useState } from 'react';
+import { ChangeEvent, FC, useCallback, useState } from 'react';
 
 import { useAppDispatch } from 'src/app/hooks';
 import ColorPicker from 'src/components/ColorPicker';
 import backgrounds from 'src/components/ColorPicker/backgrounds';
-import { fetchCreateNote } from 'src/pages/notes/notesSlice';
+import { fetchCreateNote, fetchUpdateNote } from 'src/pages/notes/notesSlice';
 import { Button, Input } from 'src/themes/UI';
 import { Note } from 'src/types';
 import TopicBox from '../TopicBox';
 import styles from './FormNote.module.scss';
+import MDEditor from './MDEditor';
 
 interface Props {
   onClose: () => void;
@@ -34,21 +34,30 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
     setTitle(titleValue);
   };
 
+  const handleChangeContent = useCallback((value: string) => {
+    setContent(value);
+  }, []);
+
   const handleChangeColorInput = (e: ChangeEvent<HTMLInputElement>) => {
     const backgroundValue = e.target.value;
     setBackgroundColor(backgroundValue);
   };
-
   const handleSubmitNote = async () => {
-    await dispatch(
-      fetchCreateNote({ title, content, background: backgroundColor, topics: [] })
-    ).unwrap();
+    if (data) {
+      await dispatch(
+        fetchUpdateNote({ id: data._id, title, content, background: backgroundColor, topics: [] })
+      ).unwrap();
+    } else {
+      await dispatch(
+        fetchCreateNote({ title, content, background: backgroundColor, topics: [] })
+      ).unwrap();
+    }
     onClose();
   };
 
   return (
     <div className={cx('wrapper')}>
-      <h3 className={cx('heading')}>Create Note</h3>
+      <h3 className={cx('heading')}>{data ? 'Update Note' : 'Create Note'}</h3>
       <div className={cx('form')}>
         <Input
           className={cx('title')}
@@ -59,11 +68,7 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
           icon={<FontAwesomeIcon icon={faHeading} />}
         />
         <div className={cx('editor')} data-color-mode="dark">
-          <MDEditor
-            height={300}
-            value={content}
-            onChange={(value?: string) => setContent(value as string)}
-          />
+          <MDEditor content={content} onChange={handleChangeContent} />
         </div>
         <div className={cx('background')}>
           <h3 className={cx('background-heading')}>Choose background card :</h3>

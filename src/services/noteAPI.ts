@@ -4,6 +4,7 @@ import {
   MetaPagination,
   NewNote,
   Note,
+  NoteUpdate,
   ToggleNoteToTrash,
 } from 'src/types';
 import axiosInstance from './axiosInstance';
@@ -30,9 +31,8 @@ const noteAPI = {
     const url = '/notes';
     return axiosInstance.post(url, data);
   },
-  updateNote(payload: any): Promise<BaseDataResponse<Note>> {
-    const { id, data } = payload;
-    const url = `/notes/${id}`;
+  updateNote(data: NoteUpdate): Promise<BaseDataResponse<Note>> {
+    const url = `/notes/${data.id}`;
     return axiosInstance.put(url, data);
   },
   toggleNoteToTrash(payload: ToggleNoteToTrash): Promise<BaseDataResponse<Note>> {

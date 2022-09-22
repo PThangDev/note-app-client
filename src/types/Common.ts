@@ -22,6 +22,9 @@ export interface Pagination {
   total: number;
 }
 
+export type UnionPagination = {
+  [Property in keyof Pagination]?: string;
+};
 export interface MetaPagination {
   pagination: Pagination;
 }

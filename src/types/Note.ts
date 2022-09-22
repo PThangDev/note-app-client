@@ -17,10 +17,13 @@ export interface Note {
 }
 
 export type NewNote = Pick<Note, 'title' | 'content' | 'background' | 'topics'>;
-
 export interface NoteParams {
   is_trash?: boolean;
   is_pin?: boolean;
+  limit?: string;
+  page?: string;
+  sort?: string;
+  q?: string;
 }
 
 export type GetNotePayload = {
@@ -30,6 +33,7 @@ export type GetNotePayload = {
 export interface NoteUpdateRequierd
   extends Pick<Note, 'title' | 'content' | 'background' | 'is_trash' | 'is_pin'> {
   topics: string[];
+  id: string;
 }
 
 export type NoteUpdate = {
