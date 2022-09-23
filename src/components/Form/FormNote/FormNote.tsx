@@ -1,8 +1,9 @@
-import { faHeading } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faHeading } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeadlessTippy from '@tippyjs/react/headless';
 import classnames from 'classnames/bind';
 import { ChangeEvent, FC, useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from 'src/app/hooks';
 import ColorPicker from 'src/components/ColorPicker';
@@ -15,7 +16,7 @@ import styles from './FormNote.module.scss';
 import MDEditor from './MDEditor';
 
 interface Props {
-  onClose: () => void;
+  onClose?: () => void;
   data?: Note;
 }
 
@@ -23,11 +24,16 @@ const cx = classnames.bind(styles);
 
 const FormNote: FC<Props> = ({ data, onClose }) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [title, setTitle] = useState<string>(data?.title || '');
   const [content, setContent] = useState<string>(data?.content || '');
   const [backgroundColor, setBackgroundColor] = useState(data?.background || backgrounds[0]);
   const [topicIds, setTopicIds] = useState<string[]>([]);
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
 
   const handleChangeInputTitle = (e: ChangeEvent<HTMLInputElement>) => {
     const titleValue = e.target.value;
@@ -52,11 +58,17 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
         fetchCreateNote({ title, content, background: backgroundColor, topics: [] })
       ).unwrap();
     }
-    onClose();
+    handleGoBack();
   };
   return (
     <div className={cx('wrapper')}>
-      <h3 className={cx('heading')}>{data ? 'Update Note' : 'Create Note'}</h3>
+      <div className={cx('header')}>
+        <button onClick={handleGoBack}>
+          <FontAwesomeIcon className={cx('icon')} icon={faAngleLeft} />
+          Back
+        </button>
+        <h3 className={cx('heading')}>{data ? 'Update Note' : 'Create Note'}</h3>
+      </div>
       <div className={cx('form')}>
         <Input
           className={cx('title')}

@@ -1,17 +1,44 @@
 .wrapper {
-  width: 95vw;
-  height: 90vh;
-
   position: relative;
   display: flex;
   flex-direction: column;
   overflow: auto;
 }
 
+.header {
+  margin-bottom: 20px;
+  position: relative;
+
+  button {
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: var(--font-xl);
+
+    display: flex;
+    align-items: center;
+
+    color: var(--grey-bold-color);
+
+    &:hover {
+      color: var(--text-color);
+
+      .icon {
+        transform: translateX(-3px);
+      }
+    }
+
+    .icon {
+      margin-right: 5px;
+      transition: transform 0.4s;
+    }
+  }
+}
+
 .heading {
   text-align: center;
   font-size: var(--font-3xl);
-  margin-bottom: 20px;
 }
 
 .title {

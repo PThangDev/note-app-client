@@ -29,6 +29,14 @@ const routePaths = {
     path: '/notes',
     label: 'Notes',
   },
+  newNote: {
+    path: '/notes/new',
+    label: 'New Note',
+  },
+  editNote: {
+    path: '/notes/edit/:id',
+    label: 'Edit Note',
+  },
   noteDetail: {
     path: '/notes/:id/:slug',
     label: 'Note Detail',
