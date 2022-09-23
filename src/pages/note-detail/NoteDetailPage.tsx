@@ -37,11 +37,7 @@ const NoteDetailPage: FC<Props> = (props) => {
         </div>
         <div className={cx('info')}>{formatDate(data?.createdAt)}</div>
         <div className={cx('content')} data-color-mode="dark">
-          <MDEditor.Markdown
-            className="md-editor-preview"
-            source={data?.content}
-            style={{ whiteSpace: 'pre-wrap' }}
-          />
+          <MDEditor.Markdown className="md-editor-preview" source={data?.content} />
         </div>
       </div>
     </>
