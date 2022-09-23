@@ -11,7 +11,7 @@
   --grey-bold-color: rgb(97, 97, 97);
   --grey-light-color: rgb(198, 198, 198);
 
-  --text-color: #0c405a;
+  --text-color: #333;
 
   --main-bg: rgb(244, 241, 241);
 
@@ -69,6 +69,10 @@ a {
   display: inline-block;
   text-decoration: none;
   color: inherit;
+}
+
+button {
+  cursor: pointer;
 }
 
 button,

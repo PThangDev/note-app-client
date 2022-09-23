@@ -114,7 +114,11 @@
 .buttons {
   display: flex;
   align-items: center;
+  a {
+    margin-right: 8px;
+  }
 }
+
 .icon {
   font-size: var(--font-lg);
 }

@@ -1,7 +1,14 @@
 // React Mark down
-.wmde-markdown h2 {
-  border: none !important;
+.wmde-markdown {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    border: none !important;
+  }
 }
+
 .w-md-editor-text {
   // Remove padding in editor
 

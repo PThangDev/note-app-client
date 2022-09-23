@@ -7,6 +7,8 @@ const HomePage = lazy(() => import('src/pages/home'));
 const NotesPage = lazy(() => import('src/pages/notes'));
 const NoteDetailPage = lazy(() => import('src/pages/note-detail'));
 const NoteDetailRouter = lazy(() => import('src/pages/note-detail/NoteDetailRouter'));
+const NewNotePage = lazy(() => import('src/pages/new-note'));
+const EditNotePage = lazy(() => import('src/pages/edit-note'));
 const TopicsPage = lazy(() => import('src/pages/topics'));
 const PinsPage = lazy(() => import('src/pages/pins'));
 const TrashsPage = lazy(() => import('src/pages/trashs'));
@@ -22,6 +24,18 @@ const privateRoutes = [
   {
     path: routePaths.notes.path,
     component: NotesPage,
+    layout: DefaultLayout,
+    outer: PrivateRouter,
+  },
+  {
+    path: routePaths.newNote.path,
+    component: NewNotePage,
+    layout: DefaultLayout,
+    outer: PrivateRouter,
+  },
+  {
+    path: routePaths.editNote.path,
+    component: EditNotePage,
     layout: DefaultLayout,
     outer: PrivateRouter,
   },

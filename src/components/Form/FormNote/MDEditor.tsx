@@ -1,6 +1,5 @@
 import ReactMDEditor from '@uiw/react-md-editor';
-import { useEffect } from 'react';
-import { FC, memo } from 'react';
+import { FC, memo, useEffect } from 'react';
 import MDEditorLite from 'react-markdown-editor-lite';
 
 interface Props {
@@ -26,13 +25,7 @@ const MDEditor: FC<Props> = ({ value = '', onChange }) => {
       renderHTML={(text) =>
         new Promise((resolve) => {
           setTimeout(() => {
-            resolve(
-              <ReactMDEditor.Markdown
-                className="md-editor-preview"
-                source={text}
-                style={{ whiteSpace: 'pre-wrap' }}
-              />
-            );
+            resolve(<ReactMDEditor.Markdown className="md-editor-preview" source={text} />);
           }, 100);
         })
       }

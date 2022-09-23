@@ -1,4 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
+
 import { noteAPI } from 'src/services';
 import {
   BaseDataResponse,
@@ -123,9 +125,9 @@ const notesSlice = createSlice({
         sweetAlert.loading();
       })
       .addCase(fetchCreateNote.fulfilled, (state, action) => {
-        const { data, message } = action.payload;
-        state.data = [data, ...state.data];
-        sweetAlert.success(message);
+        const { message } = action.payload;
+        sweetAlert.close();
+        toast.success(message);
       })
       .addCase(fetchCreateNote.rejected, (state, action) => {
         sweetAlert.error(action.payload?.message);
@@ -135,14 +137,9 @@ const notesSlice = createSlice({
         sweetAlert.loading();
       })
       .addCase(fetchUpdateNote.fulfilled, (state, action) => {
-        const { data, message } = action.payload;
-        state.data = state.data.map((note) => {
-          if (note._id === data._id) {
-            return data;
-          }
-          return note;
-        });
-        sweetAlert.success(message);
+        const { message } = action.payload;
+        sweetAlert.close();
+        toast.success(message);
       })
       .addCase(fetchUpdateNote.rejected, (state, action) => {
         sweetAlert.error(action.payload?.message);

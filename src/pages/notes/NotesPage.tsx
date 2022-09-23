@@ -1,12 +1,12 @@
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames/bind';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 
-import { FormNote } from 'src/components/Form';
-import Modal from 'src/components/Modal';
 import Pagination from 'src/components/Pagination';
+import { routePaths } from 'src/configs';
 import NoteContainer from 'src/containers/NoteContainer';
 import useGetNotes from 'src/hooks/useGetNotes';
 import { Button } from 'src/themes/UI';
@@ -19,12 +19,6 @@ const cx = classnames.bind(styles);
 const NotesPage: FC<Props> = (props) => {
   const { data, isLoading, pagination } = useGetNotes({ params: { is_trash: false } });
 
-  const [isOpenFormNote, setIsOpenFormNote] = useState<boolean>(false);
-
-  const handleCloseFormNote = () => {
-    setIsOpenFormNote(false);
-  };
-
   return (
     <>
       <Helmet>
@@ -32,20 +26,13 @@ const NotesPage: FC<Props> = (props) => {
       </Helmet>
       <div className={cx('wrapper')}>
         <div className={cx('actions')}>
-          <Button
-            icon={<FontAwesomeIcon icon={faCirclePlus} />}
-            onClick={() => setIsOpenFormNote(true)}
-          >
-            Create a new note
-          </Button>
+          <Link to={routePaths.newNote.path}>
+            <Button icon={<FontAwesomeIcon icon={faCirclePlus} />}>Create a new note</Button>
+          </Link>
         </div>
         <NoteContainer notes={data} isLoading={isLoading} />
         <Pagination pageRangeDisplay={5} pagination={pagination} />
       </div>
-      {/* Modal */}
-      <Modal isOpen={isOpenFormNote} onClose={handleCloseFormNote} closeWhenClickOnOverlay>
-        <FormNote onClose={handleCloseFormNote} />
-      </Modal>
     </>
   );
 };
