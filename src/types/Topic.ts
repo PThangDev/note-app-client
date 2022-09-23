@@ -12,3 +12,5 @@ export interface Topic {
   updateAt: string;
   __v: number;
 }
+
+export type BaseTopic = Pick<Topic, '_id' | 'name' | 'background'>;
