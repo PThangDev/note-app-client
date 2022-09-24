@@ -8,7 +8,7 @@ import {
   Pagination,
   RejectValue,
 } from 'src/types';
-import { Topic } from 'src/types/Topic';
+import { GetTopicsPayload, Topic } from 'src/types/Topic';
 
 interface InitialState {
   isLoading: boolean;
@@ -17,7 +17,7 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-  isLoading: false,
+  isLoading: true,
   data: [],
   pagination: {
     limit: 0,
@@ -29,11 +29,11 @@ const initialState: InitialState = {
 
 export const fetchGetTopics = createAsyncThunk<
   BaseDataResponse<Topic[], MetaPagination>,
-  undefined,
+  GetTopicsPayload | undefined,
   RejectValue
 >('/topics', async (payload, thunkAPI) => {
   try {
-    const response = await topicAPI.getTopics();
+    const response = await topicAPI.getTopics(payload);
     return response;
   } catch (error) {
     return thunkAPI.rejectWithValue(error as ErrorResponse);
@@ -47,7 +47,7 @@ const topicsSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchGetTopics.pending, (state, action) => {
-        state.isLoading = true;
+        // state.isLoading = false;
       })
       .addCase(fetchGetTopics.fulfilled, (state, action) => {
         const { data, meta } = action.payload;

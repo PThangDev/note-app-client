@@ -9,6 +9,7 @@ interface Props {}
 
 const useGetNotes = (payload?: GetNotePayload) => {
   const dispatch = useAppDispatch();
+
   const notes = useAppSelector((state) => state.notes);
   const { limit, page, sort, q } = useGetParams();
 

@@ -16,7 +16,9 @@ export interface Note {
   __v: number;
 }
 
-export type NewNote = Pick<Note, 'title' | 'content' | 'background' | 'topics'>;
+export type NewNote = Pick<Note, 'title' | 'content' | 'background'> & {
+  topics: string[];
+};
 export interface NoteParams {
   is_trash?: boolean;
   is_pin?: boolean;
