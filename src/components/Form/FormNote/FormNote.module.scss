@@ -61,9 +61,10 @@
 }
 
 .background {
-  margin: 20px 0;
   display: flex;
-  align-items: center;
+  border: 1px solid var(--grey-light-color);
+  height: 100%;
+  padding: 20px 15px;
 }
 .color-picker {
   display: flex;

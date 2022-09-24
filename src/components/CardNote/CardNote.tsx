@@ -10,7 +10,7 @@ import Tippy from '@tippyjs/react';
 import MDEditor from '@uiw/react-md-editor';
 import classnames from 'classnames/bind';
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { useAppDispatch } from 'src/app/hooks';
 import { routePaths } from 'src/configs';
@@ -41,6 +41,8 @@ const CardNote: FC<Props> = ({
 }) => {
   const dispatch = useAppDispatch();
   const { _id, content, title, topics, background, user, createdAt, slug, is_pin } = note;
+
+  const location = useLocation();
 
   const handleMoveNoteToTrash = async () => {
     const result = await sweetAlert.confirm({ text: 'Do you want to move note to trash!' });
@@ -107,7 +109,11 @@ const CardNote: FC<Props> = ({
     return (
       <>
         <Tippy content="Edit">
-          <Link className={cx('link-edit')} to={`${routePaths.notes.path}/edit/${_id}`}>
+          <Link
+            className={cx('link-edit')}
+            to={`${routePaths.notes.path}/edit/${_id}`}
+            state={{ previousPage: location.pathname }}
+          >
             <Button>
               <FontAwesomeIcon className={cx('icon')} icon={faPenToSquare} />
             </Button>
@@ -136,11 +142,7 @@ const CardNote: FC<Props> = ({
           </div>
         </div>
         <div className={cx('content')} data-color-mode="dark">
-          <MDEditor.Markdown
-            className="md-editor-preview"
-            source={content}
-            style={{ whiteSpace: 'pre-wrap' }}
-          />
+          <MDEditor.Markdown className="md-editor-preview" source={content} />
           <Link to={`${routePaths.notes.path}/${_id}`} />
         </div>
         <div className={cx('options')}>

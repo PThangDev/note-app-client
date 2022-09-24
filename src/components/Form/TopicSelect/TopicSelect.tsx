@@ -1,10 +1,15 @@
-import { faCircleXmark, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCircleXmark,
+  faDeleteLeft,
+  faMagnifyingGlass,
+  faSquarePlus,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames/bind';
 import { FC, memo } from 'react';
 
 import useGetTopics from 'src/hooks/useGetTopics';
-import { Checkbox, Input } from 'src/themes/UI';
+import { Button, Checkbox, Input } from 'src/themes/UI';
 import { BaseTopic } from 'src/types';
 import styles from './TopicSelect.module.scss';
 
@@ -21,8 +26,6 @@ const TopicSelect: FC<Props> = ({ topics, onChangeTopicSelect }) => {
   const handleChangeTopicSelect = (topic: BaseTopic) => {
     onChangeTopicSelect(topic);
   };
-
-  console.log({ topics });
 
   return (
     <div className={cx('wrapper')}>
@@ -45,12 +48,19 @@ const TopicSelect: FC<Props> = ({ topics, onChangeTopicSelect }) => {
           ))}
         </div>
       </div>
-      <Input
-        className={cx('search')}
-        icon={<FontAwesomeIcon icon={faMagnifyingGlass} />}
-        name="search-topic"
-        placeholder="Topic name..."
-      />
+
+      <div className={cx('options')}>
+        <Input
+          className={cx('search')}
+          icon={<FontAwesomeIcon icon={faMagnifyingGlass} />}
+          name="search-topic"
+          placeholder="Topic name..."
+        />
+        <Button icon={<FontAwesomeIcon icon={faSquarePlus} />}>Add</Button>
+        <Button status="error" icon={<FontAwesomeIcon icon={faDeleteLeft} />}>
+          Clear
+        </Button>
+      </div>
       <div className={cx('card')}>
         {data.map((topic) => (
           <Checkbox

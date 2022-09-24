@@ -125,7 +125,8 @@ const notesSlice = createSlice({
         sweetAlert.loading();
       })
       .addCase(fetchCreateNote.fulfilled, (state, action) => {
-        const { message } = action.payload;
+        const { data, message } = action.payload;
+        state.data = [data, ...state.data];
         sweetAlert.close();
         toast.success(message);
       })
@@ -137,7 +138,13 @@ const notesSlice = createSlice({
         sweetAlert.loading();
       })
       .addCase(fetchUpdateNote.fulfilled, (state, action) => {
-        const { message } = action.payload;
+        const { data, message } = action.payload;
+        state.data = state.data.map((note) => {
+          if (note._id === data._id) {
+            return data;
+          }
+          return note;
+        });
         sweetAlert.close();
         toast.success(message);
       })

@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeadlessTippy from '@tippyjs/react/headless';
 import classnames from 'classnames/bind';
 import { ChangeEvent, FC, useCallback, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Col, Container, Row } from 'react-grid-system';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from 'src/app/hooks';
 import ColorPicker from 'src/components/ColorPicker';
@@ -25,6 +26,7 @@ const cx = classnames.bind(styles);
 const FormNote: FC<Props> = ({ data, onClose }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [title, setTitle] = useState<string>(data?.title || '');
   const [content, setContent] = useState<string>(data?.content || '');
@@ -45,7 +47,11 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
   }, [topics]);
 
   const handleGoBack = () => {
-    navigate(-1);
+    if (location.state?.previousPage) {
+      navigate(location.state.previousPage, { state: { reload: false } });
+    } else {
+      navigate(-1);
+    }
   };
 
   const handleChangeInputTitle = (e: ChangeEvent<HTMLInputElement>) => {
@@ -109,39 +115,46 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
         <div className={cx('editor')} data-color-mode="dark">
           <MDEditor value={content} onChange={handleChangeContent} />
         </div>
-        <div className={cx('background')}>
-          <h3 className={cx('background-heading')}>Choose background card :</h3>
-          <div className={cx('color-field')}>
-            <HeadlessTippy
-              interactive
-              placement="right-end"
-              delay={[300, 500]}
-              hideOnClick={false}
-              render={(attrs) => (
-                <ColorPicker
-                  color={backgroundColor}
-                  onChange={(newColor) => setBackgroundColor(newColor)}
-                  attrs={attrs}
-                />
-              )}
-            >
-              <div className={cx('color-input')}>
-                <input value={backgroundColor} type="text" onChange={handleChangeColorInput} />
-                <p className={cx('line')} style={{ background: backgroundColor }}></p>
-              </div>
-            </HeadlessTippy>
-          </div>
-        </div>
 
         <div className={cx('topics')}>
-          <h3 className={cx('topics-heading')}>
-            Topics
-            {/* <ButtonCreate className={cx('button-create-topic')} text="Add topic" /> */}
-          </h3>
-
-          <div className={cx('topic-group')}>
-            <TopicSelect topics={topics} onChangeTopicSelect={handleChangeTopic} />
-          </div>
+          <Container fluid style={{ padding: 0 }}>
+            <Row nogutter>
+              <Col xl={6}>
+                <div className={cx('topic-group')}>
+                  <TopicSelect topics={topics} onChangeTopicSelect={handleChangeTopic} />
+                </div>
+              </Col>
+              <Col xl={6}>
+                <div className={cx('background')}>
+                  <h3 className={cx('background-heading')}>Choose background card :</h3>
+                  <div className={cx('color-field')}>
+                    <HeadlessTippy
+                      interactive
+                      placement="right-end"
+                      delay={[300, 500]}
+                      hideOnClick={false}
+                      render={(attrs) => (
+                        <ColorPicker
+                          color={backgroundColor}
+                          onChange={(newColor) => setBackgroundColor(newColor)}
+                          attrs={attrs}
+                        />
+                      )}
+                    >
+                      <div className={cx('color-input')}>
+                        <input
+                          value={backgroundColor}
+                          type="text"
+                          onChange={handleChangeColorInput}
+                        />
+                        <p className={cx('line')} style={{ background: backgroundColor }}></p>
+                      </div>
+                    </HeadlessTippy>
+                  </div>
+                </div>
+              </Col>
+            </Row>
+          </Container>
         </div>
 
         <div className={cx('actions')}>

@@ -1,14 +1,36 @@
 $card-topic-gap: 5px;
 .wrapper {
   padding: 20px 15px;
-  width: 50%;
+  width: 100%;
   border: 1px solid var(--grey-light-color);
 }
 
+.header {
+  display: flex;
+  font-weight: 600;
+}
+.heading {
+  padding: 5px;
+}
+
+.options {
+  display: flex;
+  align-items: stretch;
+  margin-top: 10px;
+}
 .search {
   border: 2px solid var(--grey-light-color);
   border-radius: 8px;
+  flex: 1;
+  height: 48px;
+  margin-right: 10px;
+
+  label {
+    font-size: var(--font-lg);
+  }
+
   input {
+    font-size: var(--font-sm);
     border: none;
   }
 }
@@ -18,14 +40,6 @@ $card-topic-gap: 5px;
   flex-wrap: wrap;
   padding: 10px 0;
   margin: calc(#{$card-topic-gap} * -1) calc(#{$card-topic-gap} * -1);
-}
-
-.header {
-  display: flex;
-  font-weight: 600;
-}
-.heading {
-  padding: 5px;
 }
 
 .chip-list {

@@ -41,7 +41,6 @@ const Button = (
         {
           'button--primary': primary,
           'button--full-width': fullWidth,
-          'button--disabled': disabled,
           'button--loading': isLoading,
           [`button--${status}`]: status,
         },
