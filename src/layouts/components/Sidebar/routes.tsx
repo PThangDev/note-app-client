@@ -15,6 +15,7 @@ const routes = [
     to: routePaths.home.path,
     label: routePaths.home.label,
     icon: <FontAwesomeIcon icon={faHouseUser} />,
+    end: true,
   },
   {
     to: routePaths.notes.path,

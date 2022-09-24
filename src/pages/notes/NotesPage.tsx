@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames/bind';
 import { FC } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Pagination from 'src/components/Pagination';
 import { routePaths } from 'src/configs';
@@ -19,8 +19,6 @@ const cx = classnames.bind(styles);
 const NotesPage: FC<Props> = (props) => {
   const { data, isLoading, pagination } = useGetNotes({ params: { is_trash: false } });
 
-  const location = useLocation();
-
   return (
     <>
       <Helmet>
@@ -28,7 +26,7 @@ const NotesPage: FC<Props> = (props) => {
       </Helmet>
       <div className={cx('wrapper')}>
         <div className={cx('actions')}>
-          <Link to={routePaths.newNote.path} state={{ previousPage: location.pathname }}>
+          <Link to={routePaths.newNote.path}>
             <Button icon={<FontAwesomeIcon icon={faCirclePlus} />}>Create a new note</Button>
           </Link>
         </div>

@@ -6,7 +6,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames/bind';
-import { FC, memo } from 'react';
+import { ChangeEvent, FC, memo, useState } from 'react';
+import useDebounce from 'src/hooks/useDebounce';
 
 import useGetTopics from 'src/hooks/useGetTopics';
 import { Button, Checkbox, Input } from 'src/themes/UI';
@@ -21,7 +22,16 @@ interface Props {
 const cx = classnames.bind(styles);
 
 const TopicSelect: FC<Props> = ({ topics, onChangeTopicSelect }) => {
-  const { data, isLoading } = useGetTopics();
+  const [search, setSearch] = useState<string>('');
+
+  const searchDebouncedValue = useDebounce(search, 500);
+
+  const { data, isLoading } = useGetTopics({ params: { q: searchDebouncedValue } });
+
+  const handleChangeInputSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    const searchValue = e.target.value;
+    setSearch(searchValue);
+  };
 
   const handleChangeTopicSelect = (topic: BaseTopic) => {
     onChangeTopicSelect(topic);
@@ -55,6 +65,7 @@ const TopicSelect: FC<Props> = ({ topics, onChangeTopicSelect }) => {
           icon={<FontAwesomeIcon icon={faMagnifyingGlass} />}
           name="search-topic"
           placeholder="Topic name..."
+          onChange={handleChangeInputSearch}
         />
         <Button icon={<FontAwesomeIcon icon={faSquarePlus} />}>Add</Button>
         <Button status="error" icon={<FontAwesomeIcon icon={faDeleteLeft} />}>

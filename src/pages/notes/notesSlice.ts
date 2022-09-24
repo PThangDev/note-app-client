@@ -23,7 +23,7 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-  isLoading: false,
+  isLoading: true,
   data: [],
   pagination: {
     limit: 0,
@@ -108,7 +108,9 @@ const notesSlice = createSlice({
     builder
       // Get Notes
       .addCase(fetchGetNotes.pending, (state, action) => {
-        state.isLoading = true;
+        if (action.meta.arg?.params?.page !== undefined) {
+          state.isLoading = true;
+        }
       })
       .addCase(fetchGetNotes.fulfilled, (state, action) => {
         const { data, meta } = action.payload;

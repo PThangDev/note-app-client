@@ -4,7 +4,7 @@ import HeadlessTippy from '@tippyjs/react/headless';
 import classnames from 'classnames/bind';
 import { ChangeEvent, FC, useCallback, useMemo, useState } from 'react';
 import { Col, Container, Row } from 'react-grid-system';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from 'src/app/hooks';
 import ColorPicker from 'src/components/ColorPicker';
@@ -26,7 +26,6 @@ const cx = classnames.bind(styles);
 const FormNote: FC<Props> = ({ data, onClose }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [title, setTitle] = useState<string>(data?.title || '');
   const [content, setContent] = useState<string>(data?.content || '');
@@ -47,11 +46,7 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
   }, [topics]);
 
   const handleGoBack = () => {
-    if (location.state?.previousPage) {
-      navigate(location.state.previousPage, { state: { reload: false } });
-    } else {
-      navigate(-1);
-    }
+    navigate(-1);
   };
 
   const handleChangeInputTitle = (e: ChangeEvent<HTMLInputElement>) => {

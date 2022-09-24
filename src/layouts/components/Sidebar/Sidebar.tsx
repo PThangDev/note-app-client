@@ -23,10 +23,14 @@ const Sidebar: FC<Props> = (props) => {
     <div className={cx('wrapper')}>
       <ul className={cx('list')}>
         {routes.map((route, index) => {
-          const { icon, to, label } = route;
+          const { icon, to, label, end = undefined } = route;
           return (
             <li className={cx('item')} key={`${to}-${index}`}>
-              <NavLink className={({ isActive }) => cx('link', { active: isActive })} end to={to}>
+              <NavLink
+                className={({ isActive }) => cx('link', { active: isActive })}
+                end={end}
+                to={to}
+              >
                 <span className={cx('icon')}>{icon}</span>
                 <span className={cx('label')}>{label}</span>
               </NavLink>

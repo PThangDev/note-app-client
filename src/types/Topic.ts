@@ -14,3 +14,14 @@ export interface Topic {
 }
 
 export type BaseTopic = Pick<Topic, '_id' | 'name' | 'background'>;
+
+export interface TopicParams {
+  page?: string;
+  sort?: string;
+  limit?: string;
+  q?: string;
+}
+
+export interface GetTopicsPayload {
+  params?: TopicParams;
+}
