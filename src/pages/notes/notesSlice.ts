@@ -19,12 +19,16 @@ import { sweetAlert } from 'src/utils';
 interface InitialState {
   isLoading: boolean;
   data: Note[];
+  notesPinned: Note[];
+  noteOthers: Note[];
   pagination: Pagination;
 }
 
 const initialState: InitialState = {
   isLoading: true,
   data: [],
+  notesPinned: [],
+  noteOthers: [],
   pagination: {
     limit: 0,
     page_count: 0,
@@ -40,6 +44,30 @@ export const fetchGetNotes = createAsyncThunk<
 >('/notes', async (payload, thunkAPI) => {
   try {
     const response = await noteAPI.getNotes(payload);
+    return response;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error as ErrorResponse);
+  }
+});
+export const fetchGetNotesPinned = createAsyncThunk<
+  BaseDataResponse<Note[], MetaPagination>,
+  GetNotePayload | undefined,
+  RejectValue
+>('/notes/pins', async (payload, thunkAPI) => {
+  try {
+    const response = await noteAPI.getNotes({ ...payload, endpoint: '/pins' });
+    return response;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error as ErrorResponse);
+  }
+});
+export const fetchGetNoteOthers = createAsyncThunk<
+  BaseDataResponse<Note[], MetaPagination>,
+  GetNotePayload | undefined,
+  RejectValue
+>('/notes/others', async (payload, thunkAPI) => {
+  try {
+    const response = await noteAPI.getNotes({ ...payload, endpoint: '/others' });
     return response;
   } catch (error) {
     return thunkAPI.rejectWithValue(error as ErrorResponse);
@@ -108,11 +136,15 @@ const notesSlice = createSlice({
     builder
       // Get Notes
       .addCase(fetchGetNotes.pending, (state, action) => {
+        if (action.meta.arg?.endpoint) return;
+
         if (action.meta.arg?.params?.page !== undefined) {
           state.isLoading = true;
         }
       })
       .addCase(fetchGetNotes.fulfilled, (state, action) => {
+        // if (action.meta.arg?.endpoint) return;
+
         const { data, meta } = action.payload;
 
         state.isLoading = false;
@@ -120,7 +152,18 @@ const notesSlice = createSlice({
         state.pagination = meta?.pagination as Pagination;
       })
       .addCase(fetchGetNotes.rejected, (state, action) => {
+        if (action.meta.arg?.endpoint) return;
         state.isLoading = false;
+      })
+      // Get notes pinned
+      .addCase(fetchGetNotesPinned.fulfilled, (state, action) => {
+        const { data } = action.payload;
+        state.notesPinned = data;
+      })
+      // Get notes others
+      .addCase(fetchGetNoteOthers.fulfilled, (state, action) => {
+        const { data } = action.payload;
+        state.noteOthers = data;
       })
       // Create a new note
       .addCase(fetchCreateNote.pending, (state, action) => {
@@ -160,6 +203,7 @@ const notesSlice = createSlice({
       .addCase(fetchDeleteNote.fulfilled, (state, action) => {
         const { data, message } = action.payload;
         state.data = state.data.filter((note) => note._id !== data._id);
+
         sweetAlert.success(message);
       })
       .addCase(fetchDeleteNote.rejected, (state, action) => {
@@ -172,6 +216,8 @@ const notesSlice = createSlice({
       .addCase(fetchToggleNoteToTrash.fulfilled, (state, action) => {
         const { data, message } = action.payload;
         state.data = state.data.filter((note) => note._id !== data._id);
+        state.noteOthers = state.noteOthers.filter((note) => note._id !== data._id);
+        state.notesPinned = state.notesPinned.filter((note) => note._id !== data._id);
         sweetAlert.success(message);
       })
       .addCase(fetchToggleNoteToTrash.rejected, (state, action) => {

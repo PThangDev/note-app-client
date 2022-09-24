@@ -47,7 +47,7 @@ const topicsSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchGetTopics.pending, (state, action) => {
-        // state.isLoading = false;
+        // state.isLoading = true;
       })
       .addCase(fetchGetTopics.fulfilled, (state, action) => {
         const { data, meta } = action.payload;
