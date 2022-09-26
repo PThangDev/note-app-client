@@ -153,7 +153,7 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
         </div>
 
         <div className={cx('actions')}>
-          <Button status="error" type="default" onClick={handleGoBack}>
+          <Button status="error" onClick={handleGoBack}>
             Cancel
           </Button>
           <Button onClick={handleSubmitNote}>Save</Button>

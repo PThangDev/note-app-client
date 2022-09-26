@@ -1,0 +1,58 @@
+.wrapper {
+}
+
+.header {
+}
+
+.topics {
+}
+
+.form {
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.card {
+  padding: 0 12px;
+  border-radius: 5px;
+  background-color: var(--grey-light-color);
+  font-size: var(--font-lg);
+
+  display: flex;
+  align-items: center;
+
+  &:not(:last-child) {
+    margin-bottom: 15px;
+  }
+}
+
+.checkbox {
+  flex: 1;
+
+  label {
+    flex: 1;
+    padding: 15px 0;
+    cursor: pointer;
+  }
+}
+
+.actions {
+  color: var(--white-color);
+
+  .icon {
+    margin: 0 5px;
+    cursor: pointer;
+    transition: transform 0.3s, color 0.3s;
+    font-size: var(--font-xl);
+
+    &:hover {
+      transform: scale(1.1);
+      color: var(--primary-color);
+    }
+  }
+}
