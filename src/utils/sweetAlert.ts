@@ -19,9 +19,10 @@ const sweetAlert = {
 
   error(message: string = 'Server not responding!') {
     return Swal.fire({
+      customClass: 'swal2-error',
       iconHtml: '<p class="swal2-icon-sad"></p>',
       title: 'Error...',
-      text: message,
+      text: `(*) ${message}`,
       // footer: '<a href="">Why do I have this issue?</a>',
     });
   },

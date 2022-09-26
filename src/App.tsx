@@ -6,6 +6,7 @@ import 'react-markdown-editor-lite/lib/index.css';
 
 import GlobalStyles from 'src/themes';
 import { PageRoutes } from './routes';
+import ScrollToTop from './components/ScrollToTop';
 
 interface Props {}
 
@@ -25,6 +26,8 @@ const App: FC<Props> = (props) => {
       <GlobalStyles />
       {/* Routes */}
       <PageRoutes />
+      {/* Scroll to top */}
+      <ScrollToTop />
     </div>
   );
 };

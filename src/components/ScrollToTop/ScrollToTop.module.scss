@@ -1,0 +1,14 @@
+.icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: var(--font-hg);
+  cursor: pointer;
+  transition: transform 0.3s;
+  color: var(--primary-color);
+  z-index: 100;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}

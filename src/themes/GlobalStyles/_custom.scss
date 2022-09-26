@@ -38,10 +38,11 @@
   }
 }
 // Sweet alert
-.custom-swal2-error {
+.swal2-error {
   #swal2-html-container {
     color: var(--error-color);
     font-size: var(--font-xl);
+    font-weight: 500;
   }
 }
 
