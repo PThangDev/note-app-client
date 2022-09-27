@@ -15,6 +15,7 @@ import {
   ToggleNoteToTrash,
 } from 'src/types';
 import { sweetAlert } from 'src/utils';
+import noteDetailSlice from '../note-detail/noteDetailSlice';
 
 interface InitialState {
   isLoading: boolean;
@@ -91,6 +92,10 @@ export const fetchUpdateNote = createAsyncThunk<BaseDataResponse<Note>, NoteUpda
   async (payload, thunkAPI) => {
     try {
       const response = await noteAPI.updateNote(payload);
+
+      const { updateNoteDetail } = noteDetailSlice.actions;
+
+      thunkAPI.dispatch(updateNoteDetail(response.data));
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error as ErrorResponse);
@@ -104,12 +109,16 @@ export const fetchToggleNoteToTrash = createAsyncThunk<
   RejectValue
 >('/notes/:id-[toggle-note-to-trash]', async (payload, thunkAPI) => {
   try {
+    const { updateNoteDetail } = noteDetailSlice.actions;
     const { message } = payload;
     const response = await noteAPI.toggleNoteToTrash(payload);
+
+    thunkAPI.dispatch(updateNoteDetail(response.data));
 
     if (message) {
       return { ...response, message };
     }
+
     return response;
   } catch (error) {
     return thunkAPI.rejectWithValue(error as ErrorResponse);

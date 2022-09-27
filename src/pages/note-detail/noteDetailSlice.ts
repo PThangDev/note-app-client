@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
+
 import { noteAPI } from 'src/services';
 import { BaseDataResponse, ErrorResponse, Note, RejectValue } from 'src/types';
 
@@ -31,7 +32,11 @@ export const fetchGetNoteDetail = createAsyncThunk<BaseDataResponse<Note>, strin
 const noteDetailSlice = createSlice({
   name: 'note-detail',
   initialState,
-  reducers: {},
+  reducers: {
+    updateNoteDetail(state, action) {
+      state.data = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchGetNoteDetail.pending, (state, action) => {

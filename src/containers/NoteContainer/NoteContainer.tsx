@@ -13,6 +13,7 @@ interface Props {
   isLoading: boolean;
   isTrash?: boolean;
   loadingItems?: number;
+  hideEmptyItem?: boolean;
   header?: {
     text: string;
     color?: string;
@@ -27,6 +28,7 @@ const LOADING_ITEM_DEFAULT = 8;
 const NoteContainer: FC<Props> = ({
   notes,
   header,
+  hideEmptyItem = false,
   loadingItems = LOADING_ITEM_DEFAULT,
   isLoading = false,
   isTrash = false,
@@ -70,6 +72,10 @@ const NoteContainer: FC<Props> = ({
       ));
     }
   };
+
+  if (hideEmptyItem && notes.length === 0) {
+    return null;
+  }
 
   return (
     <div className={cx('wrapper')}>

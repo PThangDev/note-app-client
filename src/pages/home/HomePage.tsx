@@ -30,6 +30,7 @@ const HomePage: FC<Props> = (props) => {
             notes={notesPinned}
             isLoading={isLoading}
             header={{ text: 'Pins', to: `${routePaths.topics.path}/pins` }}
+            hideEmptyItem
           />
         )}
         {data.map((topic) => {
@@ -44,6 +45,7 @@ const HomePage: FC<Props> = (props) => {
               notes={topic.notes}
               loadingItems={4}
               isLoading={isLoading}
+              hideEmptyItem
             />
           );
         })}
@@ -52,6 +54,7 @@ const HomePage: FC<Props> = (props) => {
             notes={noteOthers}
             isLoading={isLoading}
             header={{ text: 'Others', to: `${routePaths.topics.path}/others` }}
+            hideEmptyItem
           />
         )}
       </div>

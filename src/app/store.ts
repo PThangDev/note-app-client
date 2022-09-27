@@ -4,11 +4,16 @@ import authSlice from 'src/pages/auth/authSlice';
 import noteDetailSlice from 'src/pages/note-detail/noteDetailSlice';
 import notesSlice from 'src/pages/notes/notesSlice';
 import topicsSlice from 'src/pages/topics/topicsSlice';
+import { User } from 'src/types';
+import { storage } from 'src/utils';
 
 const checkUnAuthorization: Middleware = (store) => (next) => (action) => {
   if (action.payload?.status === 401) {
-    const { logout } = authSlice.actions;
-    return store.dispatch(logout(action.payload?.errors.message));
+    const user = storage.get<User>('user');
+    if (user) {
+      const { logout } = authSlice.actions;
+      return store.dispatch(logout(action.payload?.message));
+    }
   } else {
     next(action);
   }

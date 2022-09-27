@@ -22,6 +22,7 @@
     background-color: #a5b1c2;
   }
 }
+
 .header {
   border-bottom: 1px solid rgb(253, 225, 225);
   &-inner {
@@ -43,6 +44,7 @@
     }
   }
 }
+
 .title {
   display: flex;
   align-items: center;
@@ -64,11 +66,12 @@
 }
 .content {
   width: 100%;
-  padding: 20px;
-  height: 188px;
+  padding: 10px 20px;
+  height: 150px;
   overflow: hidden;
   position: relative;
   overflow: hidden;
+
   a {
     position: absolute;
     top: 0;
@@ -106,7 +109,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
+  padding: 8px 20px;
   .time {
     text-decoration: underline;
   }
