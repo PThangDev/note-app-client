@@ -98,7 +98,7 @@ const CardNote: FC<Props> = ({
       if (is_pin) {
         return (
           <FontAwesomeIcon
-            className={cx('icon-pin')}
+            className={cx('icon-pin', { active: is_pin })}
             icon={faThumbTack}
             onClick={handleTogglePinNote}
           />
