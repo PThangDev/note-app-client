@@ -8,32 +8,34 @@
 .header {
   margin-bottom: 20px;
   position: relative;
+}
+.btn-go-back {
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--font-xl);
+  background: none;
 
-  button {
-    position: absolute;
-    left: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: var(--font-xl);
-    background: none;
+  display: flex;
+  align-items: center;
 
-    display: flex;
-    align-items: center;
+  color: var(--grey-bold-color);
+  transition: text-decoration 0.4s;
+  line-height: 2;
 
-    color: var(--grey-bold-color);
-
-    &:hover {
-      color: var(--text-color);
-
-      .icon {
-        transform: translateX(-3px);
-      }
-    }
+  &:hover {
+    color: var(--text-color);
+    text-decoration: underline;
 
     .icon {
-      margin-right: 5px;
-      transition: transform 0.4s;
+      transform: translateX(-3px);
     }
+  }
+
+  .icon {
+    margin-right: 5px;
+    transition: transform 0.4s;
   }
 }
 
@@ -60,44 +62,33 @@
   height: 100%;
 }
 
-.background {
+.groups {
+}
+
+.groups-right {
   display: flex;
   border: 1px solid var(--grey-light-color);
   height: 100%;
   padding: 20px 15px;
 }
+
+.groups-left {
+  border: 1px solid var(--grey-light-color);
+  height: 100%;
+}
+
 .color-picker {
-  display: flex;
-  flex-direction: column;
-  max-width: 200px;
+  margin-left: 20px;
+  flex: 1;
 }
 
-.color-field {
-  // position: relative;
-}
-.color-input {
-  position: relative;
+.card-preview {
+  height: 100%;
+  flex: 2;
+  width: 50%;
 
-  input {
-    border: 2px solid #666666;
-    border-radius: 5px;
-    padding: 5px;
-    padding-right: 10px;
-    font-size: var(--font-lg);
-    max-width: 160px;
-    margin-left: 10px;
-  }
-
-  .line {
-    content: '';
-    position: absolute;
-    display: block;
-    right: 5px;
-    top: 50%;
-    width: 5px;
-    height: 70%;
-    border-radius: 3px;
-    transform: translateY(-50%);
+  .card {
+    height: 100%;
   }
 }
 

@@ -84,10 +84,14 @@
   }
 }
 // React colorful
-.react-colorful.color-table {
+.react-colorful {
   width: 100%;
+  .react-colorful__hue,
+  .react-colorful__alpha {
+    height: 20px;
+  }
   .react-colorful__pointer {
-    width: 18px;
-    height: 18px;
+    width: 18px !important;
+    height: 18px !important;
   }
 }

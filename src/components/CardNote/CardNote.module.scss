@@ -10,6 +10,19 @@
 
   margin: 7.5px 0;
 
+  &.read-only {
+    margin: 0;
+
+    .content {
+      height: 100%;
+      max-height: 200px;
+    }
+
+    &:hover {
+      transform: unset;
+    }
+  }
+
   &:hover {
     transform: translateY(-3px) scale(1.015);
 
@@ -79,6 +92,8 @@
 .icon-pin {
   cursor: pointer;
   display: none;
+
+  flex-shrink: 0;
 
   &.active {
     display: block;

@@ -1,18 +1,54 @@
 .wrapper {
+  width: 100%;
+}
+
+.color-input {
+  position: relative;
+  width: 100%;
+
+  input {
+    border: 2px solid #666666;
+    border-radius: 5px;
+    padding: 8px 5px;
+    font-size: var(--font-lg);
+    width: 100%;
+  }
+
+  .line {
+    content: '';
+    position: absolute;
+    display: block;
+    right: 8px;
+    top: 50%;
+    width: 8px;
+    height: 75%;
+    border-radius: 3px;
+    transform: translateY(-50%);
+  }
+}
+
+.color-table {
+  margin-top: 8px;
   display: flex;
   flex-direction: column;
-  max-width: 210px;
   border: 2px solid var(--grey-light-color);
   border-radius: 8px;
 }
 
-.options {
+.react-colorful {
+  width: 100% !important;
+}
+
+.color-options {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
   padding: 10px 5px;
+  background-color: var(--white-color);
+  border-radius: 5px;
 }
+
 .color {
   $size: 20px;
   width: $size;
