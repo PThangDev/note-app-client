@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react';
 import MDEditor from '@uiw/react-md-editor';
 import classnames from 'classnames/bind';
-import { FC, useState } from 'react';
+import { FC, memo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAppDispatch } from 'src/app/hooks';
@@ -27,10 +27,12 @@ import { PinIcon } from '../Icons';
 import styles from './CardNote.module.scss';
 
 interface Props {
-  note: Note;
+  note: Partial<Note>;
+  readOnly?: boolean;
   isTrash?: boolean;
   isShowSelect?: boolean;
   isLoading?: boolean;
+  className?: string;
   onToggleCheckbox?: (id: string) => void;
 }
 
@@ -38,8 +40,10 @@ const cx = classnames.bind(styles);
 
 const CardNote: FC<Props> = ({
   note,
+  readOnly = false,
   isLoading = false,
   isTrash = false,
+  className,
   isShowSelect = false,
   onToggleCheckbox,
 }) => {
@@ -53,7 +57,7 @@ const CardNote: FC<Props> = ({
     if (result.isConfirmed) {
       dispatch(
         fetchToggleNoteToTrash({
-          id: _id,
+          id: _id as string,
           is_trash: true,
           message: 'Move note to trash successfully',
         })
@@ -65,7 +69,7 @@ const CardNote: FC<Props> = ({
     if (result.isConfirmed) {
       dispatch(
         fetchToggleNoteToTrash({
-          id: _id,
+          id: _id as string,
           is_trash: false,
           message: 'Restore note from trash successfully',
         })
@@ -76,7 +80,7 @@ const CardNote: FC<Props> = ({
   const handleDeleteNote = async () => {
     const result = await sweetAlert.confirm({ text: 'Do you want to hard delete note!' });
     if (result.isConfirmed) {
-      dispatch(fetchDeleteNote(_id));
+      dispatch(fetchDeleteNote(_id as string));
     }
   };
 
@@ -84,7 +88,9 @@ const CardNote: FC<Props> = ({
     try {
       setIsSubmmitting(true);
       const message = is_pin ? 'Unpin note successfully' : 'Pin note successfully';
-      await dispatch(fetchToggleNoteToPin({ id: _id, is_pin: !is_pin, message })).unwrap();
+      await dispatch(
+        fetchToggleNoteToPin({ id: _id as string, is_pin: !is_pin, message })
+      ).unwrap();
       setIsSubmmitting(false);
     } catch (error) {
       setIsSubmmitting(false);
@@ -145,7 +151,10 @@ const CardNote: FC<Props> = ({
 
   return (
     <>
-      <div className={cx('wrapper')} style={{ background }}>
+      <div
+        className={cx('wrapper', { 'read-only': readOnly, [className as string]: className })}
+        style={{ background }}
+      >
         <div className={cx('header')}>
           <div className={cx('header-inner')}>
             {/* {isShowSelect && <Checkbox id={_id} name="card" onChange={handleChangeCheckbox} />} */}
@@ -153,20 +162,22 @@ const CardNote: FC<Props> = ({
             <div className={cx('title')}>
               <label htmlFor={_id}>{title}</label>
             </div>
-            {!isTrash && <div className={cx('actions')}>{renderPinIcon()}</div>}
+            {!isTrash && !readOnly && <div className={cx('actions')}>{renderPinIcon()}</div>}
           </div>
         </div>
         <div className={cx('content')} data-color-mode="dark">
           <MDEditor.Markdown className="md-editor-preview" source={content} />
-          <Link to={`${routePaths.notes.path}/${_id}`} />
+          {!readOnly && <Link to={`${routePaths.notes.path}/${_id}`} />}
         </div>
-        <div className={cx('options')}>
-          <div className={cx('time')}>{formatDate(createdAt)}</div>
-          <div className={cx('buttons')}>{renderButtonOptions()}</div>
-        </div>
+        {!readOnly && (
+          <div className={cx('options')}>
+            <div className={cx('time')}>{formatDate(createdAt)}</div>
+            <div className={cx('buttons')}>{renderButtonOptions()}</div>
+          </div>
+        )}
       </div>
     </>
   );
 };
 
-export default CardNote;
+export default memo(CardNote);

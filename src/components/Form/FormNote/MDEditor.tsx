@@ -15,10 +15,9 @@ const MDEditor: FC<Props> = ({ value = '', onChange }) => {
     }
   }, []);
 
-  console.log('render...');
   return (
     <MDEditorLite
-      style={{ height: '500px' }}
+      style={{ height: '400px' }}
       value={value}
       theme="dark"
       config={{ spellCheck: false }}

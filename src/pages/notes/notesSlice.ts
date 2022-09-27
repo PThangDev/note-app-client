@@ -136,11 +136,9 @@ export const fetchToggleNoteToPin = createAsyncThunk<
   RejectValue
 >('/notes/:id-[toggle-pin]', async (payload, thunkAPI) => {
   try {
-    const { updateNoteDetail } = noteDetailSlice.actions;
     const { message } = payload;
     const response = await noteAPI.toggleNoteToPin(payload);
 
-    thunkAPI.dispatch(updateNoteDetail(response.data));
     thunkAPI.dispatch(fetchGetTopics());
 
     if (message) {

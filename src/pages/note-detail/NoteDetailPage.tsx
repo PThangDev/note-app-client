@@ -31,6 +31,8 @@ const NoteDetailPage: FC<Props> = (props) => {
   useEffect(() => {
     if (!data) {
       navigate(`${routePaths.notes.path}/${id}`, { replace: true });
+    } else {
+      navigate(`${routePaths.notes.path}/${id}/${data.slug}`, { replace: true });
     }
   }, [id, navigate, data]);
 
@@ -53,6 +55,7 @@ const NoteDetailPage: FC<Props> = (props) => {
     if (!data) return;
 
     const result = await sweetAlert.confirm({ text: 'Do you want to restore note!' });
+
     if (result.isConfirmed) {
       dispatch(
         fetchToggleNoteToTrash({
@@ -66,7 +69,9 @@ const NoteDetailPage: FC<Props> = (props) => {
 
   const handleHardDeleteNote = async () => {
     if (!data) return;
+
     const result = await sweetAlert.confirm({ text: 'Do you want to hard delete note!' });
+
     if (result.isConfirmed) {
       await dispatch(fetchDeleteNote(data._id)).unwrap();
       navigate(-1);

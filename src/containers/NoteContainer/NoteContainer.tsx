@@ -44,7 +44,7 @@ const NoteContainer: FC<Props> = ({
           onClick={(e) => (isLoading ? e.preventDefault() : null)}
         >
           {isLoading ? 'Loading...' : text}
-          {color && <span style={{ backgroundColor: color }}></span>}
+          <span style={{ backgroundColor: color }}></span>
         </Link>
       );
     }
