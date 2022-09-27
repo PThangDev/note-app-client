@@ -5,6 +5,7 @@ import {
   NewNote,
   Note,
   NoteUpdate,
+  ToggleNoteToPin,
   ToggleNoteToTrash,
 } from 'src/types';
 import axiosInstance from './axiosInstance';
@@ -39,6 +40,11 @@ const noteAPI = {
     const { id, is_trash } = payload;
     const url = `/notes/${id}`;
     return axiosInstance.put(url, { is_trash });
+  },
+  toggleNoteToPin(payload: ToggleNoteToPin): Promise<BaseDataResponse<Note>> {
+    const { id, is_pin } = payload;
+    const url = `/notes/${id}`;
+    return axiosInstance.put(url, { is_pin });
   },
   deleteNote(id: string): Promise<BaseDataResponse<Note>> {
     const url = `/notes/${id}`;

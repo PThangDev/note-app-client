@@ -12,10 +12,12 @@ import {
   NoteUpdate,
   Pagination,
   RejectValue,
+  ToggleNoteToPin,
   ToggleNoteToTrash,
 } from 'src/types';
 import { sweetAlert } from 'src/utils';
 import noteDetailSlice from '../note-detail/noteDetailSlice';
+import { fetchGetTopics } from '../topics/topicsSlice';
 
 interface InitialState {
   isLoading: boolean;
@@ -50,6 +52,7 @@ export const fetchGetNotes = createAsyncThunk<
     return thunkAPI.rejectWithValue(error as ErrorResponse);
   }
 });
+
 export const fetchGetNotesPinned = createAsyncThunk<
   BaseDataResponse<Note[], MetaPagination>,
   GetNotePayload | undefined,
@@ -62,6 +65,7 @@ export const fetchGetNotesPinned = createAsyncThunk<
     return thunkAPI.rejectWithValue(error as ErrorResponse);
   }
 });
+
 export const fetchGetNoteOthers = createAsyncThunk<
   BaseDataResponse<Note[], MetaPagination>,
   GetNotePayload | undefined,
@@ -114,6 +118,30 @@ export const fetchToggleNoteToTrash = createAsyncThunk<
     const response = await noteAPI.toggleNoteToTrash(payload);
 
     thunkAPI.dispatch(updateNoteDetail(response.data));
+    thunkAPI.dispatch(fetchGetTopics());
+
+    if (message) {
+      return { ...response, message };
+    }
+
+    return response;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error as ErrorResponse);
+  }
+});
+
+export const fetchToggleNoteToPin = createAsyncThunk<
+  BaseDataResponse<Note>,
+  ToggleNoteToPin & { message?: string },
+  RejectValue
+>('/notes/:id-[toggle-pin]', async (payload, thunkAPI) => {
+  try {
+    const { updateNoteDetail } = noteDetailSlice.actions;
+    const { message } = payload;
+    const response = await noteAPI.toggleNoteToPin(payload);
+
+    thunkAPI.dispatch(updateNoteDetail(response.data));
+    thunkAPI.dispatch(fetchGetTopics());
 
     if (message) {
       return { ...response, message };
@@ -230,6 +258,27 @@ const notesSlice = createSlice({
         sweetAlert.success(message);
       })
       .addCase(fetchToggleNoteToTrash.rejected, (state, action) => {
+        sweetAlert.error(action.payload?.message);
+      })
+      // Toggle note to pin
+      .addCase(fetchToggleNoteToPin.fulfilled, (state, action) => {
+        const { data, message } = action.payload;
+        state.data = state.data.map((note) => {
+          if (note._id === data._id) {
+            return data;
+          }
+          return note;
+        });
+        state.noteOthers = state.noteOthers.filter((note) => note._id !== data._id);
+
+        if (action.payload.data.is_pin) {
+          state.notesPinned = [data, ...state.notesPinned];
+        } else {
+          state.notesPinned = state.notesPinned.filter((note) => note._id !== data._id);
+        }
+        toast.success(message);
+      })
+      .addCase(fetchToggleNoteToPin.rejected, (state, action) => {
         sweetAlert.error(action.payload?.message);
       });
   },

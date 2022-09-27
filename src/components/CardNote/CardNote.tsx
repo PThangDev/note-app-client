@@ -9,12 +9,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react';
 import MDEditor from '@uiw/react-md-editor';
 import classnames from 'classnames/bind';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAppDispatch } from 'src/app/hooks';
 import { routePaths } from 'src/configs';
-import { fetchDeleteNote, fetchToggleNoteToTrash } from 'src/pages/notes/notesSlice';
+import {
+  fetchDeleteNote,
+  fetchToggleNoteToPin,
+  fetchToggleNoteToTrash,
+} from 'src/pages/notes/notesSlice';
 import { Button } from 'src/themes/UI';
 import { Spin } from 'src/themes/UI/Loading';
 import { Note } from 'src/types';
@@ -41,6 +45,8 @@ const CardNote: FC<Props> = ({
 }) => {
   const dispatch = useAppDispatch();
   const { _id, content, title, topics, background, user, createdAt, slug, is_pin } = note;
+
+  const [isSubmmitting, setIsSubmmitting] = useState<boolean>(false);
 
   const handleMoveNoteToTrash = async () => {
     const result = await sweetAlert.confirm({ text: 'Do you want to move note to trash!' });
@@ -74,16 +80,31 @@ const CardNote: FC<Props> = ({
     }
   };
 
-  const handlePinNote = async () => {};
+  const handleTogglePinNote = async () => {
+    try {
+      setIsSubmmitting(true);
+      const message = is_pin ? 'Unpin note successfully' : 'Pin note successfully';
+      await dispatch(fetchToggleNoteToPin({ id: _id, is_pin: !is_pin, message })).unwrap();
+      setIsSubmmitting(false);
+    } catch (error) {
+      setIsSubmmitting(false);
+    }
+  };
 
   const renderPinIcon = () => {
-    if (isLoading) {
+    if (isLoading || isSubmmitting) {
       return <Spin />;
     } else {
       if (is_pin) {
-        return <FontAwesomeIcon icon={faThumbTack} />;
+        return (
+          <FontAwesomeIcon
+            className={cx('icon-pin')}
+            icon={faThumbTack}
+            onClick={handleTogglePinNote}
+          />
+        );
       }
-      return <PinIcon onClick={handlePinNote} />;
+      return <PinIcon className={cx('icon-pin')} onClick={handleTogglePinNote} />;
     }
   };
 

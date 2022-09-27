@@ -1,9 +1,9 @@
 import classnames from 'classnames/bind';
 import { FC } from 'react';
 import { Helmet } from 'react-helmet-async';
+
 import NoteContainer from 'src/containers/NoteContainer';
 import useGetNotes from 'src/hooks/useGetNotes';
-
 import styles from './PinsPage.module.scss';
 
 interface Props {}

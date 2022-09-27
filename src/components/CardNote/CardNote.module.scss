@@ -64,6 +64,15 @@
     display: -webkit-box;
   }
 }
+
+.icon-pin {
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
 .content {
   width: 100%;
   padding: 10px 20px;
