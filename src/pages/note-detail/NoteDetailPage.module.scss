@@ -1,25 +1,95 @@
 .wrapper {
   padding: 20px;
 }
+
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   .heading {
     margin-right: 30px;
     margin-bottom: 8px;
+    display: flex;
+    flex-direction: column;
   }
 }
+
 .actions {
   display: flex;
   align-items: center;
 }
+.link-edit-note {
+  margin-right: 10px;
+}
+
 .info {
   margin-bottom: 20px;
   font-size: var(--font-sm);
-  text-decoration: underline;
+  display: flex;
+  align-items: center;
+
+  &-date {
+    text-decoration: underline;
+  }
+
+  &-sub {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: var(--font-sm);
+    color: var(--white-color);
+    background-color: var(--error-color);
+    border-radius: 999px;
+    margin-left: 10px;
+    padding: 3px 15px;
+    text-decoration: none !important;
+
+    .icon {
+      margin-right: 5px;
+      animation: animateRing 3s linear infinite;
+    }
+  }
 }
+
 .content {
   color: var(--text-color);
   min-height: 150vh;
+}
+
+@keyframes animateRing {
+  0% {
+    transform: rotate(0deg);
+  }
+  1% {
+    transform: rotate(25deg);
+  }
+  2% {
+    transform: rotate(5deg);
+  }
+  3% {
+    transform: rotate(0deg);
+  }
+  4% {
+    transform: rotate(-5deg);
+  }
+  5% {
+    transform: rotate(-10deg);
+  }
+  6% {
+    transform: rotate(-25deg);
+  }
+  7% {
+    transform: rotate(-10deg);
+  }
+  8% {
+    transform: rotate(-5deg);
+  }
+  9% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
