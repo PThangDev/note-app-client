@@ -1,14 +1,15 @@
 import { faAngleLeft, faHeading } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import HeadlessTippy from '@tippyjs/react/headless';
 import classnames from 'classnames/bind';
 import { ChangeEvent, FC, useCallback, useMemo, useState } from 'react';
 import { Col, Container, Row } from 'react-grid-system';
 import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from 'src/app/hooks';
+import CardNote from 'src/components/CardNote';
 import ColorPicker from 'src/components/ColorPicker';
 import backgrounds from 'src/components/ColorPicker/backgrounds';
+import useDebounce from 'src/hooks/useDebounce';
 import { fetchCreateNote, fetchUpdateNote } from 'src/pages/notes/notesSlice';
 import { Button, Input } from 'src/themes/UI';
 import { BaseTopic, Note } from 'src/types';
@@ -30,6 +31,19 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
   const [title, setTitle] = useState<string>(data?.title || '');
   const [content, setContent] = useState<string>(data?.content || '');
   const [backgroundColor, setBackgroundColor] = useState(data?.background || backgrounds[0]);
+
+  const titleDebounced = useDebounce(title, 300);
+  const contentDebounced = useDebounce(content, 300);
+  const backgroundColorDebounced = useDebounce(backgroundColor, 300);
+
+  const notesPreview = useMemo(() => {
+    return {
+      content: contentDebounced,
+      background: backgroundColorDebounced,
+      title: titleDebounced,
+    };
+  }, [backgroundColorDebounced, contentDebounced, titleDebounced]);
+
   const [topics, setTopics] = useState<BaseTopic[]>(() => {
     if (data) {
       return data.topics.map((topic) => ({
@@ -58,9 +72,8 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
     setContent(value);
   }, []);
 
-  const handleChangeColorInput = (e: ChangeEvent<HTMLInputElement>) => {
-    const backgroundValue = e.target.value;
-    setBackgroundColor(backgroundValue);
+  const handleChangeColorInput = (newColor: string) => {
+    setBackgroundColor(newColor);
   };
   const handleChangeTopic = useCallback((topic: BaseTopic) => {
     setTopics((prevTopics) => {
@@ -92,7 +105,7 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
   return (
     <div className={cx('wrapper')}>
       <div className={cx('header')}>
-        <button onClick={handleGoBack}>
+        <button className={cx('btn-go-back')} onClick={handleGoBack}>
           <FontAwesomeIcon className={cx('icon')} icon={faAngleLeft} />
           Back
         </button>
@@ -111,41 +124,22 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
           <MDEditor value={content} onChange={handleChangeContent} />
         </div>
 
-        <div className={cx('topics')}>
+        <div className={cx('groups')}>
           <Container fluid style={{ padding: 0 }}>
             <Row nogutter>
               <Col xl={6}>
-                <div className={cx('topic-group')}>
-                  <TopicSelect topics={topics} onChangeTopicSelect={handleChangeTopic} />
+                <div className={cx('groups-left')}>
+                  <div className={cx('card-preview')}>
+                    <CardNote className={cx('card')} readOnly note={notesPreview} />
+                  </div>
+                  <div className={cx('color-picker')}>
+                    <ColorPicker color={backgroundColor} onChange={handleChangeColorInput} />
+                  </div>
                 </div>
               </Col>
               <Col xl={6}>
-                <div className={cx('background')}>
-                  <h3 className={cx('background-heading')}>Choose background card :</h3>
-                  <div className={cx('color-field')}>
-                    <HeadlessTippy
-                      interactive
-                      placement="right-end"
-                      delay={[300, 500]}
-                      hideOnClick={false}
-                      render={(attrs) => (
-                        <ColorPicker
-                          color={backgroundColor}
-                          onChange={(newColor) => setBackgroundColor(newColor)}
-                          attrs={attrs}
-                        />
-                      )}
-                    >
-                      <div className={cx('color-input')}>
-                        <input
-                          value={backgroundColor}
-                          type="text"
-                          onChange={handleChangeColorInput}
-                        />
-                        <p className={cx('line')} style={{ background: backgroundColor }}></p>
-                      </div>
-                    </HeadlessTippy>
-                  </div>
+                <div className={cx('groups-right')}>
+                  <TopicSelect topics={topics} onChangeTopicSelect={handleChangeTopic} />
                 </div>
               </Col>
             </Row>
