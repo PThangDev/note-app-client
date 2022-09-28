@@ -129,17 +129,17 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
             <Row nogutter>
               <Col xl={6}>
                 <div className={cx('groups-left')}>
+                  <TopicSelect topics={topics} onChangeTopicSelect={handleChangeTopic} />
+                </div>
+              </Col>
+              <Col xl={6}>
+                <div className={cx('groups-right')}>
                   <div className={cx('card-preview')}>
                     <CardNote className={cx('card')} readOnly note={notesPreview} />
                   </div>
                   <div className={cx('color-picker')}>
                     <ColorPicker color={backgroundColor} onChange={handleChangeColorInput} />
                   </div>
-                </div>
-              </Col>
-              <Col xl={6}>
-                <div className={cx('groups-right')}>
-                  <TopicSelect topics={topics} onChangeTopicSelect={handleChangeTopic} />
                 </div>
               </Col>
             </Row>

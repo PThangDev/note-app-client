@@ -1,7 +1,7 @@
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
-import queryString from 'query-string';
+import qs from 'query-string';
 import { FC, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ const Pagination: FC<Props> = ({ pagination, pageRangeDisplay = 5 }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const paginationParams = queryString.parse(location.search);
+  const paginationParams = qs.parse(location.search);
   const page = Number(paginationParams.page) || 1;
   const pageCount = Number(pagination?.page_count);
   const total = Number(pagination?.total);
@@ -73,7 +73,7 @@ const Pagination: FC<Props> = ({ pagination, pageRangeDisplay = 5 }) => {
     }
   }, [page, pageCount, pageRangeDisplay]);
   const handleChangePage = (page: number) => {
-    const params = queryString.stringify({ ...paginationParams, page });
+    const params = qs.stringify({ ...paginationParams, page });
 
     navigate(`${location.pathname}?${params}`);
   };

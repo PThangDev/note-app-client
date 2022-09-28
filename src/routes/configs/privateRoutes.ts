@@ -13,6 +13,7 @@ const TopicsPage = lazy(() => import('src/pages/topics'));
 const PinsPage = lazy(() => import('src/pages/pins'));
 const TrashsPage = lazy(() => import('src/pages/trashs'));
 const ProfilePage = lazy(() => import('src/pages/profile'));
+const SearchPage = lazy(() => import('src/pages/search'));
 
 const privateRoutes = [
   {
@@ -72,6 +73,12 @@ const privateRoutes = [
   {
     path: routePaths.trashs.path,
     component: TrashsPage,
+    layout: DefaultLayout,
+    outer: PrivateRouter,
+  },
+  {
+    path: routePaths.search.path,
+    component: SearchPage,
     layout: DefaultLayout,
     outer: PrivateRouter,
   },

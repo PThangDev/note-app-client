@@ -173,7 +173,10 @@ const notesSlice = createSlice({
       .addCase(fetchGetNotes.pending, (state, action) => {
         if (action.meta.arg?.endpoint) return;
 
-        if (action.meta.arg?.params?.page !== undefined) {
+        if (
+          action.meta.arg?.params?.page !== undefined ||
+          action.meta.arg?.params?.q !== undefined
+        ) {
           state.isLoading = true;
         }
       })
@@ -261,6 +264,7 @@ const notesSlice = createSlice({
       // Toggle note to pin
       .addCase(fetchToggleNoteToPin.fulfilled, (state, action) => {
         const { data, message } = action.payload;
+
         state.data = state.data.map((note) => {
           if (note._id === data._id) {
             return data;
