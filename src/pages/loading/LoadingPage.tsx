@@ -14,7 +14,7 @@ const LoadingPage: FC<Props> = (props) => {
       <Helmet>
         <title>Loading...</title>
       </Helmet>
-      <div className={cx('wrapper')}>LoadingPage</div>
+      <div className={cx('wrapper')}></div>
     </HelmetProvider>
   );
 };
