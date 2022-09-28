@@ -4,7 +4,6 @@ import classNames from 'classnames/bind';
 import qs from 'query-string';
 import { ChangeEvent, FC, SyntheticEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppSelector } from 'src/app/hooks';
 
 import { Input } from 'src/themes/UI';
 import styles from './Search.module.scss';
@@ -16,8 +15,6 @@ const cx = classNames.bind(styles);
 const Search: FC<Props> = (props) => {
   const [search, setSearch] = useState<string>('');
   const navigate = useNavigate();
-
-  const { isLoading } = useAppSelector((state) => state.notes);
 
   const handleChangeInputSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -41,7 +38,7 @@ const Search: FC<Props> = (props) => {
         icon={<FontAwesomeIcon icon={faMagnifyingGlass} />}
         value={search}
         onChange={handleChangeInputSearch}
-        disabled={isLoading}
+        // disabled={isLoading}
       />
     </form>
   );
