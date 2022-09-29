@@ -1,13 +1,15 @@
-import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCirclePlus, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react';
 import classnames from 'classnames/bind';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Col, Container, Row } from 'react-grid-system';
 import { Helmet } from 'react-helmet-async';
+import FormTopic from 'src/components/Form/FormTopic';
+import Modal from 'src/components/Modal';
 
 import useGetTopics from 'src/hooks/useGetTopics';
-import { Button, Checkbox, Input } from 'src/themes/UI';
+import { Button, Checkbox } from 'src/themes/UI';
 import styles from './TopicsPage.module.scss';
 
 interface Props {}
@@ -16,33 +18,36 @@ const cx = classnames.bind(styles);
 
 const TopicsPage: FC<Props> = (props) => {
   const { data, isLoading } = useGetTopics();
+
+  const [isOpenModalFormTopic, setIsOpenModalFormTopic] = useState<boolean>(false);
+
+  const handleCloseModalFormTopic = () => {
+    setIsOpenModalFormTopic(false);
+  };
+
+  const handleOpenModalFormTopic = () => {
+    setIsOpenModalFormTopic(true);
+  };
+
   return (
     <>
       <Helmet>
         <title>Topics</title>
       </Helmet>
       <div className={cx('wrapper')}>
-        <div className={cx('header')}>Topics</div>
+        <div className={cx('header')}>
+          <h3>Topics</h3>
+          <Button icon={<FontAwesomeIcon icon={faCirclePlus} />} onClick={handleOpenModalFormTopic}>
+            Create a new topic
+          </Button>
+        </div>
 
         <div className={cx('topics')}>
           <Container fluid>
-            <Row>
-              <Col xl={6}>
-                <form className={cx('form')}>
-                  <Input placeholder="Name" />
-                  <div className={cx('buttons')}>
-                    <Button type="submit">Submit</Button>
-                    <Button status="error">Reset</Button>
-                  </div>
-                </form>
-              </Col>
-              <Col xl={6}>
-                {data.map((topic) => (
-                  <div
-                    className={cx('card')}
-                    key={topic._id}
-                    style={{ background: topic.background }}
-                  >
+            <Row gutterWidth={15}>
+              {data.map((topic) => (
+                <Col key={topic._id} xl={2}>
+                  <div className={cx('card')} style={{ background: topic.background }}>
                     <Checkbox
                       className={cx('checkbox')}
                       id={topic._id}
@@ -58,12 +63,17 @@ const TopicsPage: FC<Props> = (props) => {
                       </Tippy>
                     </div>
                   </div>
-                ))}
-              </Col>
+                </Col>
+              ))}
             </Row>
           </Container>
         </div>
       </div>
+
+      {/* Modals */}
+      <Modal isOpen={isOpenModalFormTopic} onClose={handleCloseModalFormTopic}>
+        <FormTopic onClose={handleCloseModalFormTopic} />
+      </Modal>
     </>
   );
 };
