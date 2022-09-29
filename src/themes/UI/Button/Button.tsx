@@ -7,7 +7,7 @@ import styles from './Button.module.scss';
 
 interface Props {
   children?: ReactNode;
-  type?: string;
+  type?: 'button' | 'submit' | 'reset';
   primary?: boolean;
   icon?: ReactElement;
   fullWidth?: boolean;
@@ -23,8 +23,9 @@ const cx = classNames.bind(styles);
 const Button = (
   {
     children = '',
-    primary = true,
     icon,
+    type = 'button',
+    primary = true,
     fullWidth = false,
     disabled = false,
     isLoading = false,
@@ -46,6 +47,7 @@ const Button = (
         },
         className
       )}
+      type={type}
       onClick={onClick}
       disabled={disabled || isLoading}
       ref={ref}
