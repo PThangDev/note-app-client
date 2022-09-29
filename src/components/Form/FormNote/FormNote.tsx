@@ -1,4 +1,3 @@
-import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import {
   faAngleLeft,
   faFileExport,
@@ -157,12 +156,7 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
         </div>
 
         <div className={cx('actions')}>
-          <Button
-            status="error"
-            icon={<FontAwesomeIcon icon={faCircleXmark} />}
-            type="default"
-            onClick={handleGoBack}
-          >
+          <Button status="error" onClick={handleGoBack}>
             Cancel
           </Button>
           <Button
