@@ -1,12 +1,13 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import EmptyLayout from 'src/layouts/EmptyLayout';
 import NotFoundPage from 'src/pages/notfound';
 import routes from '../configs/routes';
+import LoadingRoutes from './LoadingRoutes';
 
 const PageRoutes = () => {
   return (
-    <Routes>
+    <LoadingRoutes>
       {routes.map((route) => {
         const {
           path,
@@ -29,7 +30,7 @@ const PageRoutes = () => {
         );
       })}
       <Route path="*" element={<NotFoundPage />} />
-    </Routes>
+    </LoadingRoutes>
   );
 };
 export default PageRoutes;
