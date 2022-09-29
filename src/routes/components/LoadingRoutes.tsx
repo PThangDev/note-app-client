@@ -7,7 +7,7 @@ interface Props {
 }
 
 TopBarProgress.config({
-  barThickness: 7,
+  barThickness: 4,
 });
 
 const LoadingRoutes: FC<Props> = ({ children }) => {
