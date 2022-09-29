@@ -27,7 +27,7 @@ const LoadingRoutes: FC<Props> = ({ children }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setProgress(false);
-    }, 500);
+    }, 300);
 
     return () => clearTimeout(timer);
   }, [prevLoc]);

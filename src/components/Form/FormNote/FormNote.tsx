@@ -1,4 +1,10 @@
-import { faAngleLeft, faHeading } from '@fortawesome/free-solid-svg-icons';
+import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
+import {
+  faAngleLeft,
+  faFileExport,
+  faFloppyDisk,
+  faHeading,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames/bind';
 import { ChangeEvent, FC, useCallback, useMemo, useState } from 'react';
@@ -100,6 +106,10 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
         fetchCreateNote({ title, content, background: backgroundColor, topics: topicIds })
       ).unwrap();
     }
+  };
+
+  const handleSubmitNoteAndGoBack = async () => {
+    await handleSubmitNote();
     handleGoBack();
   };
   return (
@@ -147,10 +157,24 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
         </div>
 
         <div className={cx('actions')}>
-          <Button status="error" type="default" onClick={handleGoBack}>
+          <Button
+            status="error"
+            icon={<FontAwesomeIcon icon={faCircleXmark} />}
+            type="default"
+            onClick={handleGoBack}
+          >
             Cancel
           </Button>
-          <Button onClick={handleSubmitNote}>Save</Button>
+          <Button
+            status="success"
+            icon={<FontAwesomeIcon icon={faFileExport} />}
+            onClick={handleSubmitNoteAndGoBack}
+          >
+            Save And Exit
+          </Button>
+          <Button icon={<FontAwesomeIcon icon={faFloppyDisk} />} onClick={handleSubmitNote}>
+            Save
+          </Button>
         </div>
       </div>
     </div>
