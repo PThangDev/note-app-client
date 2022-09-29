@@ -98,6 +98,10 @@ const CardNote: FC<Props> = ({
   };
 
   const renderPinIcon = () => {
+    if (isTrash || readOnly) {
+      return null;
+    }
+
     if (isLoading || isSubmmitting) {
       return <Spin />;
     } else {
@@ -162,7 +166,7 @@ const CardNote: FC<Props> = ({
             <div className={cx('title')}>
               <label htmlFor={_id}>{title}</label>
             </div>
-            {!isTrash && !readOnly && <div className={cx('actions')}>{renderPinIcon()}</div>}
+            <div className={cx('actions')}>{renderPinIcon()}</div>
           </div>
         </div>
         <div className={cx('content')} data-color-mode="dark">

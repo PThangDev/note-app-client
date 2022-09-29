@@ -1,5 +1,24 @@
+// React markdown editor lite
+.rc-md-editor .editor-container .sec-md .input {
+  font-size: 1.6rem;
+}
+
+.custom-html-style {
+  p,
+  ol,
+  ul,
+  code,
+  pre,
+  table {
+    font-size: 1.6rem;
+  }
+}
+
 // React Mark down
 .wmde-markdown {
+  &.md-editor-preview {
+    font-family: 'Montserrat', sans-serif;
+  }
   h1,
   h2,
   h3,
