@@ -1,13 +1,17 @@
 .wrapper {
   width: 100%;
   padding: 0 12px;
-  padding-bottom: 15px;
   margin-bottom: 12px;
   border-radius: 5px;
   font-size: var(--font-lg);
 
   background-color: var(--grey-light-color);
   color: var(--white-color);
+
+  &.hide-content {
+    height: 100%;
+    margin-bottom: 0;
+  }
 }
 
 .top {
@@ -49,7 +53,8 @@
 }
 
 .footer {
-  margin-top: 10px;
+  padding-top: 10px;
+  padding-bottom: 15px;
 }
 .created-at {
   text-decoration: underline;

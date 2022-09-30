@@ -7,38 +7,11 @@ $card-topic-gap: 5px;
 .header {
   display: flex;
   font-weight: 600;
-}
-.heading {
-  padding: 5px;
-}
-
-.options {
-  display: flex;
-  align-items: stretch;
-  margin-top: 10px;
-}
-.search {
-  border: 2px solid var(--grey-light-color);
-  border-radius: 8px;
-  flex: 1;
-  height: 48px;
-  margin-right: 10px;
-
-  label {
-    font-size: var(--font-lg);
+  margin-bottom: 10px;
+  h3 {
+    margin-bottom: 0px;
+    margin-right: 5px;
   }
-
-  input {
-    font-size: var(--font-sm);
-    border: none;
-  }
-}
-
-.card {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 10px 0;
-  margin: calc(#{$card-topic-gap} * -1) calc(#{$card-topic-gap} * -1);
 }
 
 .chip-list {
@@ -63,17 +36,42 @@ $card-topic-gap: 5px;
   }
 }
 
-.topic {
-  width: calc(50% - #{$card-topic-gap} * 2);
-  margin: $card-topic-gap $card-topic-gap;
-  padding: 0 8px;
-  border-radius: 5px;
-  background-color: purple;
-  color: var(--white-color);
-  font-weight: 600;
+.options {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 10px;
+}
+.search {
+  border: 2px solid var(--grey-light-color);
+  border-radius: 8px;
+  flex: 1;
+  height: 48px;
+  margin-right: 10px;
+
   label {
-    padding: 15px 0;
-    flex: 1;
-    cursor: pointer;
+    font-size: var(--font-lg);
   }
+
+  input {
+    font-size: var(--font-sm);
+    border: none;
+  }
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 0;
+  margin: calc(#{$card-topic-gap} * -1) calc(#{$card-topic-gap} * -1);
+  height: 300px;
+  overflow: auto;
+}
+
+.card {
+  $spacer-horizontal: 5px;
+
+  margin: 0 $spacer-horizontal;
+  margin-bottom: 10px;
+
+  width: calc(50% - #{$spacer-horizontal} * 2);
 }

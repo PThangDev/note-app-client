@@ -143,11 +143,14 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
               </Col>
               <Col xl={6}>
                 <div className={cx('groups-right')}>
-                  <div className={cx('card-preview')}>
-                    <CardNote className={cx('card')} readOnly note={notesPreview} />
-                  </div>
-                  <div className={cx('color-picker')}>
-                    <ColorPicker color={backgroundColor} onChange={handleChangeColorInput} />
+                  <h3>Choose color and preview card</h3>
+                  <div className={cx('groups-body')}>
+                    <div className={cx('card-preview')}>
+                      <CardNote className={cx('card')} readOnly note={notesPreview} />
+                    </div>
+                    <div className={cx('color-picker')}>
+                      <ColorPicker color={backgroundColor} onChange={handleChangeColorInput} />
+                    </div>
                   </div>
                 </div>
               </Col>

@@ -8,10 +8,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames/bind';
 import { ChangeEvent, FC, memo, useState } from 'react';
 
+import CardTopic from 'src/components/CardTopic';
 import Modal from 'src/components/Modal';
 import useDebounce from 'src/hooks/useDebounce';
 import useGetTopics from 'src/hooks/useGetTopics';
-import { Button, Checkbox, Input } from 'src/themes/UI';
+import { Button, Input } from 'src/themes/UI';
 import { BaseTopic } from 'src/types';
 import FormTopic from '../FormTopic';
 import styles from './TopicSelect.module.scss';
@@ -50,7 +51,7 @@ const TopicSelect: FC<Props> = ({ topics, onChangeTopicSelect }) => {
     <>
       <div className={cx('wrapper')}>
         <div className={cx('header')}>
-          <p className={cx('heading')}>Topics:</p>
+          <h3 className={cx('heading')}>Topics:</h3>
           <div className={cx('chip-list')}>
             {topics.map((topic) => (
               <div
@@ -84,23 +85,16 @@ const TopicSelect: FC<Props> = ({ topics, onChangeTopicSelect }) => {
             Clear
           </Button>
         </div>
-        <div className={cx('card')}>
+        <div className={cx('list')}>
           {data.map((topic) => (
-            <Checkbox
-              className={cx('topic')}
-              style={{ backgroundColor: topic.background }}
-              key={topic._id}
-              label={topic.name}
-              id={topic._id}
-              checked={Boolean(topics.find((tp) => tp._id === topic._id))}
-              onChange={() =>
-                handleChangeTopicSelect({
-                  _id: topic._id,
-                  name: topic.name,
-                  background: topic.background,
-                })
-              }
-            />
+            <div className={cx('card')} key={topic._id}>
+              <CardTopic
+                topic={topic}
+                fullContent={false}
+                onSelect={handleChangeTopicSelect}
+                checked={Boolean(topics.find((tp) => tp._id === topic._id))}
+              />
+            </div>
           ))}
         </div>
       </div>

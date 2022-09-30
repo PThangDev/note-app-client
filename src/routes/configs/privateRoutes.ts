@@ -2,6 +2,7 @@ import { lazy } from 'react';
 
 import { routePaths } from 'src/configs';
 import DefaultLayout from 'src/layouts/DefaultLayout';
+import EmptyLayout from 'src/layouts/EmptyLayout';
 import { PrivateRouter } from '../components/OuterRoute';
 const HomePage = lazy(() => import('src/pages/home'));
 const NotesPage = lazy(() => import('src/pages/notes'));
@@ -31,13 +32,13 @@ const privateRoutes = [
   {
     path: routePaths.newNote.path,
     component: NewNotePage,
-    layout: DefaultLayout,
+    layout: EmptyLayout,
     outer: PrivateRouter,
   },
   {
     path: routePaths.editNote.path,
     component: EditNotePage,
-    layout: DefaultLayout,
+    layout: EmptyLayout,
     outer: PrivateRouter,
   },
   {
