@@ -16,9 +16,28 @@
 
 // React Mark down
 .wmde-markdown {
+  color: inherit !important;
+
+  .contains-task-list input[type='checkbox'] {
+    width: 18px;
+    height: 18px;
+  }
+
   &.md-editor-preview {
     font-family: 'Montserrat', sans-serif;
   }
+
+  table {
+    width: 100% !important;
+    display: table !important;
+    table-layout: fixed;
+    // overflow-wrap: break-word;
+  }
+
+  table tr {
+    background-color: var(--main-bg) !important;
+  }
+
   h1,
   h2,
   h3,
@@ -30,7 +49,6 @@
 
 .w-md-editor-text {
   // Remove padding in editor
-
   code[class*='language-'],
   pre[class*='language-'] {
     line-height: auto !important;
@@ -44,9 +62,6 @@
       padding: 0 !important;
     }
   }
-}
-.wmde-markdown {
-  color: inherit !important;
 }
 
 .md-editor-preview {
