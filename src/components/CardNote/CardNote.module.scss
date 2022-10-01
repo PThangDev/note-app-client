@@ -76,6 +76,7 @@
   line-height: 1.2;
   height: 48px;
   flex: 1;
+  max-width: 95%;
 
   label {
     display: -webkit-box;
@@ -86,7 +87,6 @@
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     max-height: 100%;
-    display: -webkit-box;
   }
 }
 

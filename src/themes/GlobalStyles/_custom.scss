@@ -21,6 +21,7 @@
   .contains-task-list input[type='checkbox'] {
     width: 18px;
     height: 18px;
+    transform: translateY(1.1px);
   }
 
   &.md-editor-preview {
