@@ -4,27 +4,34 @@ import { ChangeEvent, FC, useState } from 'react';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react';
+import { Link } from 'react-router-dom';
+import { useAppDispatch } from 'src/app/hooks';
 import Modal from 'src/components/Modal';
+import { routePaths } from 'src/configs';
+import { fetchDeleteTopic } from 'src/pages/topics/topicsSlice';
 import { Checkbox } from 'src/themes/UI';
 import { Topic } from 'src/types';
+import { formatDate, sweetAlert } from 'src/utils';
 import FormTopic from '../Form/FormTopic';
 import styles from './CardTopic.module.scss';
-import { formatDate, sweetAlert } from 'src/utils';
-import { useAppDispatch } from 'src/app/hooks';
-import { fetchDeleteTopic } from 'src/pages/topics/topicsSlice';
-import { Link } from 'react-router-dom';
-import { routePaths } from 'src/configs';
 
 interface Props {
   topic: Topic;
   fullContent?: boolean;
   checked?: boolean;
+  disabled?: boolean;
   onSelect?: (topic: Topic) => void;
 }
 
 const cx = classnames.bind(styles);
 
-const CardTopic: FC<Props> = ({ topic, fullContent = true, checked, onSelect }) => {
+const CardTopic: FC<Props> = ({
+  topic,
+  fullContent = true,
+  disabled = false,
+  checked,
+  onSelect,
+}) => {
   const dispatch = useAppDispatch();
   const [isOpenModalEdit, setIsOpenModalEdit] = useState<boolean>(false);
 
@@ -51,7 +58,7 @@ const CardTopic: FC<Props> = ({ topic, fullContent = true, checked, onSelect }) 
   return (
     <>
       <div
-        className={cx('wrapper', { 'hide-content': !fullContent })}
+        className={cx('wrapper', { 'hide-content': !fullContent, disabled })}
         style={{ background: topic.background }}
       >
         <div className={cx('top')}>

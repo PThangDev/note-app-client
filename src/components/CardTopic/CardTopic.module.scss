@@ -19,6 +19,13 @@
     height: 100%;
     margin-bottom: 0;
   }
+  &.disabled {
+    transform: unset;
+    cursor: not-allowed;
+    .checkbox label {
+      cursor: not-allowed;
+    }
+  }
 }
 
 .top {

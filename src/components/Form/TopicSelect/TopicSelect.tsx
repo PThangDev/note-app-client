@@ -6,7 +6,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames/bind';
-import { ChangeEvent, FC, memo, useState } from 'react';
+import qs from 'query-string';
+import { ChangeEvent, FC, memo, useEffect, useMemo, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import CardTopic from 'src/components/CardTopic';
 import Modal from 'src/components/Modal';
@@ -27,16 +29,34 @@ const cx = classnames.bind(styles);
 const TopicSelect: FC<Props> = ({ topics, onChangeTopicSelect }) => {
   const [isOpenFormTopic, setIsOpenFormTopic] = useState<boolean>(false);
   const [search, setSearch] = useState<string>('');
+  const location = useLocation();
 
   const searchDebouncedValue = useDebounce(search, 500);
 
   const { data, isLoading } = useGetTopics({ params: { q: searchDebouncedValue } });
+
+  const { topic: topicId } = qs.parse(location.search);
+  const topicSelected = useMemo(() => data.find((tp) => tp._id === topicId), [data, topicId]);
+
+  useEffect(() => {
+    if (typeof topicId === 'string') {
+      if (!topicSelected) return;
+      if (topics.length > 0) return;
+
+      onChangeTopicSelect({
+        _id: topicSelected._id,
+        name: topicSelected.name,
+        background: topicSelected.background,
+      });
+    }
+  }, [data, onChangeTopicSelect, topicId, topicSelected, topics.length]);
 
   const handleChangeInputSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value;
     setSearch(searchValue);
   };
   const handleChangeTopicSelect = (topic: BaseTopic) => {
+    if (topicSelected?._id === topic._id) return;
     onChangeTopicSelect(topic);
   };
 
@@ -60,11 +80,13 @@ const TopicSelect: FC<Props> = ({ topics, onChangeTopicSelect }) => {
                 key={`chip-item-${topic._id}`}
               >
                 {topic.name}
-                <FontAwesomeIcon
-                  className={cx('icon')}
-                  icon={faCircleXmark}
-                  onClick={() => handleChangeTopicSelect(topic)}
-                />
+                {!(topicSelected?._id === topic._id) && (
+                  <FontAwesomeIcon
+                    className={cx('icon')}
+                    icon={faCircleXmark}
+                    onClick={() => handleChangeTopicSelect(topic)}
+                  />
+                )}
               </div>
             ))}
           </div>
@@ -92,6 +114,7 @@ const TopicSelect: FC<Props> = ({ topics, onChangeTopicSelect }) => {
                 topic={topic}
                 fullContent={false}
                 onSelect={handleChangeTopicSelect}
+                disabled={topicSelected?._id === topic._id}
                 checked={Boolean(topics.find((tp) => tp._id === topic._id))}
               />
             </div>

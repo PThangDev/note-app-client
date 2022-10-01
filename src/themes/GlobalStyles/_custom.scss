@@ -26,6 +26,11 @@ body .wmde-markdown {
     color: var(--white-color);
   }
 
+  pre .copied {
+    background: var(--primary-color);
+    visibility: visible;
+  }
+
   .contains-task-list input[type='checkbox'] {
     width: 18px;
     height: 18px;

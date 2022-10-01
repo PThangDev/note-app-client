@@ -1,9 +1,9 @@
-import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCirclePlus, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames/bind';
 import { FC, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'src/app/hooks';
 import FormTopic from 'src/components/Form/FormTopic';
@@ -41,6 +41,7 @@ const TopicDetailPage: FC<Props> = (props) => {
   const handleCloseFormTopic = () => {
     setIsOpenFormTopic(false);
   };
+
   const handleDeleteTopic = async () => {
     const result = await sweetAlert.confirm({ text: 'Do you want to hard delete topic!' });
     if (result.isConfirmed) {
@@ -80,6 +81,9 @@ const TopicDetailPage: FC<Props> = (props) => {
           <p className={cx('created-at')}>{formatDate(data?.createdAt)}</p>
         </div>
         <div className={cx('notes')}>
+          <Link className={cx('notes-create')} to={`${routePaths.newNote.path}?topic=${id}`}>
+            <Button icon={<FontAwesomeIcon icon={faCirclePlus} />}>Create a new note</Button>
+          </Link>
           <NoteContainer notes={data?.notes || []} isLoading={isLoading} />
         </div>
       </div>
