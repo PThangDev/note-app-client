@@ -15,17 +15,21 @@
 }
 
 // React Mark down
-.wmde-markdown {
-  color: inherit !important;
+body .wmde-markdown {
+  color: inherit;
+  min-height: 100px;
+  background: transparent;
+
+  font-family: 'Montserrat', sans-serif;
+
+  span.code-line {
+    color: var(--white-color);
+  }
 
   .contains-task-list input[type='checkbox'] {
     width: 18px;
     height: 18px;
     transform: translateY(1.1px);
-  }
-
-  &.md-editor-preview {
-    font-family: 'Montserrat', sans-serif;
   }
 
   table {
@@ -65,13 +69,6 @@
   }
 }
 
-.md-editor-preview {
-  min-height: 100px;
-  background: transparent !important;
-  span.code-line {
-    color: var(--white-color);
-  }
-}
 // Sweet alert
 .swal2-error {
   #swal2-html-container {

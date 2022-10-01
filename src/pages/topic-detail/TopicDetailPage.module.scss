@@ -1,0 +1,36 @@
+.wrapper {
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h2 {
+    font-size: var(--font-2xl);
+  }
+}
+
+.description {
+  margin-top: 5px;
+
+  max-width: 75%;
+
+  .text {
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+
+  .created-at {
+    text-decoration: underline;
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.notes {
+  margin-top: 10px;
+}

@@ -25,6 +25,14 @@ const routePaths = {
     path: '/topics',
     label: 'Topics',
   },
+  topicDetail: {
+    path: '/topics/:id/:slug',
+    label: 'Topic Detail',
+  },
+  topicDetailRouter: {
+    path: '/topics/:id',
+    label: 'Topic Detail Render',
+  },
   notes: {
     path: '/notes',
     label: 'Notes',

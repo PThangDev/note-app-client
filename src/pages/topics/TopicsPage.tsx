@@ -42,7 +42,7 @@ const TopicsPage: FC<Props> = (props) => {
         </div>
 
         <div className={cx('topics')}>
-          <Container fluid>
+          <Container fluid style={{ padding: 0 }}>
             <Row gutterWidth={15}>
               {data.map((topic) => (
                 <Col key={topic._id} xl={3}>

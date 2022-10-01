@@ -79,13 +79,13 @@ const CardTopic: FC<Props> = ({ topic, fullContent = true, checked, onSelect }) 
         {fullContent && (
           <>
             <Link to={`${routePaths.topics.path}/${topic._id}`} className={cx('description')}>
-              {topic.description}
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, quos commodi officia
-              inventore illo quisquam quo sunt corporis fuga sit tempore excepturi animi porro odio
-              mollitia, quae id labore repellat.
+              {topic.description || (
+                <span className={cx('description-empty')}>No description...</span>
+              )}
             </Link>
             <div className={cx('footer')}>
-              <p className={cx('created-at')}>{formatDate(topic.createdAt)}</p>
+              <span className={cx('created-at')}>{formatDate(topic.createdAt)}</span>
+              <span className={cx('total-notes')}>({topic.notes.length} notes)</span>
             </div>
           </>
         )}

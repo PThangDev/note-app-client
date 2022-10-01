@@ -7,6 +7,10 @@ const topicAPI = {
     const url = '/topics';
     return axiosInstance.get(url, { params: payload?.params });
   },
+  getTopicDetail(id: string): Promise<BaseDataResponse<Topic>> {
+    const url = `/topics/${id}`;
+    return axiosInstance.get(url);
+  },
   createTopic(data: NewTopic): Promise<BaseDataResponse<Topic>> {
     const url = '/topics';
     return axiosInstance.post(url, data);

@@ -71,7 +71,6 @@ const FormTopic: FC<Props> = ({ topic, onClose }) => {
         e.preventDefault();
         handleSubmitTopic();
       }
-      console.log(e);
     };
 
     document.addEventListener('keydown', handleKeyDown);

@@ -9,6 +9,12 @@
   background-color: var(--grey-light-color);
   color: var(--white-color);
 
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: translateY(-5px) scale(1.01);
+  }
+
   &.hide-content {
     height: 100%;
     margin-bottom: 0;
@@ -59,15 +65,34 @@
 }
 
 .description {
+  display: flex;
   padding: 10px 0;
   height: 160px;
+  overflow: auto;
+  font-size: 15px;
+
+  &-empty {
+    font-size: var(--font-sm);
+    font-style: italic;
+  }
+
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
 }
 
 .footer {
   padding-top: 10px;
   padding-bottom: 15px;
+  display: flex;
+  align-items: center;
 }
 .created-at {
   text-decoration: underline;
   font-size: var(--font-md);
+  font-weight: 600;
+}
+.total-notes {
+  font-size: var(--font-sm);
+  margin-left: 5px;
 }

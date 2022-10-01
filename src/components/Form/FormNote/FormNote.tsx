@@ -66,9 +66,10 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
     return topics.map((topic) => topic._id);
   }, [topics]);
 
-  const handleGoBack = () => {
+  const handleGoBack = useCallback(() => {
     navigate(-1);
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleChangeInputTitle = (e: ChangeEvent<HTMLInputElement>) => {
     const titleValue = e.target.value;
@@ -120,13 +121,15 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
       if (e.ctrlKey && e.code === 'KeyS') {
         e.preventDefault();
         handleSubmitNote();
+      } else if (e.ctrlKey && e.key === 'Escape') {
+        handleGoBack();
       }
     };
 
     document.addEventListener('keydown', handleKeyDown);
 
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [handleSubmitNote]);
+  }, [handleGoBack, handleSubmitNote]);
 
   return (
     <div className={cx('wrapper')}>
