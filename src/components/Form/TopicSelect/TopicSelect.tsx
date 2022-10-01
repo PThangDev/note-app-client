@@ -6,12 +6,15 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames/bind';
-import { ChangeEvent, FC, memo, useState } from 'react';
+import qs from 'query-string';
+import { ChangeEvent, FC, memo, useEffect, useMemo, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
+import CardTopic from 'src/components/CardTopic';
 import Modal from 'src/components/Modal';
 import useDebounce from 'src/hooks/useDebounce';
 import useGetTopics from 'src/hooks/useGetTopics';
-import { Button, Checkbox, Input } from 'src/themes/UI';
+import { Button, Input } from 'src/themes/UI';
 import { BaseTopic } from 'src/types';
 import FormTopic from '../FormTopic';
 import styles from './TopicSelect.module.scss';
@@ -26,16 +29,34 @@ const cx = classnames.bind(styles);
 const TopicSelect: FC<Props> = ({ topics, onChangeTopicSelect }) => {
   const [isOpenFormTopic, setIsOpenFormTopic] = useState<boolean>(false);
   const [search, setSearch] = useState<string>('');
+  const location = useLocation();
 
   const searchDebouncedValue = useDebounce(search, 500);
 
   const { data, isLoading } = useGetTopics({ params: { q: searchDebouncedValue } });
+
+  const { topic: topicId } = qs.parse(location.search);
+  const topicSelected = useMemo(() => data.find((tp) => tp._id === topicId), [data, topicId]);
+
+  useEffect(() => {
+    if (typeof topicId === 'string') {
+      if (!topicSelected) return;
+      if (topics.length > 0) return;
+
+      onChangeTopicSelect({
+        _id: topicSelected._id,
+        name: topicSelected.name,
+        background: topicSelected.background,
+      });
+    }
+  }, [data, onChangeTopicSelect, topicId, topicSelected, topics.length]);
 
   const handleChangeInputSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value;
     setSearch(searchValue);
   };
   const handleChangeTopicSelect = (topic: BaseTopic) => {
+    if (topicSelected?._id === topic._id) return;
     onChangeTopicSelect(topic);
   };
 
@@ -50,7 +71,7 @@ const TopicSelect: FC<Props> = ({ topics, onChangeTopicSelect }) => {
     <>
       <div className={cx('wrapper')}>
         <div className={cx('header')}>
-          <p className={cx('heading')}>Topics:</p>
+          <h3 className={cx('heading')}>Topics:</h3>
           <div className={cx('chip-list')}>
             {topics.map((topic) => (
               <div
@@ -59,11 +80,13 @@ const TopicSelect: FC<Props> = ({ topics, onChangeTopicSelect }) => {
                 key={`chip-item-${topic._id}`}
               >
                 {topic.name}
-                <FontAwesomeIcon
-                  className={cx('icon')}
-                  icon={faCircleXmark}
-                  onClick={() => handleChangeTopicSelect(topic)}
-                />
+                {!(topicSelected?._id === topic._id) && (
+                  <FontAwesomeIcon
+                    className={cx('icon')}
+                    icon={faCircleXmark}
+                    onClick={() => handleChangeTopicSelect(topic)}
+                  />
+                )}
               </div>
             ))}
           </div>
@@ -84,23 +107,17 @@ const TopicSelect: FC<Props> = ({ topics, onChangeTopicSelect }) => {
             Clear
           </Button>
         </div>
-        <div className={cx('card')}>
+        <div className={cx('list')}>
           {data.map((topic) => (
-            <Checkbox
-              className={cx('topic')}
-              style={{ backgroundColor: topic.background }}
-              key={topic._id}
-              label={topic.name}
-              id={topic._id}
-              checked={Boolean(topics.find((tp) => tp._id === topic._id))}
-              onChange={() =>
-                handleChangeTopicSelect({
-                  _id: topic._id,
-                  name: topic.name,
-                  background: topic.background,
-                })
-              }
-            />
+            <div className={cx('card')} key={topic._id}>
+              <CardTopic
+                topic={topic}
+                fullContent={false}
+                onSelect={handleChangeTopicSelect}
+                disabled={topicSelected?._id === topic._id}
+                checked={Boolean(topics.find((tp) => tp._id === topic._id))}
+              />
+            </div>
           ))}
         </div>
       </div>

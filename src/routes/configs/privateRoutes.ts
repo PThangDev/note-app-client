@@ -2,6 +2,7 @@ import { lazy } from 'react';
 
 import { routePaths } from 'src/configs';
 import DefaultLayout from 'src/layouts/DefaultLayout';
+import EmptyLayout from 'src/layouts/EmptyLayout';
 import { PrivateRouter } from '../components/OuterRoute';
 const HomePage = lazy(() => import('src/pages/home'));
 const NotesPage = lazy(() => import('src/pages/notes'));
@@ -10,6 +11,8 @@ const NoteDetailRouter = lazy(() => import('src/pages/note-detail/NoteDetailRout
 const NewNotePage = lazy(() => import('src/pages/new-note'));
 const EditNotePage = lazy(() => import('src/pages/edit-note'));
 const TopicsPage = lazy(() => import('src/pages/topics'));
+const TopicDetailPage = lazy(() => import('src/pages/topic-detail'));
+const TopicDetailRouter = lazy(() => import('src/pages/topic-detail/TopicDetailRouter'));
 const PinsPage = lazy(() => import('src/pages/pins'));
 const TrashsPage = lazy(() => import('src/pages/trashs'));
 const ProfilePage = lazy(() => import('src/pages/profile'));
@@ -31,13 +34,13 @@ const privateRoutes = [
   {
     path: routePaths.newNote.path,
     component: NewNotePage,
-    layout: DefaultLayout,
+    layout: EmptyLayout,
     outer: PrivateRouter,
   },
   {
     path: routePaths.editNote.path,
     component: EditNotePage,
-    layout: DefaultLayout,
+    layout: EmptyLayout,
     outer: PrivateRouter,
   },
   {
@@ -55,6 +58,18 @@ const privateRoutes = [
   {
     path: routePaths.topics.path,
     component: TopicsPage,
+    layout: DefaultLayout,
+    outer: PrivateRouter,
+  },
+  {
+    path: routePaths.topicDetail.path,
+    component: TopicDetailPage,
+    layout: DefaultLayout,
+    outer: PrivateRouter,
+  },
+  {
+    path: routePaths.topicDetailRouter.path,
+    component: TopicDetailRouter,
     layout: DefaultLayout,
     outer: PrivateRouter,
   },

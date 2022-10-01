@@ -6,7 +6,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames/bind';
-import { ChangeEvent, FC, useCallback, useMemo, useState } from 'react';
+import { ChangeEvent, FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { Col, Container, Row } from 'react-grid-system';
 import { useNavigate } from 'react-router-dom';
 
@@ -29,6 +29,8 @@ interface Props {
 
 const cx = classnames.bind(styles);
 
+const TIME_DEBOUNCE_DELAY = 300;
+
 const FormNote: FC<Props> = ({ data, onClose }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -37,9 +39,9 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
   const [content, setContent] = useState<string>(data?.content || '');
   const [backgroundColor, setBackgroundColor] = useState(data?.background || backgrounds[0]);
 
-  const titleDebounced = useDebounce(title, 300);
-  const contentDebounced = useDebounce(content, 300);
-  const backgroundColorDebounced = useDebounce(backgroundColor, 300);
+  const titleDebounced = useDebounce(title, TIME_DEBOUNCE_DELAY);
+  const contentDebounced = useDebounce(content, TIME_DEBOUNCE_DELAY);
+  const backgroundColorDebounced = useDebounce(backgroundColor, TIME_DEBOUNCE_DELAY);
 
   const notesPreview = useMemo(() => {
     return {
@@ -64,9 +66,10 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
     return topics.map((topic) => topic._id);
   }, [topics]);
 
-  const handleGoBack = () => {
+  const handleGoBack = useCallback(() => {
     navigate(-1);
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleChangeInputTitle = (e: ChangeEvent<HTMLInputElement>) => {
     const titleValue = e.target.value;
@@ -89,7 +92,7 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
     });
   }, []);
 
-  const handleSubmitNote = async () => {
+  const handleSubmitNote = useCallback(async () => {
     if (data) {
       await dispatch(
         fetchUpdateNote({
@@ -105,12 +108,29 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
         fetchCreateNote({ title, content, background: backgroundColor, topics: topicIds })
       ).unwrap();
     }
-  };
+  }, [backgroundColor, content, data, dispatch, title, topicIds]);
 
   const handleSubmitNoteAndGoBack = async () => {
     await handleSubmitNote();
     handleGoBack();
   };
+
+  // Handle event ctrl + s
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.code === 'KeyS') {
+        e.preventDefault();
+        handleSubmitNote();
+      } else if (e.ctrlKey && e.key === 'Escape') {
+        handleGoBack();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [handleGoBack, handleSubmitNote]);
+
   return (
     <div className={cx('wrapper')}>
       <div className={cx('header')}>
@@ -143,11 +163,14 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
               </Col>
               <Col xl={6}>
                 <div className={cx('groups-right')}>
-                  <div className={cx('card-preview')}>
-                    <CardNote className={cx('card')} readOnly note={notesPreview} />
-                  </div>
-                  <div className={cx('color-picker')}>
-                    <ColorPicker color={backgroundColor} onChange={handleChangeColorInput} />
+                  <h3>Choose color and preview card</h3>
+                  <div className={cx('groups-body')}>
+                    <div className={cx('card-preview')}>
+                      <CardNote className={cx('card')} readOnly note={notesPreview} />
+                    </div>
+                    <div className={cx('color-picker')}>
+                      <ColorPicker color={backgroundColor} onChange={handleChangeColorInput} />
+                    </div>
                   </div>
                 </div>
               </Col>

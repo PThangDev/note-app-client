@@ -25,7 +25,7 @@ const Checkbox: FC<Props> = ({
   onChange = () => {},
 }) => {
   return (
-    <div className={cx('checkbox', className)} style={style}>
+    <div className={cx('wrapper', className)} style={style}>
       <input
         type="checkbox"
         checked={checked ?? undefined}

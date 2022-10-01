@@ -170,9 +170,15 @@ const CardNote: FC<Props> = ({
           </div>
         </div>
         <div className={cx('content')} data-color-mode="dark">
-          <MDEditor.Markdown className="md-editor-preview" source={content} />
-          {!readOnly && <Link to={`${routePaths.notes.path}/${_id}`} />}
+          {readOnly ? (
+            <MDEditor.Markdown className={cx('content-preview')} source={content} />
+          ) : (
+            <Link className={cx('content-link')} to={`${routePaths.notes.path}/${_id}`}>
+              <MDEditor.Markdown className={cx('content-preview')} source={content} disableCopy />
+            </Link>
+          )}
         </div>
+
         {!readOnly && (
           <div className={cx('options')}>
             <div className={cx('time')}>{formatDate(createdAt)}</div>

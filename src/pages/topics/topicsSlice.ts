@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
+
 import { topicAPI } from 'src/services';
 import {
   BaseDataResponse,
@@ -10,6 +11,7 @@ import {
 } from 'src/types';
 import { GetTopicsPayload, NewTopic, Topic, TopicUpdateRequest } from 'src/types/Topic';
 import { sweetAlert } from 'src/utils';
+import topicDetailSlice from '../topic-detail/topicDetailSlice';
 
 interface InitialState {
   isLoading: boolean;
@@ -60,6 +62,10 @@ export const fetchUpdateTopic = createAsyncThunk<
 >('/topics/:id/edit', async (payload, thunkAPI) => {
   try {
     const response = await topicAPI.updateTopic(payload);
+    const { updateTopic } = topicDetailSlice.actions;
+
+    thunkAPI.dispatch(updateTopic(response.data));
+
     return response;
   } catch (error) {
     return thunkAPI.rejectWithValue(error as ErrorResponse);
