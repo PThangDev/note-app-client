@@ -1,5 +1,6 @@
 import {
   faPenToSquare,
+  faStar,
   faTrash,
   faTrashCan,
   faTrashCanArrowUp,
@@ -7,7 +8,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MDEditor from '@uiw/react-md-editor';
 import classnames from 'classnames/bind';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useMemo, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
@@ -16,6 +17,7 @@ import { routePaths } from 'src/configs';
 import { Button } from 'src/themes/UI';
 import { formatDate, sweetAlert } from 'src/utils';
 import { fetchDeleteNote, fetchToggleNoteToTrash } from '../notes/notesSlice';
+import NotesRelated from './components/NotesRelated';
 import styles from './NoteDetailPage.module.scss';
 
 interface Props {}
@@ -28,13 +30,40 @@ const NoteDetailPage: FC<Props> = (props) => {
   const { id } = useParams();
   const { data } = useAppSelector((state) => state.noteDetail);
 
+  const previousRoute = useRef<string | null>(null);
+
+  const notesRelated = useMemo(() => {
+    if (!data) return [];
+
+    return data.topics
+      .map((topic) => topic.notes.filter((note) => note._id !== id))
+      .reduce((acc, cur) => {
+        const noteRepeated = acc.find((item) => cur.find((n) => n._id === item._id));
+        if (noteRepeated) {
+          return acc;
+        }
+        return acc.concat(cur);
+      }, []);
+  }, [data, id]);
+
   useEffect(() => {
+    if (id) previousRoute.current = id;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (previousRoute.current && previousRoute.current !== id && id) {
+      navigate(`${routePaths.notes.path}/${id}`, { replace: true });
+      return;
+    }
+
     if (!data) {
       navigate(`${routePaths.notes.path}/${id}`, { replace: true });
     } else {
-      navigate(`${routePaths.notes.path}/${id}/${data.slug}`, { replace: true });
+      navigate(`${routePaths.notes.path}/${id}/${data.slug}`, { replace: true, relative: 'route' });
     }
-  }, [id, navigate, data]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, data?.slug]);
 
   const handleMoveNoteToTrash = async () => {
     if (!data) return;
@@ -122,20 +151,40 @@ const NoteDetailPage: FC<Props> = (props) => {
       {/* Main */}
       <div className={cx('wrapper')}>
         <div className={cx('header')}>
-          <h1 className={cx('heading')}>{data?.title}</h1>
+          <h2 className={cx('heading')}>{data?.title}</h2>
           <div className={cx('actions')}>{renderActionButtons()}</div>
         </div>
         <div className={cx('info')}>
-          <span className={cx('info-date')}>{formatDate(data?.createdAt)}</span>
-          {data?.is_trash && (
-            <span className={cx('info-sub')}>
-              <FontAwesomeIcon className={cx('icon')} icon={faTrash} />
-              Deleted
-            </span>
-          )}
+          <p className={cx('info-sub')}>
+            <span className={cx('info-date')}>{formatDate(data?.createdAt)}</span>
+            {data?.is_trash && (
+              <span className={cx('info-delete')}>
+                <FontAwesomeIcon className={cx('icon')} icon={faTrash} />
+                Deleted
+              </span>
+            )}
+          </p>
+          <div className={cx('info-link-topic')}>
+            {data &&
+              data.topics.map((topic) => (
+                <Link
+                  key={topic._id}
+                  to={`${routePaths.topics.path}/${topic._id}`}
+                  style={{ background: topic.background }}
+                >
+                  <FontAwesomeIcon className={cx('icon')} icon={faStar} />
+                  {topic.name}
+                </Link>
+              ))}
+          </div>
         </div>
         <div className={cx('content')} data-color-mode="dark">
-          <MDEditor.Markdown className="md-editor-preview" source={data?.content} />
+          <MDEditor.Markdown className={cx('content-preview')} source={data?.content} />
+          {notesRelated.length > 0 && (
+            <div className={cx('notes-related')}>
+              <NotesRelated notes={notesRelated} />
+            </div>
+          )}
         </div>
       </div>
     </>

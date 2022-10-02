@@ -12,13 +12,15 @@ const NoteDetailRouter: FC<Props> = (props) => {
   const { id } = useParams();
 
   const { data } = useGetNoteDetail();
+
   useEffect(() => {
     if (data) {
       navigate(`${routePaths.notes.path}/${id}/${data.slug}`, {
         replace: true,
       });
     }
-  }, [id, navigate, data]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, navigate, data?.slug]);
 
   return (
     <>

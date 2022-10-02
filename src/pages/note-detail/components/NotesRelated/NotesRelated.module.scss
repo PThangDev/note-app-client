@@ -1,0 +1,50 @@
+.wrapper {
+  width: var(--notes-related-width);
+  padding-left: 8px;
+
+  position: sticky;
+  right: 0;
+  top: calc(var(--header-height));
+}
+
+.header {
+  h3 {
+    margin: 0;
+    font-weight: 600;
+    margin-bottom: 10px;
+
+    .icon {
+      font-size: var(--font-sm);
+      margin-right: 5px;
+      margin-left: -2px;
+    }
+  }
+}
+
+.notes {
+}
+
+.note-link {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  word-break: break-word;
+
+  transition: all 0.3s;
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  &:hover {
+    text-decoration: underline;
+    color: var(--primary-color);
+    padding-left: 5px;
+  }
+}
+
+.note-icon {
+  width: 14px;
+  margin-right: 5px;
+  flex-shrink: 0;
+}
