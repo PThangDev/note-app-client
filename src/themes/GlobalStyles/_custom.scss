@@ -41,11 +41,18 @@ body .wmde-markdown {
     width: 100% !important;
     display: table !important;
     table-layout: fixed;
-    // overflow-wrap: break-word;
+
+    th {
+      text-align: left;
+    }
   }
 
   table tr {
-    background-color: var(--main-bg) !important;
+    background-color: var(--main-bg);
+
+    &:nth-child(2n) {
+      background-color: rgb(236, 236, 236);
+    }
   }
 
   h1,

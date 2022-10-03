@@ -12,3 +12,39 @@
   align-items: center;
   gap: 30px;
 }
+
+.filter {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+.form {
+  display: flex;
+  align-items: stretch;
+}
+.search {
+  border: 2px solid var(--grey-light-color);
+  border-radius: 5px;
+  height: 40px;
+  width: 400px;
+  margin-right: 10px;
+
+  input {
+    font-size: var(--font-sm);
+    border: 0;
+  }
+  label {
+    font-size: var(--font-md);
+  }
+}
+.sort {
+  max-width: 250px;
+}
+
+.topics {
+  display: flex;
+  margin-top: 10px;
+}
+.topic {
+}

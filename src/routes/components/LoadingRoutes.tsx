@@ -8,6 +8,12 @@ interface Props {
 
 TopBarProgress.config({
   barThickness: 4,
+  barColors: {
+    0: '#d35400',
+    0.2: '#f39c12',
+    0.5: '#e67e22',
+    1: '#f1c40f',
+  },
 });
 
 const LoadingRoutes: FC<Props> = ({ children }) => {
@@ -20,7 +26,6 @@ const LoadingRoutes: FC<Props> = ({ children }) => {
     setProgress(true);
     if (location.pathname === prevLoc) {
       setPrevLoc('');
-      //thanks to ankit sahu
     }
   }, [location]);
 
