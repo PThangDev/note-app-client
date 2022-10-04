@@ -51,10 +51,15 @@
   font-size: 3rem;
   transition: all 0.5s;
   overflow: hidden;
-  // opacity: none;
-  // visibility: hidden;
-  // transition-delay: opacity 0.5s, visibility 0.5s;
 }
+.right {
+  display: flex;
+  align-items: center;
+}
+.dark-mode {
+  margin: 0 8px;
+}
+
 .inner {
   height: 100%;
   display: flex;

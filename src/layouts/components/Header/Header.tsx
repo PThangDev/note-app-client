@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { useAppSelector } from 'src/app/hooks';
 import images from 'src/assets/images';
+import Switch from 'src/components/Form/Switch';
 import { NoteIcon } from 'src/components/Icons';
 import { routePaths } from 'src/configs';
 import styles from './Header.module.scss';
@@ -27,11 +28,15 @@ const Header: FC<Props> = (props) => {
           {/* Search */}
           <Search />
         </div>
-        <div id="target"></div>
-        <Link to={routePaths.profile.path} className={cx('user')}>
-          <img className={cx('avatar')} src={user?.avatar || images.avatarDefault} alt="" />
-          <p className={cx('username')}>{user?.username}</p>
-        </Link>
+        <div className={cx('right')}>
+          <div className={cx('dark-mode')}>
+            <Switch name="dark-mode" />
+          </div>
+          <Link to={routePaths.profile.path} className={cx('user')}>
+            <img className={cx('avatar')} src={user?.avatar || images.avatarDefault} alt="" />
+            <p className={cx('username')}>{user?.username}</p>
+          </Link>
+        </div>
       </div>
     </header>
   );
