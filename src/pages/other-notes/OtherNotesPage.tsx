@@ -4,24 +4,24 @@ import { Helmet } from 'react-helmet-async';
 
 import NoteContainer from 'src/containers/NoteContainer';
 import useGetNotes from 'src/hooks/useGetNotes';
-import styles from './PinsPage.module.scss';
+import styles from './OtherNotesPage.module.scss';
 
 interface Props {}
 
 const cx = classnames.bind(styles);
 
-const PinsPage: FC<Props> = (props) => {
-  const { data, isLoading } = useGetNotes({ endpoint: '/pins' });
+const OtherNotesPage: FC<Props> = (props) => {
+  const { data, isLoading } = useGetNotes({ endpoint: '/others' });
   return (
     <>
       <Helmet>
         <title>Pins</title>
       </Helmet>
       <div className={cx('wrapper')}>
-        <NoteContainer header={{ text: 'Pins' }} notes={data} isLoading={isLoading} />
+        <NoteContainer notes={data} header={{ text: 'Other Notes' }} isLoading={isLoading} />
       </div>
     </>
   );
 };
 
-export default PinsPage;
+export default OtherNotesPage;

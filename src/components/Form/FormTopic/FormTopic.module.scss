@@ -39,6 +39,8 @@
   outline: none;
   border-radius: 8px;
 
+  font-size: var(--font-md);
+
   &:focus-visible {
     border: 1px solid var(--grey-bold-color);
   }

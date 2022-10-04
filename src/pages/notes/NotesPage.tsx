@@ -54,7 +54,7 @@ const NotesPage: FC<Props> = (props) => {
 
   useEffect(() => {
     const queryParams = qs.stringify(
-      { q: searchKeywordDebounced || null, sort },
+      { q: searchKeywordDebounced.trim() || null, sort: sort || null },
       { skipNull: true }
     );
 

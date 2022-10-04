@@ -10,6 +10,7 @@ const NoteDetailPage = lazy(() => import('src/pages/note-detail'));
 const NoteDetailRouter = lazy(() => import('src/pages/note-detail/NoteDetailRouter'));
 const NewNotePage = lazy(() => import('src/pages/new-note'));
 const EditNotePage = lazy(() => import('src/pages/edit-note'));
+const OtherNotesPage = lazy(() => import('src/pages/other-notes'));
 const TopicsPage = lazy(() => import('src/pages/topics'));
 const TopicDetailPage = lazy(() => import('src/pages/topic-detail'));
 const TopicDetailRouter = lazy(() => import('src/pages/topic-detail/TopicDetailRouter'));
@@ -76,6 +77,12 @@ const privateRoutes = [
   {
     path: routePaths.pins.path,
     component: PinsPage,
+    layout: DefaultLayout,
+    outer: PrivateRouter,
+  },
+  {
+    path: routePaths.others.path,
+    component: OtherNotesPage,
     layout: DefaultLayout,
     outer: PrivateRouter,
   },
