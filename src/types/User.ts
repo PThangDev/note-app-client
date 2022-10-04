@@ -4,6 +4,7 @@ export type UserRole = 'customer' | 'admin';
 export type UserStatus = 'pending' | 'active' | 'banned';
 export interface User {
   _id: string;
+  fullname: string;
   username: string;
   password: string;
   email: string;
@@ -13,6 +14,8 @@ export interface User {
   status: UserStatus;
   createdAt: string;
   updatedAt: string;
+  total_topics?: number;
+  total_notes?: number;
   __v: number;
 }
 

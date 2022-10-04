@@ -2,8 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 import { User } from 'src/types';
-import { storage } from 'src/utils';
-import { fetchLogin } from './authActions';
+import { storage, sweetAlert } from 'src/utils';
+import { fetchGetInfoUser, fetchLogin } from './authActions';
 
 interface InitialState {
   isLoading: boolean;
@@ -64,6 +64,18 @@ const authSlice = createSlice({
       .addCase(fetchLogin.rejected, (state, action) => {
         state.isLoading = false;
         toast.error(action.payload?.message);
+      })
+      // Get Info user
+      .addCase(fetchGetInfoUser.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchGetInfoUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload.data;
+      })
+      .addCase(fetchGetInfoUser.rejected, (state, action) => {
+        state.isLoading = false;
+        sweetAlert.error(action.payload?.message);
       });
   },
 });

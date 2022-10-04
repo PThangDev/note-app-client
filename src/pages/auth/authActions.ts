@@ -40,3 +40,16 @@ export const fetchRegister = createAsyncThunk<
     return thunkAPI.rejectWithValue(error as ErrorResponse);
   }
 });
+
+export const fetchGetInfoUser = createAsyncThunk<BaseDataResponse<User>, undefined, RejectValue>(
+  '/auth/info-account',
+  async (payload, thunkAPI) => {
+    try {
+      const response = await authAPI.getInfoAccount();
+
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error as ErrorResponse);
+    }
+  }
+);
