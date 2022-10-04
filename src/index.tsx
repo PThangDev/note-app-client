@@ -9,22 +9,19 @@ import reportWebVitals from './reportWebVitals';
 
 import store from './app/store';
 import ErrorBoundaryPage from './pages/error-boundary';
-import LoadingPage from './pages/loading';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
   <React.StrictMode>
     <ErrorBoundary fallback={<ErrorBoundaryPage />}>
-      <React.Suspense fallback={<LoadingPage />}>
-        <Provider store={store}>
-          <Router>
-            <HelmetProvider>
-              <App />
-            </HelmetProvider>
-          </Router>
-        </Provider>
-      </React.Suspense>
+      <Provider store={store}>
+        <Router>
+          <HelmetProvider>
+            <App />
+          </HelmetProvider>
+        </Router>
+      </Provider>
     </ErrorBoundary>
   </React.StrictMode>
 );
