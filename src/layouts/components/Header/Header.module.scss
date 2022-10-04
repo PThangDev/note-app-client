@@ -1,3 +1,4 @@
+@import '/src/themes/GlobalStyles/utils';
 .wrapper {
   position: fixed;
   top: 0;
@@ -83,4 +84,15 @@
   margin-left: 10px;
   font-weight: 500;
   color: var(--white-color);
+}
+.menu-bars {
+  // display: none;
+  font-size: var(--font-3xl);
+  margin-left: 12px;
+  cursor: pointer;
+  display: none;
+
+  @include media-lg {
+    display: block;
+  }
 }

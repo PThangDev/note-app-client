@@ -8,15 +8,13 @@ import { fetchGetInfoUser, fetchLogin } from './authActions';
 interface InitialState {
   isLoading: boolean;
   user: User | null;
-  message: string;
   isAuthenticate: boolean;
 }
 
 const initialState: InitialState = {
   isLoading: false,
   user: storage.get<User>('user') || null,
-  message: '',
-  isAuthenticate: Boolean(storage.get('user')),
+  isAuthenticate: !!storage.get('user'),
 };
 
 const authSlice = createSlice({
@@ -33,8 +31,8 @@ const authSlice = createSlice({
       storage.remove('access_token');
       storage.remove('refresh_token');
 
-      state.isAuthenticate = false;
       state.user = null;
+      state.isAuthenticate = false;
 
       if (action.payload) {
         toast.error(action.payload);

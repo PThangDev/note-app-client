@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames/bind';
 import qs from 'query-string';
 import { ChangeEvent, FC, useEffect, useState } from 'react';
-import { Col, Container, Row } from 'react-grid-system';
 import { Helmet } from 'react-helmet-async';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
@@ -12,8 +11,7 @@ import { constants, routePaths } from 'src/configs';
 import NoteContainer from 'src/containers/NoteContainer';
 import useDebounce from 'src/hooks/useDebounce';
 import useGetNotes from 'src/hooks/useGetNotes';
-import useGetTopics from 'src/hooks/useGetTopics';
-import { Button, Checkbox, Input } from 'src/themes/UI';
+import { Button, Input } from 'src/themes/UI';
 import styles from './NotesPage.module.scss';
 
 interface Props {}

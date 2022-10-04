@@ -1,3 +1,5 @@
+@import '/src/themes/GlobalStyles/utils';
+
 .wrapper {
   width: 100%;
   min-height: 200px;
@@ -7,6 +9,8 @@
   color: var(--white-color);
   transition: all 0.5s;
   overflow: hidden;
+
+  border: 1px solid;
 
   margin: 7.5px 0;
 
@@ -114,6 +118,8 @@
     padding: 10px 20px;
     position: relative;
     height: 160px;
+    width: 100%;
+    max-width: 100%;
     overflow: auto;
 
     &::-webkit-scrollbar {
@@ -123,6 +129,7 @@
 
   &-link {
     width: 100%;
+    display: flex;
   }
 }
 .actions {

@@ -17,13 +17,13 @@ root.render(
   <React.StrictMode>
     <ErrorBoundary fallback={<ErrorBoundaryPage />}>
       <React.Suspense fallback={<LoadingPage />}>
-        <HelmetProvider>
-          <Provider store={store}>
-            <Router>
+        <Provider store={store}>
+          <Router>
+            <HelmetProvider>
               <App />
-            </Router>
-          </Provider>
-        </HelmetProvider>
+            </HelmetProvider>
+          </Router>
+        </Provider>
       </React.Suspense>
     </ErrorBoundary>
   </React.StrictMode>

@@ -1,12 +1,12 @@
 import { FC } from 'react';
+import 'react-markdown-editor-lite/lib/index.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'tippy.js/dist/tippy.css';
-import 'react-markdown-editor-lite/lib/index.css';
 
 import GlobalStyles from 'src/themes';
-import { PageRoutes } from './routes';
 import ScrollToTop from './components/ScrollToTop';
+import { PageRoutes } from './routes';
 
 interface Props {}
 

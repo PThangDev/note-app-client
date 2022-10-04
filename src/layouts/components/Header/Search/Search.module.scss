@@ -1,7 +1,17 @@
+@import '/src/themes/GlobalStyles/utils';
+
 .wrapper {
   margin-left: 15px;
+
+  @include media-md {
+    display: none;
+  }
 }
 .input {
   min-width: 600px;
   height: 40px;
+
+  @include media-lg {
+    min-width: 50vw;
+  }
 }

@@ -28,8 +28,7 @@ const store = configureStore({
     topics: topicsSlice.reducer,
     topicDetail: topicDetailSlice.reducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false }).concat(checkUnAuthorization),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(checkUnAuthorization),
 });
 
 export default store;

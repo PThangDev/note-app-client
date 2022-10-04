@@ -1,5 +1,6 @@
-@import './font';
-@import './custom';
+@import './utils/font';
+@import './utils/custom';
+@import './utils/responsive';
 
 :root {
   --white-color: #ffffff;

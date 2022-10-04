@@ -9,18 +9,22 @@ import authSlice from 'src/pages/auth/authSlice';
 import routes from './routes';
 import styles from './Sidebar.module.scss';
 
-interface Props {}
+interface Props {
+  isOpen: boolean;
+  onCloseSidebar: () => void;
+}
 
 const cx = classNames.bind(styles);
 
-const Sidebar: FC<Props> = (props) => {
+const Sidebar: FC<Props> = ({ isOpen = false, onCloseSidebar }) => {
   const dispatch = useAppDispatch();
+
   const handleLogout = () => {
     const { logout } = authSlice.actions;
     dispatch(logout());
   };
   return (
-    <div className={cx('wrapper')}>
+    <div className={cx('wrapper', { active: isOpen })}>
       <ul className={cx('list')}>
         {routes.map((route, index) => {
           const { icon, to, label, end = undefined } = route;
@@ -30,6 +34,7 @@ const Sidebar: FC<Props> = (props) => {
                 className={({ isActive }) => cx('link', { active: isActive })}
                 end={end}
                 to={to}
+                onClick={onCloseSidebar}
               >
                 <span className={cx('icon')}>{icon}</span>
                 <span className={cx('label')}>{label}</span>
