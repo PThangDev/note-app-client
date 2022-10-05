@@ -15,7 +15,7 @@ const NoteDetailRouter: FC<Props> = (props) => {
 
   useEffect(() => {
     if (data) {
-      navigate(`${routePaths.notes.path}/${id}/${data.slug}`, {
+      navigate(`${routePaths.notes}/${id}/${data.slug}`, {
         replace: true,
       });
     }

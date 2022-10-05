@@ -1,7 +1,6 @@
 import { Route } from 'react-router-dom';
 
 import EmptyLayout from 'src/layouts/EmptyLayout';
-import NotFoundPage from 'src/pages/notfound';
 import routes from '../configs/routes';
 import LoadingRoutes from './LoadingRoutes';
 
@@ -29,7 +28,6 @@ const PageRoutes = () => {
           />
         );
       })}
-      <Route path="*" element={<NotFoundPage />} />
     </LoadingRoutes>
   );
 };

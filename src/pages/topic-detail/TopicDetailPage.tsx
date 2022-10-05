@@ -29,9 +29,9 @@ const TopicDetailPage: FC<Props> = (props) => {
 
   useEffect(() => {
     if (!data) {
-      navigate(`${routePaths.topics.path}/${id}`, { replace: true });
+      navigate(`${routePaths.topics}/${id}`, { replace: true });
     } else {
-      navigate(`${routePaths.topics.path}/${id}/${data.slug}`, { replace: true });
+      navigate(`${routePaths.topics}/${id}/${data.slug}`, { replace: true });
     }
   }, [id, navigate, data]);
 
@@ -81,7 +81,7 @@ const TopicDetailPage: FC<Props> = (props) => {
           <p className={cx('created-at')}>{formatDate(data?.createdAt)}</p>
         </div>
         <div className={cx('notes')}>
-          <Link className={cx('notes-create')} to={`${routePaths.newNote.path}?topic=${id}`}>
+          <Link className={cx('notes-create')} to={`${routePaths.newNote}?topic=${id}`}>
             <Button icon={<FontAwesomeIcon icon={faCirclePlus} />}>Create a new note</Button>
           </Link>
           <NoteContainer notes={data?.notes || []} isLoading={isLoading} />

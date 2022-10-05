@@ -72,7 +72,7 @@ const NotesPage: FC<Props> = (props) => {
       </Helmet>
       <div className={cx('wrapper')}>
         <div className={cx('actions')}>
-          <Link to={routePaths.newNote.path}>
+          <Link to={routePaths.newNote}>
             <Button icon={<FontAwesomeIcon icon={faCirclePlus} />}>Create a new note</Button>
           </Link>
         </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { ErrorBoundary } from 'react-error-boundary';
 import { HelmetProvider } from 'react-helmet-async';
@@ -16,11 +16,13 @@ root.render(
   <React.StrictMode>
     <ErrorBoundary fallback={<ErrorBoundaryPage />}>
       <Provider store={store}>
-        <Router>
-          <HelmetProvider>
-            <App />
-          </HelmetProvider>
-        </Router>
+        <Suspense fallback={null}>
+          <Router>
+            <HelmetProvider>
+              <App />
+            </HelmetProvider>
+          </Router>
+        </Suspense>
       </Provider>
     </ErrorBoundary>
   </React.StrictMode>

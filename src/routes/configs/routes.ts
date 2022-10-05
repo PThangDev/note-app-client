@@ -1,6 +1,7 @@
 import authRoutes from './authRoutes';
 import privateRoutes from './privateRoutes';
+import publicRoutes from './publicRoutes';
 
-const routes = [...authRoutes, ...privateRoutes];
+const routes = [...publicRoutes, ...authRoutes, ...privateRoutes];
 
 export default routes;

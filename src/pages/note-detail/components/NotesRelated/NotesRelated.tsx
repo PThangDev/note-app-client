@@ -36,7 +36,7 @@ const NotesRelated: FC<Props> = ({ notes }) => {
         {notes.map((note) => (
           <Link
             className={cx('note-link')}
-            to={`${routePaths.notes.path}/${note._id}`}
+            to={`${routePaths.notes}/${note._id}`}
             key={`${note._id}-notes-related`}
             onClick={() => handleGetNoteDetail(note._id)}
           >

@@ -1,105 +1,105 @@
+import { lazy } from 'react';
 import { routePaths } from 'src/configs';
 import DefaultLayout from 'src/layouts/DefaultLayout';
 import EmptyLayout from 'src/layouts/EmptyLayout';
 import { PrivateRouter } from '../components/OuterRoute';
 
-import EditNotePage from 'src/pages/edit-note';
-import HomePage from 'src/pages/home';
-import NewNotePage from 'src/pages/new-note';
-
-import NoteDetailPage from 'src/pages/note-detail';
-import NoteDetailRouter from 'src/pages/note-detail/NoteDetailRouter';
-import NotesPage from 'src/pages/notes';
-import OtherNotesPage from 'src/pages/other-notes';
-import PinsPage from 'src/pages/pins';
-import ProfilePage from 'src/pages/profile';
-import SearchPage from 'src/pages/search';
-import TopicDetailPage from 'src/pages/topic-detail';
-import TopicDetailRouter from 'src/pages/topic-detail/TopicDetailRouter';
-import TopicsPage from 'src/pages/topics';
-import TrashsPage from 'src/pages/trashs';
+const HomePage = lazy(() => import('src/pages/home'));
+const NotesPage = lazy(() => import('src/pages/notes'));
+const NoteDetailPage = lazy(() => import('src/pages/note-detail'));
+const NoteDetailRouter = lazy(() => import('src/pages/note-detail/NoteDetailRouter'));
+const NewNotePage = lazy(() => import('src/pages/new-note'));
+const EditNotePage = lazy(() => import('src/pages/edit-note'));
+const OtherNotesPage = lazy(() => import('src/pages/other-notes'));
+const TopicsPage = lazy(() => import('src/pages/topics'));
+const TopicDetailPage = lazy(() => import('src/pages/topic-detail'));
+const TopicDetailRouter = lazy(() => import('src/pages/topic-detail/TopicDetailRouter'));
+const PinsPage = lazy(() => import('src/pages/pins'));
+const TrashsPage = lazy(() => import('src/pages/trashs'));
+const ProfilePage = lazy(() => import('src/pages/profile'));
+const SearchPage = lazy(() => import('src/pages/search'));
 
 const privateRoutes = [
   {
-    path: routePaths.home.path,
+    path: routePaths.home,
     component: HomePage,
     layout: DefaultLayout,
     outer: PrivateRouter,
   },
   {
-    path: routePaths.notes.path,
+    path: routePaths.notes,
     component: NotesPage,
     layout: DefaultLayout,
     outer: PrivateRouter,
   },
   {
-    path: routePaths.newNote.path,
+    path: routePaths.newNote,
     component: NewNotePage,
     layout: EmptyLayout,
     outer: PrivateRouter,
   },
   {
-    path: routePaths.editNote.path,
+    path: routePaths.editNote,
     component: EditNotePage,
     layout: EmptyLayout,
     outer: PrivateRouter,
   },
   {
-    path: routePaths.noteDetailRouter.path,
+    path: routePaths.noteDetailRouter,
     component: NoteDetailRouter,
     layout: DefaultLayout,
     outer: PrivateRouter,
   },
   {
-    path: routePaths.noteDetail.path,
+    path: routePaths.noteDetail,
     component: NoteDetailPage,
     layout: DefaultLayout,
     outer: PrivateRouter,
   },
   {
-    path: routePaths.topics.path,
+    path: routePaths.topics,
     component: TopicsPage,
     layout: DefaultLayout,
     outer: PrivateRouter,
   },
   {
-    path: routePaths.topicDetail.path,
+    path: routePaths.topicDetail,
     component: TopicDetailPage,
     layout: DefaultLayout,
     outer: PrivateRouter,
   },
   {
-    path: routePaths.topicDetailRouter.path,
+    path: routePaths.topicDetailRouter,
     component: TopicDetailRouter,
     layout: DefaultLayout,
     outer: PrivateRouter,
   },
   {
-    path: routePaths.pins.path,
+    path: routePaths.pins,
     component: PinsPage,
     layout: DefaultLayout,
     outer: PrivateRouter,
   },
   {
-    path: routePaths.others.path,
+    path: routePaths.others,
     component: OtherNotesPage,
     layout: DefaultLayout,
     outer: PrivateRouter,
   },
   {
-    path: routePaths.profile.path,
+    path: routePaths.profile,
     component: ProfilePage,
     layout: DefaultLayout,
     outer: PrivateRouter,
   },
   {
-    path: routePaths.trashs.path,
+    path: routePaths.trashs,
     component: TrashsPage,
     layout: DefaultLayout,
     outer: PrivateRouter,
   },
   {
-    path: routePaths.search.path,
+    path: routePaths.search,
     component: SearchPage,
     layout: DefaultLayout,
     outer: PrivateRouter,

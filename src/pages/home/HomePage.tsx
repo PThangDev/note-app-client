@@ -29,7 +29,7 @@ const HomePage: FC<Props> = (props) => {
           <NoteContainer
             notes={notesPinned}
             isLoading={isLoading}
-            header={{ text: 'Pins', to: `/pins` }}
+            header={{ text: 'Pins', to: routePaths.pins }}
             hideEmptyItem
           />
         )}
@@ -40,7 +40,7 @@ const HomePage: FC<Props> = (props) => {
               header={{
                 text: topic.name,
                 color: topic.background,
-                to: `${routePaths.topics.path}/${topic._id}`,
+                to: `${routePaths.topics}/${topic._id}`,
               }}
               notes={topic.notes}
               loadingItems={4}
@@ -53,7 +53,7 @@ const HomePage: FC<Props> = (props) => {
           <NoteContainer
             notes={noteOthers}
             isLoading={isLoading}
-            header={{ text: 'Others', to: `/others` }}
+            header={{ text: 'Others', to: routePaths.others }}
             hideEmptyItem
           />
         )}

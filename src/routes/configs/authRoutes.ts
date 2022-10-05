@@ -1,33 +1,33 @@
+import { lazy } from 'react';
 import { routePaths } from 'src/configs';
 import AuthLayout from 'src/layouts/AuthLayout';
 import { AuthRouter } from '../components/OuterRoute';
 
-import ActiveAccount from 'src/pages/auth/active-account';
-import ForgotPassword from 'src/pages/auth/forgot-password';
-import LoginPage from 'src/pages/auth/login';
-import RegisterPage from 'src/pages/auth/register';
-
+const LoginPage = lazy(() => import('src/pages/auth/login'));
+const RegisterPage = lazy(() => import('src/pages/auth/register'));
+const ForgotPassword = lazy(() => import('src/pages/auth/forgot-password'));
+const ActiveAccount = lazy(() => import('src/pages/auth/active-account'));
 const authRoutes = [
   {
-    path: routePaths.auth.login.path,
+    path: routePaths.login,
     component: LoginPage,
     layout: AuthLayout,
     outer: AuthRouter,
   },
   {
-    path: routePaths.auth.register.path,
+    path: routePaths.register,
     component: RegisterPage,
     layout: AuthLayout,
     outer: AuthRouter,
   },
   {
-    path: routePaths.auth.forgotPassword.path,
+    path: routePaths.forgotPassword,
     component: ForgotPassword,
     layout: AuthLayout,
     outer: AuthRouter,
   },
   {
-    path: routePaths.auth.activeAccount.path,
+    path: routePaths.activeAccount,
     component: ActiveAccount,
     layout: AuthLayout,
     outer: AuthRouter,
