@@ -62,7 +62,13 @@ const TopicDetailPage: FC<Props> = (props) => {
 
       <div className={cx('wrapper')}>
         <div className={cx('header')}>
-          <h2>{data?.name}</h2>
+          <div className={cx('title')}>
+            <h2>{data?.name}</h2>
+            <div className={cx('description')}>
+              <p className={cx('text')}>{data?.description}</p>
+              <p className={cx('created-at')}>{formatDate(data?.createdAt)}</p>
+            </div>
+          </div>
           <div className={cx('actions')}>
             <Button icon={<FontAwesomeIcon icon={faPenToSquare} />} onClick={handleOpenFormTopic}>
               Edit
@@ -76,13 +82,10 @@ const TopicDetailPage: FC<Props> = (props) => {
             </Button>
           </div>
         </div>
-        <div className={cx('description')}>
-          <p className={cx('text')}>{data?.description}</p>
-          <p className={cx('created-at')}>{formatDate(data?.createdAt)}</p>
-        </div>
+
         <div className={cx('notes')}>
           <Link className={cx('notes-create')} to={`${routePaths.newNote}?topic=${id}`}>
-            <Button icon={<FontAwesomeIcon icon={faCirclePlus} />}>Create a new note</Button>
+            <Button icon={<FontAwesomeIcon icon={faCirclePlus} />}>New note</Button>
           </Link>
           <NoteContainer notes={data?.notes || []} isLoading={isLoading} />
         </div>

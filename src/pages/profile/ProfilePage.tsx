@@ -24,7 +24,7 @@ const ProfilePage: FC<Props> = (props) => {
         <title>{user?.username ? `Profile - ${user.username}` : 'Profile'}</title>
       </Helmet>
       <div className={cx('wrapper')}>
-        <Container fluid>
+        <Container fluid style={{ padding: 0 }}>
           <Row>
             <Col xl={6}>
               <div className={cx('form')}>

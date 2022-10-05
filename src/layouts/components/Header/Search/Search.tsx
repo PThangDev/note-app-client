@@ -5,6 +5,7 @@ import qs from 'query-string';
 import { ChangeEvent, FC, SyntheticEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { routePaths } from 'src/configs';
 import { Input } from 'src/themes/UI';
 import styles from './Search.module.scss';
 
@@ -24,7 +25,7 @@ const Search: FC<Props> = (props) => {
     e.preventDefault();
     if (!search.trim()) return;
     const searchStringify = qs.stringify({ q: search });
-    navigate(`/search?${searchStringify}`);
+    navigate(`${routePaths.search}?${searchStringify}`);
   };
 
   return (

@@ -11,9 +11,9 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 const cx = classnames.bind(styles);
 
 const InputOutline: FC<Props> = ({ icon, label, ...inputProps }) => {
-  const { id } = inputProps;
+  const { id, readOnly } = inputProps;
   return (
-    <div className={cx('wrapper')}>
+    <div className={cx('wrapper', { 'read-only': readOnly })}>
       <label htmlFor={id}>{label}</label>
       <div className={cx('field')}>
         <input {...inputProps} />

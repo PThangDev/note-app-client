@@ -1,13 +1,20 @@
+@import 'src/themes/GlobalStyles/utils';
+
 .wrapper {
 }
 
 .header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: flex-start;
 
   h2 {
     font-size: var(--font-2xl);
+  }
+
+  // Responsive
+  @include media-md {
+    flex-direction: column;
   }
 }
 
@@ -29,6 +36,11 @@
 .actions {
   display: flex;
   align-items: center;
+
+  // Responsive
+  @include media-md {
+    margin-top: 10px;
+  }
 }
 
 .notes {

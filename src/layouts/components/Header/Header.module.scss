@@ -1,4 +1,4 @@
-@import '/src/themes/GlobalStyles/utils';
+@import 'src/themes/GlobalStyles/utils';
 .wrapper {
   position: fixed;
   top: 0;
@@ -24,7 +24,7 @@
   p {
     line-height: 1;
     font-size: var(--font-sm);
-    font-weight: 500;
+    font-weight: 600;
     margin-top: 8px;
   }
 }
@@ -70,6 +70,7 @@
 .user {
   display: flex;
   align-items: center;
+
   &:hover {
     opacity: 0.8;
   }
@@ -82,8 +83,12 @@
 }
 .username {
   margin-left: 10px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--white-color);
+
+  @include media-md {
+    display: none;
+  }
 }
 .menu-bars {
   // display: none;

@@ -30,8 +30,8 @@ const Header: FC<Props> = ({ onToggleSidebar }) => {
             <p>NOTE APP</p>
           </a>
           {/* Search */}
-          <Search />
         </div>
+        <Search />
         <div className={cx('right')}>
           <div className={cx('dark-mode')}>
             <Switch name="dark-mode" />

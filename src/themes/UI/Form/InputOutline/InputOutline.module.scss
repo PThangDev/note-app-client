@@ -6,9 +6,14 @@
     font-weight: 600;
   }
 }
+.wrapper.read-only {
+  .field {
+    border-color: var(--grey-bold-color);
+  }
+}
 
 .field {
-  border: 1px solid var(--grey-bold-color);
+  border: 2px solid var(--grey-bold-color);
   border-radius: 6px;
 
   &:focus-within {
