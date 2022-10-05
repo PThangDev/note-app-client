@@ -1,12 +1,4 @@
-import {
-  faBiohazard,
-  faBook,
-  faClock,
-  faEnvelope,
-  faLock,
-  faUser,
-  faUserAstronaut,
-} from '@fortawesome/free-solid-svg-icons';
+import { faBiohazard, faBook, faClock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames/bind';
 import { FC } from 'react';
@@ -14,7 +6,8 @@ import { Col, Container, Row } from 'react-grid-system';
 import { Helmet } from 'react-helmet-async';
 
 import useGetInfoUser from 'src/hooks/useGetInfoUser';
-import { Button, Input } from 'src/themes/UI';
+import { Button } from 'src/themes/UI';
+import InputOutline from 'src/themes/UI/Form/InputOutline';
 import { formatDate } from 'src/utils';
 import styles from './ProfilePage.module.scss';
 
@@ -41,25 +34,29 @@ const ProfilePage: FC<Props> = (props) => {
                 <div className={cx('avatar')}>
                   <img src={user?.avatar} alt={user?.username} />
                 </div>
-                <Input
+                <InputOutline
+                  label="Full name"
                   placeholder={user?.fullname || 'Empty'}
                   defaultValue={user?.fullname}
-                  icon={<FontAwesomeIcon icon={faUserAstronaut} />}
+                  readOnly
                 />
-                <Input
+                <InputOutline
+                  label="Username"
                   placeholder={user?.username}
                   defaultValue={user?.username}
-                  icon={<FontAwesomeIcon icon={faUser} />}
+                  readOnly
                 />
-                <Input
+                <InputOutline
+                  label="Email"
                   placeholder={user?.email}
                   defaultValue={user?.email}
-                  icon={<FontAwesomeIcon icon={faEnvelope} />}
+                  readOnly
                 />
-                <Input
+                <InputOutline
+                  label="Password"
                   placeholder={user?.password}
                   defaultValue={'**************'}
-                  icon={<FontAwesomeIcon icon={faLock} />}
+                  readOnly
                 />
                 <div className={cx('other-info')}>
                   <p className={cx('info-field', 'created-at')}>
