@@ -8,7 +8,7 @@ const routePaths = {
   activeAccount: '/auth/active/:activeToken',
   // Topics
   topics: '/topics',
-  topicDetail: '/topics/:id:slug',
+  topicDetail: '/topics/:id/:slug',
   topicDetailRouter: '/topics/:id',
   // Notes
   notes: '/notes',

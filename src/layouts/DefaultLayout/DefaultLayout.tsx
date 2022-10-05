@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind';
-import { FC, ReactNode, useState } from 'react';
+import { FC, ReactNode, Suspense, useState } from 'react';
 
+import LoadingPage from 'src/pages/loading';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import styles from './DefaultLayout.module.scss';
@@ -27,7 +28,9 @@ const DefaultLayout: FC<Props> = ({ children }) => {
       <div className={cx('inner')}>
         <Sidebar isOpen={isOpenSidebar} onCloseSidebar={handleCloseSidebar} />
 
-        <main className={cx('main', { 'full-width': !isOpenSidebar })}>{children}</main>
+        <Suspense fallback={<LoadingPage />}>
+          <main className={cx('main', { 'full-width': !isOpenSidebar })}>{children}</main>
+        </Suspense>
 
         {isOpenSidebar && <div className={cx('overlay')} onClick={handleCloseSidebar}></div>}
       </div>

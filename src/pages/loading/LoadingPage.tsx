@@ -1,5 +1,5 @@
-import { FC } from 'react';
 import classnames from 'classnames/bind';
+import { FC } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import styles from './LoadingPage.module.scss';

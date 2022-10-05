@@ -90,7 +90,7 @@ const LoginPage: FC<Props> = (props) => {
           <div className={cx('options')}>
             <Checkbox className={cx('checkbox')} label="Remember me" name="remember" />
             <Link to={routePaths.forgotPassword} disabled={isSubmitting}>
-              {routePaths.forgotPassword} ?
+              Forgot Password ?
             </Link>
           </div>
 
@@ -107,7 +107,7 @@ const LoginPage: FC<Props> = (props) => {
           <div className={cx('note')}>
             Don't have an account?
             <Link to={routePaths.register} disabled={isSubmitting}>
-              {routePaths.register}
+              Register
             </Link>
           </div>
         </form>
