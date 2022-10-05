@@ -1,0 +1,34 @@
+.wrapper {
+  margin: 10px 0;
+
+  label {
+    font-size: var(--font-sm);
+    font-weight: 600;
+  }
+}
+.wrapper.read-only {
+  .field {
+    border-color: var(--grey-bold-color);
+  }
+}
+
+.field {
+  border: 2px solid var(--grey-bold-color);
+  border-radius: 6px;
+
+  &:focus-within {
+    border-color: var(--primary-color);
+  }
+
+  input {
+    padding: 12px 10px;
+    width: 100%;
+    font-weight: 500;
+    border-radius: 6px;
+    font-size: var(--font-md);
+
+    &:read-only {
+      color: var(--grey-bold-color);
+    }
+  }
+}

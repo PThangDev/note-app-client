@@ -27,6 +27,7 @@ const LoadingRoutes: FC<Props> = ({ children }) => {
     if (location.pathname === prevLoc) {
       setPrevLoc('');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   useEffect(() => {

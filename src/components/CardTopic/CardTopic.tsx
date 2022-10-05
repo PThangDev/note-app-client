@@ -85,7 +85,7 @@ const CardTopic: FC<Props> = ({
         </div>
         {fullContent && (
           <>
-            <Link to={`${routePaths.topics.path}/${topic._id}`} className={cx('description')}>
+            <Link to={`${routePaths.topics}/${topic._id}`} className={cx('description')}>
               {topic.description || (
                 <span className={cx('description-empty')}>No description...</span>
               )}

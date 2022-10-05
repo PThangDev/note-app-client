@@ -36,7 +36,7 @@ const TopicsPage: FC<Props> = (props) => {
       <div className={cx('wrapper')}>
         <div className={cx('header')}>
           <Button icon={<FontAwesomeIcon icon={faCirclePlus} />} onClick={handleOpenModalFormTopic}>
-            Create a new topic
+            New topic
           </Button>
         </div>
 

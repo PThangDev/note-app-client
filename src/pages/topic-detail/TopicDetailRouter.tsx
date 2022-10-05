@@ -15,7 +15,7 @@ const TopicDetailRouter: FC<Props> = (props) => {
 
   useEffect(() => {
     if (data) {
-      navigate(`${routePaths.topics.path}/${id}/${data.slug}`, {
+      navigate(`${routePaths.topics}/${id}/${data.slug}`, {
         replace: true,
       });
     }

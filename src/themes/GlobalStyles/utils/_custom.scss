@@ -1,3 +1,4 @@
+@import './responsive';
 // React markdown editor lite
 .rc-md-editor .editor-container .sec-md .input {
   font-size: 1.6rem;
@@ -38,12 +39,19 @@ body .wmde-markdown {
   }
 
   table {
-    width: 100% !important;
     display: table !important;
     table-layout: fixed;
+    width: 100% !important;
+    min-width: 800px;
+    max-width: 100%;
+    overflow: auto;
 
     th {
       text-align: left;
+    }
+
+    @include media-xl {
+      display: block;
     }
   }
 
@@ -51,7 +59,7 @@ body .wmde-markdown {
     background-color: var(--main-bg);
 
     &:nth-child(2n) {
-      background-color: rgb(236, 236, 236);
+      background-color: rgb(206, 198, 198);
     }
   }
 

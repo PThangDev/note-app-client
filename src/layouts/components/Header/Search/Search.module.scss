@@ -1,4 +1,4 @@
-@import '/src/themes/GlobalStyles/utils';
+@import 'src/themes/GlobalStyles/utils';
 
 .wrapper {
   margin-left: 15px;
@@ -9,7 +9,11 @@
 }
 .input {
   min-width: 600px;
-  height: 40px;
+  border-radius: 5px;
+
+  input {
+    height: 40px;
+  }
 
   @include media-lg {
     min-width: 50vw;

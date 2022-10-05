@@ -11,7 +11,7 @@ export const AuthRouter: React.FC<Props> = ({ children }) => {
   const { isAuthenticate } = useAppSelector((state) => state.auth);
 
   if (isAuthenticate) {
-    return <Navigate to={routePaths.home.path} />;
+    return <Navigate to={routePaths.home} />;
   }
   return children;
 };
@@ -20,7 +20,7 @@ export const PrivateRouter: React.FC<Props> = ({ children }) => {
   const { isAuthenticate } = useAppSelector((state) => state.auth);
 
   if (!isAuthenticate) {
-    return <Navigate to={routePaths.auth.login.path} />;
+    return <Navigate to={routePaths.login} />;
   }
   return children;
 };

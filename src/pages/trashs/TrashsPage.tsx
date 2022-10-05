@@ -20,7 +20,7 @@ const TrashsPage: FC<Props> = (props) => {
         <title>Trashs</title>
       </Helmet>
       <div className={cx('wrapper')}>
-        <h3 className={cx('heading')}>Trashs</h3>
+        <h2 className={cx('heading')}>Trashs</h2>
         <NoteContainer notes={data} isLoading={isLoading} isTrash />
         <Pagination pagination={pagination} />
       </div>

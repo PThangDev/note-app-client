@@ -72,12 +72,10 @@ const NotesPage: FC<Props> = (props) => {
       </Helmet>
       <div className={cx('wrapper')}>
         <div className={cx('actions')}>
-          <Link to={routePaths.newNote.path}>
-            <Button icon={<FontAwesomeIcon icon={faCirclePlus} />}>Create a new note</Button>
-          </Link>
-        </div>
-        <div className={cx('filter')}>
           <div className={cx('form')}>
+            <Link className={cx('link-new-note')} to={routePaths.newNote}>
+              <Button icon={<FontAwesomeIcon icon={faCirclePlus} />}>New note</Button>
+            </Link>
             <Input
               className={cx('search')}
               icon={<FontAwesomeIcon icon={faMagnifyingGlass} />}
@@ -86,11 +84,11 @@ const NotesPage: FC<Props> = (props) => {
               onChange={handleSearchNotes}
             />
             <select className={cx('sort')} value={sortField} onChange={handleChangeSort}>
-              <option value="">Choose options</option>
-              <option value="createdAt">1. Descending created at</option>
-              <option value="-createdAt">2. Ascending created at</option>
-              <option value="title">3. Descending title</option>
-              <option value="-title">4. Ascending title</option>
+              <option value="">--- Sort ---</option>
+              <option value="createdAt">1. Desc created at</option>
+              <option value="-createdAt">2. Asc created at</option>
+              <option value="title">3. Desc title</option>
+              <option value="-title">4. Asc title</option>
             </select>
           </div>
           {/* <div className={cx('topics')}>

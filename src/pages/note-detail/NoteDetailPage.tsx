@@ -53,14 +53,14 @@ const NoteDetailPage: FC<Props> = (props) => {
 
   useEffect(() => {
     if (previousRoute.current && previousRoute.current !== id && id) {
-      navigate(`${routePaths.notes.path}/${id}`, { replace: true });
+      navigate(`${routePaths.notes}/${id}`, { replace: true });
       return;
     }
 
     if (!data) {
-      navigate(`${routePaths.notes.path}/${id}`, { replace: true });
+      navigate(`${routePaths.notes}/${id}`, { replace: true });
     } else {
-      navigate(`${routePaths.notes.path}/${id}/${data.slug}`, { replace: true, relative: 'route' });
+      navigate(`${routePaths.notes}/${id}/${data.slug}`, { replace: true, relative: 'route' });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, data?.slug]);
@@ -129,7 +129,7 @@ const NoteDetailPage: FC<Props> = (props) => {
     }
     return (
       <>
-        <Link className={cx('link-edit-note')} to={`${routePaths.notes.path}/edit/${data?._id}`}>
+        <Link className={cx('link-edit-note')} to={`${routePaths.notes}/edit/${data?._id}`}>
           <Button icon={<FontAwesomeIcon icon={faPenToSquare} />}>Edit</Button>
         </Link>
         <Button
@@ -169,7 +169,7 @@ const NoteDetailPage: FC<Props> = (props) => {
               data.topics.map((topic) => (
                 <Link
                   key={topic._id}
-                  to={`${routePaths.topics.path}/${topic._id}`}
+                  to={`${routePaths.topics}/${topic._id}`}
                   style={{ background: topic.background }}
                 >
                   <FontAwesomeIcon className={cx('icon')} icon={faStar} />

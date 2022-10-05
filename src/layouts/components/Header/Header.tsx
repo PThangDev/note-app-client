@@ -25,18 +25,18 @@ const Header: FC<Props> = ({ onToggleSidebar }) => {
     <header className={cx('wrapper')}>
       <div className={cx('inner')}>
         <div className={cx('left')}>
-          <a href={routePaths.home.path} className={cx('logo')}>
+          <a href={routePaths.home} className={cx('logo')}>
             <NoteIcon width={28} height={28} className={cx('note-icon')} />
             <p>NOTE APP</p>
           </a>
           {/* Search */}
-          <Search />
         </div>
+        <Search />
         <div className={cx('right')}>
           <div className={cx('dark-mode')}>
             <Switch name="dark-mode" />
           </div>
-          <Link to={routePaths.profile.path} className={cx('user')}>
+          <Link to={routePaths.profile} className={cx('user')}>
             <img className={cx('avatar')} src={user?.avatar || images.avatarDefault} alt="" />
             <p className={cx('username')}>{user?.username}</p>
           </Link>

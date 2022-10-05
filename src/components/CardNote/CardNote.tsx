@@ -138,7 +138,7 @@ const CardNote: FC<Props> = ({
     return (
       <>
         <Tippy content="Edit">
-          <Link className={cx('link-edit')} to={`${routePaths.notes.path}/edit/${_id}`}>
+          <Link className={cx('link-edit')} to={`${routePaths.notes}/edit/${_id}`}>
             <Button>
               <FontAwesomeIcon className={cx('icon')} icon={faPenToSquare} />
             </Button>
@@ -173,7 +173,7 @@ const CardNote: FC<Props> = ({
           {readOnly ? (
             <MDEditor.Markdown className={cx('content-preview')} source={content} />
           ) : (
-            <Link className={cx('content-link')} to={`${routePaths.notes.path}/${_id}`}>
+            <Link className={cx('content-link')} to={`${routePaths.notes}/${_id}`}>
               <MDEditor.Markdown className={cx('content-preview')} source={content} disableCopy />
             </Link>
           )}
