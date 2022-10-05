@@ -2,10 +2,9 @@ import { faEye, faEyeLowVision } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import {
-  ChangeEvent,
   ForwardedRef,
   forwardRef,
-  HTMLInputTypeAttribute,
+  InputHTMLAttributes,
   ReactElement,
   useEffect,
   useState,
@@ -13,20 +12,10 @@ import {
 
 import styles from './Input.module.scss';
 
-interface Props {
-  id?: string;
-  placeholder?: string;
-  name?: string;
-  type?: HTMLInputTypeAttribute;
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   icon?: ReactElement;
   error?: boolean;
   helperText?: string;
-  className?: string;
-  value?: string;
-  defaultValue?: string;
-  disabled?: boolean;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: () => void;
 }
 
 const cx = classNames.bind(styles);
@@ -34,17 +23,13 @@ const cx = classNames.bind(styles);
 const Input = (
   {
     id = '',
-    placeholder = '',
-    name = '',
     type = 'text',
     icon: Icon,
     error = false,
     helperText = '',
     className = '',
-    onChange,
-    onBlur,
     disabled = false,
-    ...props
+    ...inputProps
   }: Props,
   ref: ForwardedRef<HTMLInputElement>
 ) => {
@@ -60,12 +45,10 @@ const Input = (
       <div className={cx('input-field', { 'without-icon': !Boolean(Icon) })}>
         <input
           id={id}
-          placeholder={placeholder}
           type={isShowValue ? (type === 'password' ? 'text' : 'password') : type}
           disabled={disabled}
-          onChange={onChange}
-          onBlur={onBlur}
-          {...props}
+          {...inputProps}
+          ref={ref}
         />
         <label htmlFor={id} className={cx('icon')}>
           {Icon ? Icon : ''}

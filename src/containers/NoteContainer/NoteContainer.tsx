@@ -59,7 +59,16 @@ const NoteContainer: FC<Props> = ({
       return Array(loadingItems)
         .fill(0)
         .map((item, index) => (
-          <Col key={`note-skeleton-${index}`} xs={12} sm={6} md={6} lg={4} xl={3} xxxl={2.4}>
+          <Col
+            key={`note-skeleton-${index}`}
+            xs={12}
+            sm={6}
+            md={6}
+            lg={4}
+            xl={3}
+            xxl={2.4}
+            xxxl={2}
+          >
             <CardNoteSkeleton />
           </Col>
         ));
@@ -71,7 +80,17 @@ const NoteContainer: FC<Props> = ({
       }
       // Render UI Card Note
       return notes.map((note) => (
-        <Col key={note._id} xs={12} sm={6} md={6} lg={4} xl={3} xxxl={2.4}>
+        <Col
+          key={note._id}
+          style={{ padding: '0 5px' }}
+          xs={12}
+          sm={6}
+          md={6}
+          lg={4}
+          xl={3}
+          xxl={2.4}
+          xxxl={2}
+        >
           <CardNote note={note} isTrash={isTrash} />
         </Col>
       ));

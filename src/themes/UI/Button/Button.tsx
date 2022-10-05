@@ -1,21 +1,16 @@
 import { faFan } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
-import { forwardRef, ReactElement, ReactNode } from 'react';
+import { ButtonHTMLAttributes, forwardRef, ReactElement } from 'react';
 
 import styles from './Button.module.scss';
 
-interface Props {
-  children?: ReactNode;
-  type?: 'button' | 'submit' | 'reset';
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   primary?: boolean;
   icon?: ReactElement;
   fullWidth?: boolean;
-  disabled?: boolean;
   isLoading?: boolean;
-  className?: string;
   status?: 'success' | 'info' | 'warning' | 'error';
-  onClick?: () => void;
 }
 
 const cx = classNames.bind(styles);
@@ -31,7 +26,7 @@ const Button = (
     isLoading = false,
     className = '',
     status = 'info',
-    onClick,
+    ...buttonProps
   }: Props,
   ref: any
 ) => {
@@ -48,9 +43,9 @@ const Button = (
         className
       )}
       type={type}
-      onClick={onClick}
       disabled={disabled || isLoading}
       ref={ref}
+      {...buttonProps}
     >
       {icon && !isLoading && <span className={cx('icon')}>{icon}</span>}
       {isLoading && (
