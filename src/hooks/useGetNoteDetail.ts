@@ -16,7 +16,8 @@ const useGetNoteDetail = () => {
     if (id === undefined) return;
 
     dispatch(fetchGetNoteDetail(id));
-  }, [dispatch, id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   return noteDetail;
 };

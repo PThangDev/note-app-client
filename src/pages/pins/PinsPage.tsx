@@ -18,7 +18,7 @@ const PinsPage: FC<Props> = (props) => {
         <title>Pins</title>
       </Helmet>
       <div className={cx('wrapper')}>
-        <NoteContainer notes={data} isLoading={isLoading} />
+        <NoteContainer header={{ text: 'Pins' }} notes={data} isLoading={isLoading} />
       </div>
     </>
   );

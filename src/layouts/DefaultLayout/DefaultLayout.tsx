@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, useState } from 'react';
 
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
@@ -10,12 +10,26 @@ interface Props {
 }
 const cx = classNames.bind(styles);
 const DefaultLayout: FC<Props> = ({ children }) => {
+  const [isOpenSidebar, setIsOpenSidebar] = useState<boolean>(false);
+
+  const handleToggleSidebar = () => {
+    setIsOpenSidebar((prevIsOpenSidebar) => !prevIsOpenSidebar);
+  };
+  const handleCloseSidebar = () => {
+    if (isOpenSidebar) {
+      setIsOpenSidebar(false);
+    }
+  };
+
   return (
     <div className={cx('wrapper')}>
-      <Header />
+      <Header onToggleSidebar={handleToggleSidebar} />
       <div className={cx('inner')}>
-        <Sidebar />
-        <main className={cx('main')}>{children}</main>
+        <Sidebar isOpen={isOpenSidebar} onCloseSidebar={handleCloseSidebar} />
+
+        <main className={cx('main', { 'full-width': !isOpenSidebar })}>{children}</main>
+
+        {isOpenSidebar && <div className={cx('overlay')} onClick={handleCloseSidebar}></div>}
       </div>
       {/* <Menubar /> */}
     </div>

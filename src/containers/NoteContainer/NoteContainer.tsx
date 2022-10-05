@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import CardNote from 'src/components/CardNote';
 import CardNoteSkeleton from 'src/components/CardNote/components/CardNoteSkeleton';
+import Empty from 'src/components/Empty';
 import { Note } from 'src/types';
 import styles from './NoteContainer.module.scss';
 
@@ -53,6 +54,7 @@ const NoteContainer: FC<Props> = ({
   };
 
   const renderCardNote = () => {
+    // Show Loading
     if (isLoading) {
       return Array(loadingItems)
         .fill(0)
@@ -61,10 +63,13 @@ const NoteContainer: FC<Props> = ({
             <CardNoteSkeleton />
           </Col>
         ));
-    } else {
+    } // When note has loaded.
+    else {
+      // Render UI Empty Item when array notes was empty
       if (notes.length === 0) {
-        return <div className={cx('empty')}>Empty Item</div>;
+        return <Empty title="Empty Note" />;
       }
+      // Render UI Card Note
       return notes.map((note) => (
         <Col key={note._id} xs={12} sm={6} md={6} lg={4} xl={3} xxxl={2.4}>
           <CardNote note={note} isTrash={isTrash} />

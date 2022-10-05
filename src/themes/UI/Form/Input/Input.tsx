@@ -23,6 +23,7 @@ interface Props {
   helperText?: string;
   className?: string;
   value?: string;
+  defaultValue?: string;
   disabled?: boolean;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onBlur?: () => void;

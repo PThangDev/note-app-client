@@ -57,6 +57,10 @@ const routePaths = {
     path: '/pins',
     label: 'Pins',
   },
+  others: {
+    path: '/others',
+    label: 'Others',
+  },
   trashs: {
     path: '/trashs',
     label: 'Trashs',

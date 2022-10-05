@@ -1,5 +1,5 @@
 .wrapper {
-  padding: 20px;
+  padding: 0 10px;
 }
 
 .header {
@@ -9,9 +9,9 @@
 
   .heading {
     margin-right: 30px;
-    margin-bottom: 8px;
     display: flex;
     flex-direction: column;
+    font-size: var(--font-2xl);
   }
 }
 
@@ -27,13 +27,42 @@
   margin-bottom: 20px;
   font-size: var(--font-sm);
   display: flex;
-  align-items: center;
+  flex-direction: column;
+
+  &-link-topic {
+    a {
+      border-radius: 999px;
+      padding: 3px 8px;
+      margin: 5px 0;
+      color: var(--white-color);
+      font-weight: 600;
+
+      .icon {
+        font-size: 1.2rem;
+        margin-right: 3px;
+      }
+
+      &:not(last-child) {
+        margin-right: 8px;
+      }
+
+      &:hover {
+        text-decoration: underline;
+        opacity: 0.8;
+      }
+    }
+  }
 
   &-date {
     text-decoration: underline;
   }
 
   &-sub {
+    display: flex;
+    align-items: center;
+  }
+
+  &-delete {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -55,7 +84,15 @@
 
 .content {
   color: var(--text-color);
-  min-height: 150vh;
+  // min-height: 150vh;
+  display: flex;
+}
+.content-preview {
+  width: calc(100% - var(--notes-related-width));
+  padding-right: 10px;
+  min-height: 70vh !important;
+  padding-bottom: 20px;
+  border-right: 1px solid rgb(239, 233, 233);
 }
 
 @keyframes animateRing {

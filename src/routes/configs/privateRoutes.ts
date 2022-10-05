@@ -1,22 +1,23 @@
-import { lazy } from 'react';
-
 import { routePaths } from 'src/configs';
 import DefaultLayout from 'src/layouts/DefaultLayout';
 import EmptyLayout from 'src/layouts/EmptyLayout';
 import { PrivateRouter } from '../components/OuterRoute';
-const HomePage = lazy(() => import('src/pages/home'));
-const NotesPage = lazy(() => import('src/pages/notes'));
-const NoteDetailPage = lazy(() => import('src/pages/note-detail'));
-const NoteDetailRouter = lazy(() => import('src/pages/note-detail/NoteDetailRouter'));
-const NewNotePage = lazy(() => import('src/pages/new-note'));
-const EditNotePage = lazy(() => import('src/pages/edit-note'));
-const TopicsPage = lazy(() => import('src/pages/topics'));
-const TopicDetailPage = lazy(() => import('src/pages/topic-detail'));
-const TopicDetailRouter = lazy(() => import('src/pages/topic-detail/TopicDetailRouter'));
-const PinsPage = lazy(() => import('src/pages/pins'));
-const TrashsPage = lazy(() => import('src/pages/trashs'));
-const ProfilePage = lazy(() => import('src/pages/profile'));
-const SearchPage = lazy(() => import('src/pages/search'));
+
+import EditNotePage from 'src/pages/edit-note';
+import HomePage from 'src/pages/home';
+import NewNotePage from 'src/pages/new-note';
+
+import NoteDetailPage from 'src/pages/note-detail';
+import NoteDetailRouter from 'src/pages/note-detail/NoteDetailRouter';
+import NotesPage from 'src/pages/notes';
+import OtherNotesPage from 'src/pages/other-notes';
+import PinsPage from 'src/pages/pins';
+import ProfilePage from 'src/pages/profile';
+import SearchPage from 'src/pages/search';
+import TopicDetailPage from 'src/pages/topic-detail';
+import TopicDetailRouter from 'src/pages/topic-detail/TopicDetailRouter';
+import TopicsPage from 'src/pages/topics';
+import TrashsPage from 'src/pages/trashs';
 
 const privateRoutes = [
   {
@@ -76,6 +77,12 @@ const privateRoutes = [
   {
     path: routePaths.pins.path,
     component: PinsPage,
+    layout: DefaultLayout,
+    outer: PrivateRouter,
+  },
+  {
+    path: routePaths.others.path,
+    component: OtherNotesPage,
     layout: DefaultLayout,
     outer: PrivateRouter,
   },

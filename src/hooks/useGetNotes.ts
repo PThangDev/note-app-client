@@ -27,7 +27,7 @@ const useGetNotes = (payload?: GetNotePayload) => {
       })
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, limit, page, q, sort]);
+  }, [dispatch, limit, page, q, sort, payload?.params?.q]);
   return notes;
 };
 export default useGetNotes;

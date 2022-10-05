@@ -1,3 +1,5 @@
+@import '/src/themes/GlobalStyles/utils';
+
 .wrapper {
   width: var(--sidebar-width);
   padding: 0 10px;
@@ -8,9 +10,18 @@
   top: 0;
   left: 0;
   bottom: 0;
-  // box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
   transition: all 0.5s;
   z-index: 5;
+
+  @include media-lg {
+    width: 250px;
+    transform: translateX(-100%);
+
+    &.active {
+      transform: translateX(0);
+    }
+  }
 }
 .list {
 }
@@ -30,8 +41,6 @@
   transition: all 0.5s;
   border-radius: 10px;
   color: var(--white-color);
-
-  // transition-delay: justify-content 0.5s;
   text-align: center;
   cursor: pointer;
 
@@ -45,16 +54,24 @@
     }
   }
 
-  .icon {
-    img {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+  @include media-lg {
+    flex-direction: row;
+
+    .icon {
+      margin-right: 8px;
     }
   }
+}
 
-  .label {
-    transition: all 0.5s;
-    max-width: 400px;
+.icon {
+  img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+}
+
+.label {
+  transition: all 0.5s;
+  max-width: 400px;
 }

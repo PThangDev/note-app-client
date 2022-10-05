@@ -5,15 +5,19 @@ import { GetTopicsPayload } from 'src/types';
 
 interface Props {}
 
-const useGetTopics = (payload?: GetTopicsPayload) => {
+const useGetTopics = (payload?: GetTopicsPayload, filter: boolean = true) => {
   const dispatch = useAppDispatch();
   const topics = useAppSelector((state) => state.topics);
 
   useEffect(() => {
     const _payload = payload?.params ? { ...payload } : undefined;
 
-    dispatch(fetchGetTopics(_payload));
-  }, [dispatch, payload?.params?.q]);
+    if (filter) {
+      dispatch(fetchGetTopics(_payload));
+    } else {
+      dispatch(fetchGetTopics());
+    }
+  }, [dispatch, payload?.params?.q, filter]);
 
   return topics;
 };

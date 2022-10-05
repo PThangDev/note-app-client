@@ -1,5 +1,6 @@
-@import './font';
-@import './custom';
+@import './utils/font';
+@import './utils/custom';
+@import './utils/responsive';
 
 :root {
   --white-color: #ffffff;
@@ -19,6 +20,7 @@
   --header-height: 60px;
   --sidebar-width: 96px;
   --sidebar-width-close: 60px;
+  --notes-related-width: 205px;
 
   --z-index-header: 10;
 
@@ -121,5 +123,33 @@ input[type='checkbox'] {
 
     transform-origin: bottom left;
     clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  }
+}
+
+// Custom select opitions
+select {
+  position: relative;
+  min-width: 200px;
+
+  // -webkit-appearance: none;
+  padding: 8px;
+  width: 100%;
+  border: 2px solid #e8eaed;
+  border-radius: 5px;
+  background: white;
+  box-shadow: 0 1px 3px -2px #9098a9;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 16px;
+  transition: all 150ms ease;
+  outline: none;
+
+  &:focus {
+    border: 2px solid var(--primary-color);
+  }
+
+  option {
+    color: #223254;
+    min-height: 40px;
   }
 }

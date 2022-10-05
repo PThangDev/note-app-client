@@ -27,6 +27,10 @@ const authAPI = {
     const url = '/auth/register';
     return axiosInstance.post(url, data);
   },
+  getInfoAccount(): Promise<BaseDataResponse<User>> {
+    const url = '/auth/info-account';
+    return axiosInstance.get(url);
+  },
   verifyAccount(activeToken: string): Promise<BaseDataResponse<User>> {
     const url = `/auth/active/${activeToken}`;
     return axiosInstance.get(url);
