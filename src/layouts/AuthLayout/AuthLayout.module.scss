@@ -1,3 +1,5 @@
+@import 'src/themes/GlobalStyles/utils/responsive';
+
 .wrapper {
   height: 100vh;
   display: flex;
@@ -30,4 +32,8 @@
   padding: 30px 40px;
   padding-bottom: 35px;
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+
+  @include media-md {
+    padding: 20px 20px;
+  }
 }

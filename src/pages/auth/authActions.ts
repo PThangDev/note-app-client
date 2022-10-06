@@ -6,9 +6,11 @@ import {
   ActiveToken,
   BaseDataResponse,
   ErrorResponse,
+  ForgotPasswordResponse,
   RefreshToken,
   RejectValue,
   User,
+  UserForgotPassword,
   UserLogin,
   UserRegister,
 } from 'src/types';
@@ -53,3 +55,16 @@ export const fetchGetInfoUser = createAsyncThunk<BaseDataResponse<User>, undefin
     }
   }
 );
+
+export const fetchForgotPassword = createAsyncThunk<
+  BaseDataResponse<ForgotPasswordResponse>,
+  UserForgotPassword,
+  RejectValue
+>('/auth/forgot-password', async (payload, thunkAPI) => {
+  try {
+    const response = await authAPI.forgotPassword(payload);
+    return response;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error as ErrorResponse);
+  }
+});
