@@ -7,6 +7,7 @@ import {
   BaseDataResponse,
   ErrorResponse,
   ForgotPasswordResponse,
+  GoogleLoginResonse,
   RefreshToken,
   RejectValue,
   User,
@@ -29,6 +30,20 @@ export const fetchLogin = createAsyncThunk<
   }
 });
 
+export const fetchLoginByGoogle = createAsyncThunk<
+  BaseDataResponse<User, AccessToken & RefreshToken>,
+  GoogleLoginResonse,
+  RejectValue
+>('/auth/google-login', async (payload, thunkAPI) => {
+  try {
+    const response = await authAPI.loginByGoogle(payload);
+
+    return response;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error as ErrorResponse);
+  }
+});
+
 export const fetchRegister = createAsyncThunk<
   BaseDataResponse<null, ActiveToken>,
   UserRegister,
@@ -36,6 +51,8 @@ export const fetchRegister = createAsyncThunk<
 >('/auth/register', async (payload, thunkAPI) => {
   try {
     const response = await authAPI.register(payload);
+
+    console.log(response);
 
     return response;
   } catch (error) {

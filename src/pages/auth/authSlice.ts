@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 
 import { User } from 'src/types';
 import { storage, sweetAlert } from 'src/utils';
-import { fetchGetInfoUser, fetchLogin } from './authActions';
+import { fetchGetInfoUser, fetchLogin, fetchLoginByGoogle } from './authActions';
 
 interface InitialState {
   isLoading: boolean;
@@ -60,6 +60,28 @@ const authSlice = createSlice({
         }
       })
       .addCase(fetchLogin.rejected, (state, action) => {
+        state.isLoading = false;
+        toast.error(action.payload?.message);
+      })
+      // Login by google
+      .addCase(fetchLoginByGoogle.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchLoginByGoogle.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const { data, message, meta } = action.payload;
+        if (data) {
+          state.user = data;
+          state.isAuthenticate = true;
+          // Save data to storage
+          storage.set('user', data);
+          storage.set('access_token', meta?.access_token);
+          storage.set('refresh_token', meta?.refresh_token);
+
+          toast.success(message);
+        }
+      })
+      .addCase(fetchLoginByGoogle.rejected, (state, action) => {
         state.isLoading = false;
         toast.error(action.payload?.message);
       })
