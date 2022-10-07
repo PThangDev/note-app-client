@@ -8,7 +8,7 @@
   margin: 10px 0;
   text-align: center;
   font-size: 10rem;
-  color: var(--primary-color);
+  color: var(--success-color);
 }
 .description {
   text-align: center;
@@ -19,5 +19,7 @@
 .btn-back {
   margin: 0 auto;
   margin-top: 20px;
-  background-color: var(--success-color);
+  a {
+    color: var(--white-color);
+  }
 }

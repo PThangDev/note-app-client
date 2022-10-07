@@ -1,5 +1,8 @@
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import { FC } from 'react';
+import { routePaths } from 'src/configs';
 import { Button, Link } from 'src/themes/UI';
 
 import styles from './SuccessAuth.module.scss';
@@ -20,10 +23,11 @@ const SuccessAuth: FC<Props> = ({
       <h1 className={cx('heading')}>{heading}</h1>
       <p className={cx('icon-success')}>
         <i className="fa-solid fa-circle-check"></i>
+        <FontAwesomeIcon icon={faCircleCheck} />
       </p>
       <p className={cx('description')}>{description}</p>
       <Button className={cx('btn-back')}>
-        <Link to="/auth/login">Back to Login</Link>
+        <Link to={routePaths.login}>Back to Login</Link>
       </Button>
     </div>
   );

@@ -1,1 +1,1 @@
-export const LIMIT_NOTE = '12';
+export const LIMIT_NOTE = '10';
