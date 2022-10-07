@@ -7,6 +7,7 @@ import {
 } from 'src/types';
 import {
   ForgotPasswordResponse,
+  GoogleLoginResonse,
   User,
   UserForgotPassword,
   UserLogin,
@@ -17,6 +18,12 @@ import axiosInstance from './axiosInstance';
 const authAPI = {
   login(data: UserLogin): Promise<BaseDataResponse<User, AccessToken & RefreshToken>> {
     const url = '/auth/login';
+    return axiosInstance.post(url, data);
+  },
+  loginByGoogle(
+    data: GoogleLoginResonse
+  ): Promise<BaseDataResponse<User, AccessToken & RefreshToken>> {
+    const url = '/auth/google-login';
     return axiosInstance.post(url, data);
   },
   logout(): Promise<MessageResponse> {

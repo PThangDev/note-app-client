@@ -38,3 +38,7 @@ export interface UserForgotPassword {
 }
 
 export type ForgotPasswordResponse = User;
+
+export interface GoogleLoginResonse {
+  tokenId: string;
+}

@@ -113,6 +113,13 @@
     max-width: 100%;
     overflow: auto;
 
+    @include media-lg {
+      table {
+        display: table !important;
+        min-width: 100% !important;
+      }
+    }
+
     @include media-md {
       padding: 10px;
     }

@@ -1,6 +1,7 @@
 import classnames from 'classnames/bind';
 import { FC } from 'react';
 import { Helmet } from 'react-helmet-async';
+import Empty from 'src/components/Empty';
 
 import { routePaths } from 'src/configs';
 import NoteContainer from 'src/containers/NoteContainer';
@@ -18,6 +19,13 @@ const HomePage: FC<Props> = (props) => {
   const notesPinned = useGetNotesPinned();
   const noteOthers = useGetNoteOthers();
 
+  const renderEmptyNote = () => {
+    if (isLoading) return;
+    if (data.length === 0 && notesPinned.length === 0 && noteOthers.length === 0) {
+      return <Empty title="Empty Note" />;
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -25,6 +33,8 @@ const HomePage: FC<Props> = (props) => {
         <meta name="description" content="Note App - PThangDev"></meta>
       </Helmet>
       <div className={cx('wrapper')}>
+        {renderEmptyNote()}
+
         {notesPinned.length > 0 && (
           <NoteContainer
             notes={notesPinned}
