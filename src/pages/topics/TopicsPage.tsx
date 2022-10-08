@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet-async';
 
 import FormTopic from 'src/components/Form/FormTopic';
 import Modal from 'src/components/Modal';
+import Pagination from 'src/components/Pagination';
 import TopicContainer from 'src/containers/TopicContainer';
 import useGetTopics from 'src/hooks/useGetTopics';
 import { Button } from 'src/themes/UI';
@@ -16,7 +17,7 @@ interface Props {}
 const cx = classnames.bind(styles);
 
 const TopicsPage: FC<Props> = (props) => {
-  const { data, isLoading } = useGetTopics();
+  const { data, isLoading, pagination } = useGetTopics();
 
   const [isOpenModalFormTopic, setIsOpenModalFormTopic] = useState<boolean>(false);
 
@@ -42,6 +43,7 @@ const TopicsPage: FC<Props> = (props) => {
 
         <div className={cx('topics')}>
           <TopicContainer topics={data} isLoading={isLoading} />
+          <Pagination pagination={pagination} />
         </div>
       </div>
 
