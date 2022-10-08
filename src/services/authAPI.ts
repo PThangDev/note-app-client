@@ -39,8 +39,8 @@ const authAPI = {
     return axiosInstance.get(url);
   },
   verifyAccount(activeToken: string): Promise<BaseDataResponse<User>> {
-    const url = `/auth/active/${activeToken}`;
-    return axiosInstance.get(url);
+    const url = `/auth/active-account`;
+    return axiosInstance.put(url, { activeToken });
   },
   forgotPassword(data: UserForgotPassword): Promise<BaseDataResponse<ForgotPasswordResponse>> {
     const url = `/auth/forgot-password`;

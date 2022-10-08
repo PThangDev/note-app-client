@@ -12,8 +12,8 @@ import { routePaths } from 'src/configs';
 import { Button, Checkbox, Input, Link } from 'src/themes/UI';
 import { UserRegister } from 'src/types';
 import { fetchRegister } from '../authActions';
+import ResponseAuth from '../components/ResponseAuth';
 import SocialAuth from '../components/SocialAuth';
-import SuccessAuth from '../components/SuccessAuth';
 import styles from './RegisterPage.module.scss';
 import registerSchema from './registerSchema';
 
@@ -156,7 +156,7 @@ const RegisterPage: FC<Props> = (props) => {
         </>
       );
     } else {
-      return <SuccessAuth heading="Register" />;
+      return <ResponseAuth heading="Register" />;
     }
   };
 

@@ -85,3 +85,15 @@ export const fetchForgotPassword = createAsyncThunk<
     return thunkAPI.rejectWithValue(error as ErrorResponse);
   }
 });
+
+export const fetchVerifyAccount = createAsyncThunk<BaseDataResponse<User>, string, RejectValue>(
+  '/auth/active/:activeToken',
+  async (payload, thunkAPI) => {
+    try {
+      const response = await authAPI.verifyAccount(payload);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error as ErrorResponse);
+    }
+  }
+);
