@@ -37,6 +37,7 @@ const RegisterPage: FC<Props> = (props) => {
       password: '',
       cf_password: '',
     },
+    // Set rule validate form
     resolver: yupResolver(registerSchema),
   });
 

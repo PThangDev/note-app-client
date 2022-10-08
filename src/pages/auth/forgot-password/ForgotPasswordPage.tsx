@@ -32,6 +32,7 @@ const ForgotPasswordPage: FC<Props> = (props) => {
     defaultValues: {
       email: '',
     },
+    // Set rule validate form
     resolver: yupResolver(forgotPasswordSchema),
   });
 

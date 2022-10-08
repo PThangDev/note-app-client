@@ -1,6 +1,9 @@
 import * as yup from 'yup';
+
+import { emailSchema } from 'src/utils/schema';
+
 const forgotPasswordSchema = yup.object().shape({
-  email: yup.string().required('Email is required').email('Email is not valid'),
+  email: emailSchema(),
 });
 
 export default forgotPasswordSchema;
