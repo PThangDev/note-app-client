@@ -1,3 +1,4 @@
+import { emailSchema } from 'src/utils/schema';
 import * as yup from 'yup';
 const registerSchema = yup.object().shape({
   username: yup
@@ -10,7 +11,7 @@ const registerSchema = yup.object().shape({
       /^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._@]+(?<![_.])$/g,
       'Username cannot contain special characters!'
     ),
-  email: yup.string().required('Email is required').email('Email is not valid'),
+  email: emailSchema,
   password: yup
     .string()
     .required('Password is required')

@@ -6,6 +6,7 @@ const routePaths = {
   register: '/auth/register',
   forgotPassword: '/auth/forgot-password',
   activeAccount: '/auth/active/:activeToken',
+  changePassword: '/auth/change-password',
   // Topics
   topics: '/topics',
   topicDetail: '/topics/:id/:slug',

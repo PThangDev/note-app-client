@@ -7,20 +7,20 @@ import { Helmet } from 'react-helmet-async';
 import { Controller, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
 import { useAppDispatch } from 'src/app/hooks';
 import { routePaths } from 'src/configs';
 import { Button, Input } from 'src/themes/UI';
 import { UserForgotPassword } from 'src/types';
 import { fetchForgotPassword } from '../authActions';
-
-import styles from './ForgotPassword.module.scss';
+import styles from './ForgotPasswordPage.module.scss';
 import forgotPasswordSchema from './forgotPasswordSchema';
 
 interface Props {}
 
 const cx = classnames.bind(styles);
 
-const ForgotPassword: FC<Props> = (props) => {
+const ForgotPasswordPage: FC<Props> = (props) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const {
@@ -85,4 +85,4 @@ const ForgotPassword: FC<Props> = (props) => {
   );
 };
 
-export default ForgotPassword;
+export default ForgotPasswordPage;
