@@ -11,6 +11,7 @@ import {
   RefreshToken,
   RejectValue,
   User,
+  UserResetPasswordRequest,
   UserForgotPassword,
   UserLogin,
   UserRegister,
@@ -80,6 +81,19 @@ export const fetchForgotPassword = createAsyncThunk<
 >('/auth/forgot-password', async (payload, thunkAPI) => {
   try {
     const response = await authAPI.forgotPassword(payload);
+    return response;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error as ErrorResponse);
+  }
+});
+
+export const fetchResetPassword = createAsyncThunk<
+  BaseDataResponse,
+  UserResetPasswordRequest,
+  RejectValue
+>('/auth/reset-password', async (payload, thunkAPI) => {
+  try {
+    const response = await authAPI.resetPassword(payload);
     return response;
   } catch (error) {
     return thunkAPI.rejectWithValue(error as ErrorResponse);

@@ -5,12 +5,12 @@ import classnames from 'classnames/bind';
 import { FC } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Controller, useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { useAppDispatch } from 'src/app/hooks';
 import { routePaths } from 'src/configs';
-import { Button, Input } from 'src/themes/UI';
+import { Button, Input, Link } from 'src/themes/UI';
 import { UserForgotPassword } from 'src/types';
 import { fetchForgotPassword } from '../authActions';
 import styles from './ForgotPasswordPage.module.scss';

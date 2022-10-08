@@ -7,7 +7,7 @@ const LoginPage = lazy(() => import('src/pages/auth/login'));
 const RegisterPage = lazy(() => import('src/pages/auth/register'));
 const ForgotPasswordPage = lazy(() => import('src/pages/auth/forgot-password'));
 const ActiveAccountPage = lazy(() => import('src/pages/auth/active-account'));
-const ChangePasswordPage = lazy(() => import('src/pages/auth/change-password'));
+const ResetPasswordPage = lazy(() => import('src/pages/auth/reset-password'));
 
 const authRoutes = [
   {
@@ -36,7 +36,7 @@ const authRoutes = [
   },
   {
     path: routePaths.changePassword,
-    component: ChangePasswordPage,
+    component: ResetPasswordPage,
     layout: AuthLayout,
     outer: AuthRouter,
   },

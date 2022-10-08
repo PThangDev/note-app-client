@@ -12,6 +12,7 @@ import {
   UserForgotPassword,
   UserLogin,
   UserRegister,
+  UserResetPasswordRequest,
 } from 'src/types/User';
 import axiosInstance from './axiosInstance';
 
@@ -45,6 +46,17 @@ const authAPI = {
   forgotPassword(data: UserForgotPassword): Promise<BaseDataResponse<ForgotPasswordResponse>> {
     const url = `/auth/forgot-password`;
     return axiosInstance.post(url, data);
+  },
+  resetPassword(payload: UserResetPasswordRequest): Promise<BaseDataResponse> {
+    const { data, token } = payload;
+
+    const url = `/auth/reset-password`;
+
+    return axiosInstance.put(url, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   },
 };
 export default authAPI;

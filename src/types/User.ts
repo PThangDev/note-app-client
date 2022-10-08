@@ -43,7 +43,12 @@ export interface GoogleLoginResonse {
   tokenId: string;
 }
 
-export interface UserChangePasswordForgot {
+export interface UserResetPassword {
   newPassword: string;
   cfNewPassword: string;
+}
+
+export interface UserResetPasswordRequest {
+  data: UserResetPassword;
+  token: string;
 }

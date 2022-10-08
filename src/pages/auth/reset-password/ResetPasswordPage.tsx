@@ -7,16 +7,25 @@ import { Helmet } from 'react-helmet-async';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-import { Button, Input } from 'src/themes/UI';
-import { UserChangePasswordForgot } from 'src/types';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useAppDispatch } from 'src/app/hooks';
+import { routePaths } from 'src/configs';
+import { Button, Input, Link } from 'src/themes/UI';
+import { UserResetPassword } from 'src/types';
 import { confirmPasswordSchema, passwordSchema } from 'src/utils/schema';
-import styles from './ChangePasswordPage.module.scss';
+import { fetchResetPassword } from '../authActions';
+import styles from './ResetPasswordPage.module.scss';
 
 interface Props {}
 
 const cx = classnames.bind(styles);
 
-const ChangePasswordPage: FC<Props> = (props) => {
+const ResetPasswordPage: FC<Props> = (props) => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { resetPasswordToken } = useParams();
+
   const {
     handleSubmit,
     control,
@@ -36,15 +45,28 @@ const ChangePasswordPage: FC<Props> = (props) => {
     ),
   });
 
-  const handleChangePassword = async (data: UserChangePasswordForgot) => {};
+  const handleChangePassword = async (data: UserResetPassword) => {
+    try {
+      if (!resetPasswordToken) return;
+      const response = await dispatch(
+        fetchResetPassword({ data, token: resetPasswordToken })
+      ).unwrap();
+
+      toast.success(response.message);
+
+      navigate(routePaths.login);
+    } catch (error: any) {
+      toast.error(error?.message);
+    }
+  };
 
   return (
     <>
       <Helmet>
-        <title>Change Password</title>
+        <title>Reset Password</title>
       </Helmet>
       <div className={cx('wrapper')}>
-        <h2>Change Password</h2>
+        <h2>Reset Password</h2>
         <form className={cx('form')} onSubmit={handleSubmit(handleChangePassword)}>
           <Controller
             name="newPassword"
@@ -86,13 +108,20 @@ const ChangePasswordPage: FC<Props> = (props) => {
             }}
           />
 
-          <Button className={cx('btn-submit')} type="submit" fullWidth>
+          <Button className={cx('btn-submit')} type="submit" fullWidth isLoading={isSubmitting}>
             Confirm
           </Button>
+          <div className={cx('helper')}>
+            Back to{' '}
+            <Link to={routePaths.login} disabled={isSubmitting}>
+              Login
+            </Link>{' '}
+            or <Link to={routePaths.register}>Register</Link>
+          </div>
         </form>
       </div>
     </>
   );
 };
 
-export default ChangePasswordPage;
+export default ResetPasswordPage;
