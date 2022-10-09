@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react';
 import MDEditor from '@uiw/react-md-editor';
 import classnames from 'classnames/bind';
-import { FC, memo, useState } from 'react';
+import { FC, memo, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAppDispatch } from 'src/app/hooks';
@@ -51,6 +51,14 @@ const CardNote: FC<Props> = ({
   const { _id, content, title, topics, background, user, createdAt, slug, is_pin } = note;
 
   const [isSubmmitting, setIsSubmmitting] = useState<boolean>(false);
+
+  const contentRemoveAnchorTag = useMemo(() => {
+    if (!content) return '';
+
+    const newContent = content.replaceAll(/#+/g, '');
+
+    return newContent;
+  }, [content]);
 
   const handleMoveNoteToTrash = async () => {
     const result = await sweetAlert.confirm({ text: 'Do you want to move note to trash!' });
@@ -171,10 +179,14 @@ const CardNote: FC<Props> = ({
         </div>
         <div className={cx('content')} data-color-mode="dark">
           {readOnly ? (
-            <MDEditor.Markdown className={cx('content-preview')} source={content} />
+            <MDEditor.Markdown className={cx('content-preview')} source={contentRemoveAnchorTag} />
           ) : (
             <Link className={cx('content-link')} to={`${routePaths.notes}/${_id}`}>
-              <MDEditor.Markdown className={cx('content-preview')} source={content} disableCopy />
+              <MDEditor.Markdown
+                className={cx('content-preview')}
+                source={contentRemoveAnchorTag}
+                disableCopy
+              />
             </Link>
           )}
         </div>

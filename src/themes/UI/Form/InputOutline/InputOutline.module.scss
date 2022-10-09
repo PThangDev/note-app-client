@@ -1,5 +1,10 @@
 .wrapper {
-  margin: 10px 0;
+  &.margin-dense {
+    margin: 10px 0;
+  }
+  &.margin-normal {
+    margin: 5px 0;
+  }
 
   label {
     font-size: var(--font-sm);

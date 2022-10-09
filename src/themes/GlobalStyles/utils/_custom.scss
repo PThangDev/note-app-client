@@ -38,6 +38,10 @@ body .wmde-markdown {
     transform: translateY(1.1px);
   }
 
+  blockquote {
+    border-left-color: var(--primary-color);
+  }
+
   table {
     display: table !important;
     table-layout: fixed;
