@@ -9,8 +9,8 @@ interface Props {
 TopBarProgress.config({
   barThickness: 4,
   barColors: {
-    0: '#d35400',
-    0.2: '#f39c12',
+    0: 'rgb(245, 67, 54)',
+    0.2: '#d35400',
     0.5: '#e67e22',
     1: '#f1c40f',
   },
