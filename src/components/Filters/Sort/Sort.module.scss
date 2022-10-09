@@ -1,0 +1,12 @@
+.wrapper {
+  font-weight: 500;
+  border-color: var(--grey-bold-color);
+
+  &:valid {
+    border-color: var(--grey-bold-color);
+  }
+
+  option {
+    font-weight: 500;
+  }
+}

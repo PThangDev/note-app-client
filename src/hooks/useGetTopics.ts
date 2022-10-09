@@ -15,13 +15,13 @@ const useGetTopics = (payload?: GetTopicsPayload, filter: boolean = true) => {
 
   useEffect(() => {
     const _payload =
-      payload?.params || limit || page || sort || q
+      limit || page || sort || q
         ? {
             params: {
-              limit: limit?.toString(),
-              page: page?.toString(),
-              sort: page?.toString(),
-              q: q?.toString(),
+              limit,
+              page,
+              sort,
+              q,
             },
             ...payload,
           }
@@ -32,7 +32,7 @@ const useGetTopics = (payload?: GetTopicsPayload, filter: boolean = true) => {
     } else {
       dispatch(fetchGetTopics());
     }
-  }, [dispatch, payload?.params?.q, filter, limit, page, sort, q]);
+  }, [dispatch, payload?.params?.q, filter, limit, page, sort, q, payload]);
 
   return topics;
 };

@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames/bind';
 import { FC, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Search } from 'src/components/Filters';
+import Sort from 'src/components/Filters/Sort';
 
 import FormTopic from 'src/components/Form/FormTopic';
 import Modal from 'src/components/Modal';
@@ -29,6 +31,13 @@ const TopicsPage: FC<Props> = (props) => {
     setIsOpenModalFormTopic(true);
   };
 
+  const sortOptions = [
+    { title: '1. Desc created at', value: '-createdAt' },
+    { title: '2. Asc created at', value: 'createdAt' },
+    { title: '3. Desc name', value: '-name' },
+    { title: '4. Asc name', value: 'name' },
+  ];
+
   return (
     <>
       <Helmet>
@@ -39,6 +48,8 @@ const TopicsPage: FC<Props> = (props) => {
           <Button icon={<FontAwesomeIcon icon={faCirclePlus} />} onClick={handleOpenModalFormTopic}>
             New topic
           </Button>
+          <Search className={cx('search')} />
+          <Sort className={cx('sort')} options={sortOptions} />
         </div>
 
         <div className={cx('topics')}>

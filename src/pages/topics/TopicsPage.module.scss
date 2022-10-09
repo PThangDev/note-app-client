@@ -3,6 +3,8 @@
 
 .header {
   margin-bottom: 20px;
+  display: flex;
+  align-items: stretch;
 }
 
 .topics {
@@ -16,4 +18,13 @@
   align-items: center;
   justify-content: center;
   margin-top: 30px;
+}
+
+.search {
+  margin: 0 15px;
+  width: 400px;
+}
+
+.sort {
+  max-width: 200px;
 }
