@@ -5,8 +5,10 @@ import { AuthRouter } from '../components/OuterRoute';
 
 const LoginPage = lazy(() => import('src/pages/auth/login'));
 const RegisterPage = lazy(() => import('src/pages/auth/register'));
-const ForgotPassword = lazy(() => import('src/pages/auth/forgot-password'));
-const ActiveAccount = lazy(() => import('src/pages/auth/active-account'));
+const ForgotPasswordPage = lazy(() => import('src/pages/auth/forgot-password'));
+const ActiveAccountPage = lazy(() => import('src/pages/auth/active-account'));
+const ResetPasswordPage = lazy(() => import('src/pages/auth/reset-password'));
+
 const authRoutes = [
   {
     path: routePaths.login,
@@ -22,13 +24,19 @@ const authRoutes = [
   },
   {
     path: routePaths.forgotPassword,
-    component: ForgotPassword,
+    component: ForgotPasswordPage,
     layout: AuthLayout,
     outer: AuthRouter,
   },
   {
     path: routePaths.activeAccount,
-    component: ActiveAccount,
+    component: ActiveAccountPage,
+    layout: AuthLayout,
+    outer: AuthRouter,
+  },
+  {
+    path: routePaths.changePassword,
+    component: ResetPasswordPage,
     layout: AuthLayout,
     outer: AuthRouter,
   },

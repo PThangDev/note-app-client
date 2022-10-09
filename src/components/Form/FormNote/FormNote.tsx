@@ -14,13 +14,13 @@ import { useAppDispatch } from 'src/app/hooks';
 import CardNote from 'src/components/CardNote';
 import ColorPicker from 'src/components/ColorPicker';
 import backgrounds from 'src/components/ColorPicker/backgrounds';
+import MDEditor from 'src/components/MDEditor';
 import useDebounce from 'src/hooks/useDebounce';
 import { fetchCreateNote, fetchUpdateNote } from 'src/pages/notes/notesSlice';
 import { Button, Input } from 'src/themes/UI';
 import { BaseTopic, Note } from 'src/types';
 import TopicSelect from '../TopicSelect';
 import styles from './FormNote.module.scss';
-import MDEditor from './MDEditor';
 
 interface Props {
   onClose?: () => void;

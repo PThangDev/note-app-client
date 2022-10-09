@@ -31,6 +31,7 @@ const LoginPage: FC<Props> = (props) => {
       account: '',
       password: '',
     },
+    // Set rule validate form
     resolver: yupResolver(loginSchema),
   });
 

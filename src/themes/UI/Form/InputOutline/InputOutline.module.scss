@@ -1,5 +1,13 @@
 .wrapper {
-  margin: 10px 0;
+  &.margin-none {
+    margin: initial;
+  }
+  &.margin-dense {
+    margin: 10px 0;
+  }
+  &.margin-normal {
+    margin: 5px 0;
+  }
 
   label {
     font-size: var(--font-sm);
@@ -8,16 +16,34 @@
 }
 .wrapper.read-only {
   .field {
-    border-color: var(--grey-bold-color);
+    border-color: var(--grey-light-color);
+
+    .icon {
+      color: var(--grey-light-color);
+    }
+
+    &:focus-within {
+      border-color: var(--grey-light-color);
+
+      .icon {
+        color: var(--grey-light-color);
+      }
+    }
   }
 }
 
 .field {
   border: 2px solid var(--grey-bold-color);
   border-radius: 6px;
+  display: flex;
+  align-items: center;
 
   &:focus-within {
-    border-color: var(--primary-color);
+    border-color: var(--primary-color) !important;
+
+    .icon {
+      color: var(--primary-color);
+    }
   }
 
   input {
@@ -31,4 +57,9 @@
       color: var(--grey-bold-color);
     }
   }
+}
+
+.icon {
+  padding-left: 10px;
+  font-size: var(--font-xl);
 }

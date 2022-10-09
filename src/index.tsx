@@ -14,7 +14,7 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
   <React.StrictMode>
-    <ErrorBoundary fallback={<ErrorBoundaryPage />}>
+    <ErrorBoundary FallbackComponent={ErrorBoundaryPage}>
       <Provider store={store}>
         <Router>
           <HelmetProvider>

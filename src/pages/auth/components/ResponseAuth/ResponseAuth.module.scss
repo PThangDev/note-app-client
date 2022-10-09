@@ -1,0 +1,34 @@
+.wrapper {
+  & > h1 {
+    font-size: var(--font-3xl);
+    text-align: center;
+  }
+}
+
+.icon {
+  margin: 10px 0;
+  text-align: center;
+  font-size: 10rem;
+  color: var(--grey-light-color);
+
+  &-success {
+    color: var(--success-color);
+  }
+
+  &-error {
+    color: var(--error-color);
+  }
+}
+.description {
+  text-align: center;
+  margin: 5px 0;
+  font-size: 2rem;
+  font-weight: 600;
+}
+.btn-back {
+  margin: 0 auto;
+  margin-top: 20px;
+  a {
+    color: var(--white-color);
+  }
+}

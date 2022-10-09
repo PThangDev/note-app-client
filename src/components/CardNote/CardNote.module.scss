@@ -46,10 +46,10 @@
 .header {
   border-bottom: 1px solid rgb(253, 225, 225);
   &-inner {
-    padding-top: 24px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 8px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -68,7 +68,7 @@
 .title {
   display: flex;
   align-items: center;
-  font-size: 2rem;
+  font-size: var(--font-xl);
   font-weight: 600;
   line-height: 1.2;
   height: 48px;
@@ -106,7 +106,7 @@
   width: 100%;
 
   &-preview {
-    padding: 10px 20px;
+    padding: 10px;
     position: relative;
     height: 160px;
     width: 100%;
@@ -136,6 +136,7 @@
 
     &::-webkit-scrollbar {
       width: 3px;
+      height: 3px;
     }
   }
 
@@ -166,7 +167,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
+  padding: 5px 10px;
   min-height: 55px;
 
   .time {
@@ -182,7 +183,10 @@
   transition-delay: opacity 0.4s, visibility 0.1;
 
   a {
-    margin-right: 8px;
+    margin-right: 12px;
+  }
+  button {
+    padding: 8px 10px;
   }
 }
 

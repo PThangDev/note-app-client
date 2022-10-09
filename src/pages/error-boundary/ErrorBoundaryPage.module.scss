@@ -1,0 +1,68 @@
+@import 'src/themes/GlobalStyles/utils';
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  padding-top: 10vh;
+
+  @include media-lg {
+    flex-direction: column;
+  }
+}
+
+.main {
+  flex: 1;
+  width: 100%;
+  padding: 0 25px;
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  font-size: var(--font-3xl);
+  margin-bottom: 20px;
+}
+
+.name {
+  font-size: var(--font-xl);
+}
+
+.message {
+  font-size: var(--font-xl);
+  color: var(--error-color);
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+}
+
+.stack {
+  font-size: var(--font-sm);
+  line-height: 1.7;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+.link {
+  margin-right: 15px;
+}
+
+.image {
+  flex: 1;
+  max-width: 100%;
+
+  .helper {
+    text-align: center;
+    font-size: var(--font-2xl);
+    color: var(--warning-color);
+  }
+
+  img {
+    max-width: 100%;
+  }
+}

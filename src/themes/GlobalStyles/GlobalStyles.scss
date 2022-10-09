@@ -9,7 +9,7 @@
   --primary-color: #00a8ff;
   --primary-bold-color: #0081c1;
   --warning-color: #f1c40f;
-  --grey-bold-color: rgb(97, 97, 97);
+  --grey-bold-color: rgb(117, 117, 117);
   --grey-light-color: rgb(198, 198, 198);
 
   --text-color: #333;
@@ -129,11 +129,10 @@ input[type='checkbox'] {
 // Custom select opitions
 select {
   position: relative;
-  min-width: 200px;
-
-  // -webkit-appearance: none;
-  padding: 8px;
   width: 100%;
+  max-height: 100%;
+  min-width: 200px;
+  padding: 8px;
   border: 2px solid #e8eaed;
   border-radius: 5px;
   background: white;

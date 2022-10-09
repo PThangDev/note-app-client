@@ -1,19 +1,5 @@
 @import './responsive';
 // React markdown editor lite
-.rc-md-editor .editor-container .sec-md .input {
-  font-size: 1.6rem;
-}
-
-.custom-html-style {
-  p,
-  ol,
-  ul,
-  code,
-  pre,
-  table {
-    font-size: 1.6rem;
-  }
-}
 
 // React Mark down
 body .wmde-markdown {
@@ -36,6 +22,10 @@ body .wmde-markdown {
     width: 18px;
     height: 18px;
     transform: translateY(1.1px);
+  }
+
+  blockquote {
+    border-left-color: var(--primary-color);
   }
 
   table {
@@ -69,6 +59,17 @@ body .wmde-markdown {
   h4,
   h5 {
     border: none !important;
+  }
+}
+
+body .rc-md-editor {
+  .rc-md-navigation .button-wrap {
+    .button-type-mode {
+      order: 10;
+    }
+    .button-type-fullscreen {
+      order: 10;
+    }
   }
 }
 

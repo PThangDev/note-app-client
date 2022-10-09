@@ -1,6 +1,7 @@
 @import 'src/themes/GlobalStyles/utils';
 
 .wrapper {
+  display: block;
 }
 .header {
   margin-top: 20px;
@@ -21,6 +22,9 @@
 }
 
 .link-new-note {
+  button {
+    height: 100%;
+  }
   @include media-md {
     margin-right: 15px;
   }
@@ -48,21 +52,10 @@
     flex-direction: column;
   }
 }
-.wrapper .search {
-  border: 2px solid var(--grey-light-color);
-  border-radius: 5px;
-  width: 400px;
-  margin: 0 10px;
-  margin-top: 0;
+.search {
+  margin: 0 15px;
 
-  input {
-    height: 40px;
-    font-size: var(--font-sm);
-    border: 0;
-  }
-  label {
-    font-size: var(--font-md);
-  }
+  width: 400px;
 
   // Responsive
   @include media-lg {
