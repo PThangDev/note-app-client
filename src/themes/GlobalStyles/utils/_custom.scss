@@ -62,6 +62,17 @@ body .wmde-markdown {
   }
 }
 
+body .rc-md-editor {
+  .rc-md-navigation .button-wrap {
+    .button-type-mode {
+      order: 10;
+    }
+    .button-type-fullscreen {
+      order: 10;
+    }
+  }
+}
+
 .w-md-editor-text {
   // Remove padding in editor
   code[class*='language-'],
