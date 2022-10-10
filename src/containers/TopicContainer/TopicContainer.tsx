@@ -26,7 +26,7 @@ const TopicContainer: FC<Props> = ({ topics, isLoading = false, loadingItems = 8
             key={`note-skeleton-${index}`}
             xs={12}
             sm={6}
-            md={6}
+            md={4}
             lg={4}
             xl={3}
             xxl={2.4}
@@ -41,7 +41,7 @@ const TopicContainer: FC<Props> = ({ topics, isLoading = false, loadingItems = 8
     }
 
     return topics.map((topic) => (
-      <Col key={topic._id} xs={12} sm={6} md={6} lg={4} xl={3} xxl={2.4} xxxl={2}>
+      <Col key={topic._id} xs={12} sm={6} md={4} lg={4} xl={3} xxl={2.4} xxxl={2}>
         <CardTopic topic={topic} />
       </Col>
     ));

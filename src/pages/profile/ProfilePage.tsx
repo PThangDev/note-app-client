@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet-async';
 
 import useGetInfoUser from 'src/hooks/useGetInfoUser';
 import { Button } from 'src/themes/UI';
-import InputOutline from 'src/themes/UI/Form/InputOutline';
+import { InputOutline } from 'src/themes/UI/Form';
 import { formatDate } from 'src/utils';
 import styles from './ProfilePage.module.scss';
 

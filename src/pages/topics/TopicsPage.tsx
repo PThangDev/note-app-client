@@ -45,7 +45,11 @@ const TopicsPage: FC<Props> = (props) => {
       </Helmet>
       <div className={cx('wrapper')}>
         <div className={cx('header')}>
-          <Button icon={<FontAwesomeIcon icon={faCirclePlus} />} onClick={handleOpenModalFormTopic}>
+          <Button
+            className={cx('btn-new')}
+            icon={<FontAwesomeIcon icon={faCirclePlus} />}
+            onClick={handleOpenModalFormTopic}
+          >
             New topic
           </Button>
           <Search className={cx('search')} />

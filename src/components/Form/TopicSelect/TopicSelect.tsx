@@ -14,7 +14,8 @@ import CardTopic from 'src/components/CardTopic';
 import Modal from 'src/components/Modal';
 import useDebounce from 'src/hooks/useDebounce';
 import useGetTopics from 'src/hooks/useGetTopics';
-import { Button, Input } from 'src/themes/UI';
+import { Button } from 'src/themes/UI';
+import { InputOutline } from 'src/themes/UI/Form';
 import { BaseTopic } from 'src/types';
 import FormTopic from '../FormTopic';
 import styles from './TopicSelect.module.scss';
@@ -93,8 +94,9 @@ const TopicSelect: FC<Props> = ({ topics, onChangeTopicSelect }) => {
         </div>
 
         <div className={cx('options')}>
-          <Input
+          <InputOutline
             className={cx('search')}
+            margin="none"
             icon={<FontAwesomeIcon icon={faMagnifyingGlass} />}
             name="search-topic"
             placeholder="Topic name..."

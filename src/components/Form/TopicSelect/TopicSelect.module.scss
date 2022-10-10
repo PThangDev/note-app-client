@@ -42,20 +42,8 @@ $card-topic-gap: 5px;
   margin-bottom: 10px;
 }
 .search {
-  border: 2px solid var(--grey-light-color);
-  border-radius: 8px;
   flex: 1;
-  height: 48px;
-  margin-right: 10px;
-
-  label {
-    font-size: var(--font-lg);
-  }
-
-  input {
-    font-size: var(--font-sm);
-    border: none;
-  }
+  margin-right: 15px;
 }
 
 .list {
