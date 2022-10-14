@@ -1,0 +1,46 @@
+.wrapper {
+  border-radius: 5px;
+  background-color: var(--warning-color);
+  color: var(--white-color);
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.15);
+
+  min-height: 140px;
+  padding: 15px 10px;
+  margin: 5px 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .icon {
+    font-size: 30px;
+  }
+}
+
+a.wrapper {
+  transition: transform 0.4s;
+
+  &:hover {
+    transform: translateY(-3px) scale(1.02);
+  }
+}
+
+.main {
+  align-self: flex-start;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  font-size: var(--font-2xl);
+
+  h3 {
+    font-weight: 600;
+  }
+}
+
+.content {
+  font-size: var(--font-2xl);
+  margin-top: 10px;
+  font-weight: 500;
+}

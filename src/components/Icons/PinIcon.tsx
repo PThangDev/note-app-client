@@ -14,7 +14,7 @@ const PinIcon: FC<Props> = ({ className, width = 24, height = 24, onClick }) => 
       xmlns="http://www.w3.org/2000/svg"
       width={width}
       height={height}
-      viewBox={`0 0 ${width} ${height}`}
+      viewBox={`0 0 24 24`}
       onClick={onClick}
     >
       <path fill="none" d="M0 0h24v24H0z" />
