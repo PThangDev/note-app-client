@@ -15,7 +15,7 @@ import { PinIcon } from 'src/components/Icons';
 import { routePaths } from 'src/configs';
 import useGetInfoUser from 'src/hooks/useGetInfoUser';
 import { Button } from 'src/themes/UI';
-import InputOutline from 'src/themes/UI/Form/InputOutline';
+import { InputOutline } from 'src/themes/UI/Form';
 import { formatDate } from 'src/utils';
 import CardInfo from './components/CardInfo';
 import styles from './ProfilePage.module.scss';
