@@ -84,6 +84,25 @@ export const fetchDeleteTopic = createAsyncThunk<BaseDataResponse<Topic>, string
   }
 );
 
+export const fetchDeleteManyTopics = createAsyncThunk<
+  BaseDataResponse<string[]>,
+  string[],
+  RejectValue
+>('/topics/delete-many', async (payload, thunkAPI) => {
+  try {
+    const response = await topicAPI.deleteManyTopic(payload);
+
+    return {
+      data: payload,
+      success: true,
+      message: response.message,
+      status: response.status,
+    };
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error as ErrorResponse);
+  }
+});
+
 const topicsSlice = createSlice({
   name: 'topics',
   initialState,
@@ -148,6 +167,20 @@ const topicsSlice = createSlice({
         toast.success(message);
       })
       .addCase(fetchDeleteTopic.rejected, (state, action) => {
+        sweetAlert.error(action.payload?.message);
+      })
+      // Delete Many Topics
+      .addCase(fetchDeleteManyTopics.pending, (state, action) => {
+        sweetAlert.loading();
+      })
+      .addCase(fetchDeleteManyTopics.fulfilled, (state, action) => {
+        const { data, message } = action.payload;
+        state.data = state.data.filter((topic) => !data.find((topicId) => topicId === topic._id));
+
+        sweetAlert.close();
+        toast.success(message);
+      })
+      .addCase(fetchDeleteManyTopics.rejected, (state, action) => {
         sweetAlert.error(action.payload?.message);
       });
   },

@@ -90,6 +90,7 @@ const FormTopic: FC<Props> = ({ topic, onClose }) => {
           name="name"
           value={name}
           onChange={handleChangeInputName}
+          autoFocus
         />
         <div className={cx('groups')}>
           <div className={cx('groups-left')}>

@@ -123,20 +123,20 @@ const ProfilePage: FC<Props> = (props) => {
                       </Col>
                       <Col md={4} xl={4}>
                         <CardInfo
-                          title="Trashs"
-                          content={4}
-                          background="var(--error-color)"
-                          to={routePaths.trashs}
-                          icon={<FontAwesomeIcon icon={faTrash} fontSize="30px" />}
-                        />
-                      </Col>
-                      <Col md={4} xl={4}>
-                        <CardInfo
                           title="Others"
                           content={4}
                           background="var(--orange-color)"
                           icon={<FontAwesomeIcon icon={faFeather} fontSize="30px" />}
                           to={routePaths.others}
+                        />
+                      </Col>
+                      <Col md={4} xl={4}>
+                        <CardInfo
+                          title="Trashs"
+                          content={4}
+                          background="var(--error-color)"
+                          to={routePaths.trashs}
+                          icon={<FontAwesomeIcon icon={faTrash} fontSize="30px" />}
                         />
                       </Col>
                     </Row>
