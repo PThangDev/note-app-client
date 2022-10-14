@@ -47,6 +47,11 @@ export interface ToggleNoteToTrash {
   is_trash: boolean;
 }
 
+export interface ToggleManyNotesToTrash {
+  noteIds: string[];
+  is_trash: boolean;
+}
+
 export interface ToggleNoteToPin {
   id: string;
   is_pin: boolean;

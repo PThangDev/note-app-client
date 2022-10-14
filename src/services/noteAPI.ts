@@ -5,6 +5,7 @@ import {
   NewNote,
   Note,
   NoteUpdate,
+  ToggleManyNotesToTrash,
   ToggleNoteToPin,
   ToggleNoteToTrash,
 } from 'src/types';
@@ -40,6 +41,11 @@ const noteAPI = {
     const { id, is_trash } = payload;
     const url = `/notes/${id}`;
     return axiosInstance.put(url, { is_trash });
+  },
+  toggleManyNotesToTrash(payload: ToggleManyNotesToTrash): Promise<BaseDataResponse> {
+    const { noteIds, is_trash } = payload;
+    const url = is_trash ? '/notes/move-to-trash' : '/restore-from-trash';
+    return axiosInstance.put(url, { noteIds });
   },
   toggleNoteToPin(payload: ToggleNoteToPin): Promise<BaseDataResponse<Note>> {
     const { id, is_pin } = payload;

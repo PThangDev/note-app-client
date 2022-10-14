@@ -19,7 +19,7 @@ import {
   fetchToggleNoteToPin,
   fetchToggleNoteToTrash,
 } from 'src/pages/notes/notesSlice';
-import { Button } from 'src/themes/UI';
+import { Button, Checkbox } from 'src/themes/UI';
 import { Spin } from 'src/themes/UI/Loading';
 import { Note } from 'src/types';
 import { formatDate, sweetAlert } from 'src/utils';
@@ -33,6 +33,7 @@ interface Props {
   isShowSelect?: boolean;
   isLoading?: boolean;
   className?: string;
+  checked?: boolean;
   onToggleCheckbox?: (id: string) => void;
 }
 
@@ -45,6 +46,7 @@ const CardNote: FC<Props> = ({
   isTrash = false,
   className,
   isShowSelect = false,
+  checked = false,
   onToggleCheckbox,
 }) => {
   const dispatch = useAppDispatch();
@@ -103,6 +105,9 @@ const CardNote: FC<Props> = ({
     } catch (error) {
       setIsSubmmitting(false);
     }
+  };
+  const handleToggleCheckbox = (id: string) => {
+    onToggleCheckbox && onToggleCheckbox(id);
   };
 
   const renderPinIcon = () => {
@@ -169,9 +174,16 @@ const CardNote: FC<Props> = ({
       >
         <div className={cx('header')}>
           <div className={cx('header-inner')}>
-            {/* {isShowSelect && <Checkbox id={_id} name="card" onChange={handleChangeCheckbox} />} */}
-
             <div className={cx('title')}>
+              {isShowSelect && (
+                <Checkbox
+                  className={cx('checkbox')}
+                  id={_id}
+                  name="card"
+                  checked={checked}
+                  onChange={() => handleToggleCheckbox(_id || '')}
+                />
+              )}
               <label htmlFor={_id}>{title}</label>
             </div>
             <div className={cx('actions')}>{renderPinIcon()}</div>

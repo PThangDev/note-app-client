@@ -12,6 +12,7 @@ import {
   NoteUpdate,
   Pagination,
   RejectValue,
+  ToggleManyNotesToTrash,
   ToggleNoteToPin,
   ToggleNoteToTrash,
 } from 'src/types';
@@ -163,6 +164,19 @@ export const fetchDeleteNote = createAsyncThunk<BaseDataResponse<Note>, string, 
   }
 );
 
+export const fetchToggleManyNotesToTrash = createAsyncThunk<
+  BaseDataResponse<ToggleManyNotesToTrash>,
+  ToggleManyNotesToTrash,
+  RejectValue
+>('/notes/trash', async (payload, thunkAPI) => {
+  try {
+    const { data, ...restResponse } = await noteAPI.toggleManyNotesToTrash(payload);
+    return { ...restResponse, data: payload };
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error as ErrorResponse);
+  }
+});
+
 const notesSlice = createSlice({
   name: 'notes',
   initialState,
@@ -259,6 +273,18 @@ const notesSlice = createSlice({
         sweetAlert.success(message);
       })
       .addCase(fetchToggleNoteToTrash.rejected, (state, action) => {
+        sweetAlert.error(action.payload?.message);
+      })
+      // Toggle many notes to trash
+      .addCase(fetchToggleManyNotesToTrash.pending, (state, action) => {
+        sweetAlert.loading();
+      })
+      .addCase(fetchToggleManyNotesToTrash.fulfilled, (state, action) => {
+        const { data, message } = action.payload;
+
+        sweetAlert.success(message);
+      })
+      .addCase(fetchToggleManyNotesToTrash.rejected, (state, action) => {
         sweetAlert.error(action.payload?.message);
       })
       // Toggle note to pin

@@ -38,6 +38,11 @@
 .checkbox {
   flex: 1;
 
+  input {
+    &::before {
+      color: var(--error-color);
+    }
+  }
   label {
     flex: 1;
     cursor: pointer;
