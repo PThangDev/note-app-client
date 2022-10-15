@@ -11,8 +11,10 @@ import styles from './NoteContainer.module.scss';
 
 interface Props {
   notes: Note[];
+  notesSelected?: string[];
   isLoading: boolean;
   isTrash?: boolean;
+  isShowSelect?: boolean;
   loadingItems?: number;
   hideEmptyItem?: boolean;
   header?: {
@@ -20,19 +22,24 @@ interface Props {
     color?: string;
     to?: string;
   };
+
+  onToggleCheckbox?: (id: string) => void;
 }
 
 const cx = classnames.bind(styles);
 
-const LOADING_ITEM_DEFAULT = 8;
+const LOADING_ITEM_DEFAULT = 10;
 
 const NoteContainer: FC<Props> = ({
   notes,
+  notesSelected = [],
   header,
   hideEmptyItem = false,
   loadingItems = LOADING_ITEM_DEFAULT,
   isLoading = false,
   isTrash = false,
+  isShowSelect,
+  onToggleCheckbox,
 }) => {
   const renderHeader = () => {
     if (!header) return null;
@@ -91,7 +98,13 @@ const NoteContainer: FC<Props> = ({
           xxl={2.4}
           xxxl={2}
         >
-          <CardNote note={note} isTrash={isTrash} />
+          <CardNote
+            note={note}
+            isTrash={isTrash}
+            isShowSelect={isShowSelect}
+            onToggleCheckbox={onToggleCheckbox}
+            checked={notesSelected.includes(note._id)}
+          />
         </Col>
       ));
     }

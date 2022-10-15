@@ -9,8 +9,11 @@
   --primary-color: #00a8ff;
   --primary-bold-color: #0081c1;
   --warning-color: #f1c40f;
+  --grey-color: #b1b1b1;
   --grey-bold-color: rgb(117, 117, 117);
   --grey-light-color: rgb(198, 198, 198);
+  --purple-color: #8e44ad;
+  --orange-color: #d35400;
 
   --text-color: #333;
 
@@ -115,11 +118,12 @@ input[type='checkbox'] {
 
   &::before {
     content: '';
+    color: var(--primary-color);
     width: 0.65em;
     height: 0.65em;
     transform: scale(0);
     transition: 120ms transform ease-in-out;
-    box-shadow: inset 1em 1em var(--primary-color);
+    box-shadow: inset 1em 1em currentColor;
 
     transform-origin: bottom left;
     clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);

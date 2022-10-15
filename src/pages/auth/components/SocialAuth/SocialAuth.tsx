@@ -1,9 +1,8 @@
-import { faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import { gapi } from 'gapi-script';
 import { FC, useEffect } from 'react';
 import { GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
+import { toast } from 'react-toastify';
 
 import { useAppDispatch } from 'src/app/hooks';
 import { fetchLoginByGoogle } from '../../authActions';
@@ -41,38 +40,19 @@ const SocialAuth: FC<Props> = ({ disabled = false }) => {
   };
   const handleLoginFailure = (error: any) => {
     console.log(error);
+    toast.error(error?.error);
   };
   return (
     <div className={cx('wrapper')}>
       <ul className={cx('list')}>
         <GoogleLogin
+          className={cx('btn-google')}
           clientId={GOOGLE_CLIENT_ID}
           buttonText="Login with google"
           onSuccess={handleLoginSuccess}
           onFailure={handleLoginFailure}
-          render={(renderProps) => (
-            <li className={cx('item')}>
-              <button
-                className={cx('icon', 'icon--google')}
-                type="button"
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-              >
-                <FontAwesomeIcon icon={faGoogle} />
-              </button>
-            </li>
-          )}
+          disabled={disabled}
         />
-        {/* <li className={cx('item')}>
-          <span className={cx('icon', 'icon--google')}>
-            <FontAwesomeIcon icon={faGoogle} />
-          </span>
-        </li>
-        <li className={cx('item')}>
-          <span className={cx('icon', 'icon--facebook')}>
-            <FontAwesomeIcon icon={faFacebookSquare} />
-          </span>
-        </li> */}
       </ul>
     </div>
   );

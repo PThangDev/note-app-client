@@ -24,5 +24,9 @@ const topicAPI = {
     const url = `/topics/${id}`;
     return axiosInstance.delete(url);
   },
+  deleteManyTopic(topicIds: string[]): Promise<BaseDataResponse> {
+    const url = `/topics`;
+    return axiosInstance.delete(url, { data: { topicIds } });
+  },
 };
 export default topicAPI;

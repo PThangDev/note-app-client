@@ -54,7 +54,7 @@
     align-items: center;
     justify-content: space-between;
     position: relative;
-    input {
+    & > input {
       $size: 20px;
       width: $size;
       height: $size;
@@ -67,6 +67,7 @@
 
 .title {
   display: flex;
+  flex-direction: row;
   align-items: center;
   font-size: var(--font-xl);
   font-weight: 600;
@@ -84,6 +85,14 @@
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     max-height: 100%;
+  }
+}
+
+.checkbox {
+  input {
+    &::before {
+      color: var(--error-color);
+    }
   }
 }
 

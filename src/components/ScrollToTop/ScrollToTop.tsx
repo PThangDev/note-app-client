@@ -1,5 +1,6 @@
-import { faCircleUp } from '@fortawesome/free-solid-svg-icons';
+import { faCircleChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Tippy from '@tippyjs/react';
 import classnames from 'classnames/bind';
 import { FC, useCallback, useEffect, useState } from 'react';
 
@@ -29,7 +30,15 @@ const ScrollToTop: FC<Props> = (props) => {
 
   if (!isVisible) return null;
 
-  return <FontAwesomeIcon className={cx('icon')} icon={faCircleUp} onClick={handleScrollToTop} />;
+  return (
+    <Tippy content="Scroll To Top" placement='left'>
+      <FontAwesomeIcon
+        className={cx('icon')}
+        icon={faCircleChevronUp}
+        onClick={handleScrollToTop}
+      />
+    </Tippy>
+  );
 };
 
 export default ScrollToTop;

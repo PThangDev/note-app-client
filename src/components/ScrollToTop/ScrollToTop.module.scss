@@ -3,10 +3,11 @@
   bottom: 20px;
   right: 20px;
   font-size: var(--font-hg);
-  cursor: pointer;
   transition: transform 0.3s;
-  color: var(--primary-color);
+  color: var(--grey-light-color);
   z-index: 100;
+  cursor: pointer;
+  outline: none;
 
   &:hover {
     transform: scale(1.1);

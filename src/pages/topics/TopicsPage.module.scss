@@ -1,3 +1,5 @@
+@import 'src/themes/GlobalStyles/utils';
+
 .wrapper {
 }
 
@@ -5,26 +7,42 @@
   margin-bottom: 20px;
   display: flex;
   align-items: stretch;
+
+  @include media-lg {
+    flex-wrap: wrap;
+  }
+
+  @include media-md {
+    flex-direction: column;
+  }
 }
 
-.topics {
-}
-
-.form {
-}
-
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 30px;
+.btn-new {
 }
 
 .search {
   margin: 0 15px;
   width: 400px;
+
+  @include media-lg {
+    width: 300px;
+  }
+
+  @include media-md {
+    margin: 0;
+    margin-top: 12px;
+    flex: 1;
+    width: 100%;
+    order: 3;
+  }
 }
 
 .sort {
   max-width: 200px;
+
+  @include media-md {
+    max-width: unset;
+    width: 100%;
+    margin-top: 15px;
+  }
 }
