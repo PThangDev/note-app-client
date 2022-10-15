@@ -59,7 +59,7 @@ const NotesPage: FC<Props> = (props) => {
       await dispatch(
         fetchToggleManyNotesToTrash({ noteIds: notesSelected, is_trash: true })
       ).unwrap();
-      dispatch(fetchGetNotes({ params: { is_trash: false, limit: constants.LIMIT_NOTE } }));
+      // dispatch(fetchGetNotes({ params: { is_trash: false, limit: constants.LIMIT_NOTE } }));
       setNotesSelected([]);
     }
   };

@@ -44,7 +44,7 @@ const noteAPI = {
   },
   toggleManyNotesToTrash(payload: ToggleManyNotesToTrash): Promise<BaseDataResponse> {
     const { noteIds, is_trash } = payload;
-    const url = is_trash ? '/notes/move-to-trash' : '/restore-from-trash';
+    const url = is_trash ? '/notes/move-to-trash' : '/notes/restore-from-trash';
     return axiosInstance.put(url, { noteIds });
   },
   toggleNoteToPin(payload: ToggleNoteToPin): Promise<BaseDataResponse<Note>> {
@@ -55,6 +55,10 @@ const noteAPI = {
   deleteNote(id: string): Promise<BaseDataResponse<Note>> {
     const url = `/notes/${id}`;
     return axiosInstance.delete(url);
+  },
+  deleteManyNotes(noteIds: string[]): Promise<BaseDataResponse> {
+    const url = '/notes';
+    return axiosInstance.delete(url, { data: { noteIds } });
   },
 };
 export default noteAPI;

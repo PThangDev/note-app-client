@@ -164,6 +164,20 @@ export const fetchDeleteNote = createAsyncThunk<BaseDataResponse<Note>, string, 
   }
 );
 
+export const fetchDeleteManyNotes = createAsyncThunk<
+  BaseDataResponse<string[]>,
+  string[],
+  RejectValue
+>('/notes/delete-many', async (payload, thunkAPI) => {
+  try {
+    const { data, ...restResponse } = await noteAPI.deleteManyNotes(payload);
+
+    return { data: payload, ...restResponse };
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error as ErrorResponse);
+  }
+});
+
 export const fetchToggleManyNotesToTrash = createAsyncThunk<
   BaseDataResponse<ToggleManyNotesToTrash>,
   ToggleManyNotesToTrash,
@@ -261,6 +275,20 @@ const notesSlice = createSlice({
       .addCase(fetchDeleteNote.rejected, (state, action) => {
         sweetAlert.error(action.payload?.message);
       })
+      // Delete many notes
+      .addCase(fetchDeleteManyNotes.pending, (state, action) => {
+        sweetAlert.loading();
+      })
+      .addCase(fetchDeleteManyNotes.fulfilled, (state, action) => {
+        const { data, message } = action.payload;
+
+        state.data = state.data.filter((note) => !data.find((nt) => nt === note._id));
+
+        sweetAlert.success(message);
+      })
+      .addCase(fetchDeleteManyNotes.rejected, (state, action) => {
+        sweetAlert.error(action.payload?.message);
+      })
       // Toggle note to trash
       .addCase(fetchToggleNoteToTrash.pending, (state, action) => {
         sweetAlert.loading();
@@ -281,6 +309,8 @@ const notesSlice = createSlice({
       })
       .addCase(fetchToggleManyNotesToTrash.fulfilled, (state, action) => {
         const { data, message } = action.payload;
+
+        state.data = state.data.filter((note) => !data.noteIds.find((nt) => nt === note._id));
 
         sweetAlert.success(message);
       })

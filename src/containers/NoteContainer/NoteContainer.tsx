@@ -28,7 +28,7 @@ interface Props {
 
 const cx = classnames.bind(styles);
 
-const LOADING_ITEM_DEFAULT = 8;
+const LOADING_ITEM_DEFAULT = 10;
 
 const NoteContainer: FC<Props> = ({
   notes,

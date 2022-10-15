@@ -22,7 +22,7 @@ interface Props {
 
 const cx = classnames.bind(styles);
 
-const TopicContainer: FC<Props> = ({ topics, isLoading = false, loadingItems = 8 }) => {
+const TopicContainer: FC<Props> = ({ topics, isLoading = false, loadingItems = 10 }) => {
   const dispatch = useAppDispatch();
   const [topicsSelected, setTopicsSelected] = useState<Topic[]>([]);
 
