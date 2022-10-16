@@ -25,7 +25,7 @@
   /* justify-content: stretch; */
   /* align-items: center; */
 
-  background-color: #ffffff;
+  background-color: var(--paper-bg);
 
   position: relative;
 }

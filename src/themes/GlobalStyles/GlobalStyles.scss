@@ -17,8 +17,11 @@
   --even-tr-bg: rgb(236, 236, 236);
 
   --text-color: #333;
+  --link-color: var(--primary-color);
 
   --main-bg: #fff0;
+  --paper-bg: #fff;
+  --text-field-bg: #fff;
 
   //height
   --header-height: 60px;
@@ -72,11 +75,16 @@ body {
   line-height: 1.3;
 }
 
+// Darkmode
 body[theme='dark-mode'] {
   --primary-color: #002436;
-  --main-bg: #272c2d;
   --text-color: #fff;
+  --link-color: #00a8ff;
+
   --even-tr-bg: rgb(41, 41, 41);
+  --main-bg: #272c2d;
+  --paper-bg: rgb(36, 36, 36);
+  --text-field-bg: rgb(46, 46, 46);
 }
 
 a {
@@ -147,8 +155,10 @@ select {
   padding: 8px;
   border: 2px solid #e8eaed;
   border-radius: 5px;
-  background: white;
+  color: var(--text-color);
+  background: var(--text-field-bg);
   box-shadow: 0 1px 3px -2px #9098a9;
+
   cursor: pointer;
   font-family: inherit;
   font-size: 16px;
@@ -160,7 +170,13 @@ select {
   }
 
   option {
-    color: #223254;
+    color: var(--text-color);
     min-height: 40px;
   }
+}
+
+// Custom textarea
+textarea {
+  color: var(--text-color);
+  background-color: var(--text-field-bg);
 }

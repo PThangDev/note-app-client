@@ -35,12 +35,13 @@
   display: flex;
   align-items: stretch;
   overflow: hidden;
+  background-color: var(--text-field-bg);
 
   &:focus-within {
-    border-color: var(--primary-color) !important;
+    border-color: #00a8ff !important;
 
     .icon {
-      color: var(--primary-color);
+      color: #00a8ff;
     }
   }
 
@@ -49,6 +50,8 @@
     width: 100%;
     font-weight: 500;
     font-size: var(--font-md);
+    color: var(--text-color);
+    background-color: var(--text-field-bg);
 
     &:read-only {
       color: var(--grey-bold-color);
@@ -60,6 +63,6 @@
   font-size: var(--font-xl);
   display: flex;
   align-items: center;
-  background-color: #fff;
+  background-color: var(--text-field-bg);
   padding: 0 5px;
 }
