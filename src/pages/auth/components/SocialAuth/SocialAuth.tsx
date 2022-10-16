@@ -52,6 +52,7 @@ const SocialAuth: FC<Props> = ({ disabled = false }) => {
           onSuccess={handleLoginSuccess}
           onFailure={handleLoginFailure}
           disabled={disabled}
+          theme="dark"
         />
       </ul>
     </div>

@@ -9,6 +9,7 @@ import images from 'src/assets/images';
 import Switch from 'src/components/Form/Switch';
 import { NoteIcon } from 'src/components/Icons';
 import { routePaths } from 'src/configs';
+import useDarkMode from 'src/hooks/useDarkMode';
 import styles from './Header.module.scss';
 import Search from './Search';
 
@@ -20,6 +21,8 @@ const cx = classNames.bind(styles);
 
 const Header: FC<Props> = ({ onToggleSidebar }) => {
   const { user } = useAppSelector((state) => state.auth);
+
+  const { darkMode, onToggleTheme: handleToggleMode } = useDarkMode();
 
   return (
     <header className={cx('wrapper')}>
@@ -34,7 +37,7 @@ const Header: FC<Props> = ({ onToggleSidebar }) => {
         <Search />
         <div className={cx('right')}>
           <div className={cx('dark-mode')}>
-            <Switch name="dark-mode" />
+            <Switch name="dark-mode" checked={darkMode} onChange={handleToggleMode} />
           </div>
           <Link to={routePaths.profile} className={cx('user')}>
             <img className={cx('avatar')} src={user?.avatar || images.avatarDefault} alt="" />

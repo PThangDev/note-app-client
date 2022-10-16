@@ -31,9 +31,10 @@
 
 .field {
   border: 2px solid var(--grey-bold-color);
-  border-radius: 6px;
+  border-radius: 7px;
   display: flex;
-  align-items: center;
+  align-items: stretch;
+  overflow: hidden;
 
   &:focus-within {
     border-color: var(--primary-color) !important;
@@ -47,7 +48,6 @@
     padding: 12px 10px;
     width: 100%;
     font-weight: 500;
-    border-radius: 6px;
     font-size: var(--font-md);
 
     &:read-only {
@@ -57,6 +57,9 @@
 }
 
 .icon {
-  padding-left: 10px;
   font-size: var(--font-xl);
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 0 5px;
 }
