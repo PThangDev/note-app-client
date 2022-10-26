@@ -1,7 +1,7 @@
-import { faTimesCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faSquareCheck, faTimesCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames/bind';
-import { FC, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { Col, Container, Row } from 'react-grid-system';
 
 import { useAppDispatch } from 'src/app/hooks';
@@ -18,13 +18,24 @@ interface Props {
   topics: Topic[];
   isLoading?: boolean;
   loadingItems?: number;
+  totalTopics?: number;
 }
 
 const cx = classnames.bind(styles);
 
-const TopicContainer: FC<Props> = ({ topics, isLoading = false, loadingItems = 10 }) => {
+const TopicContainer: FC<Props> = ({
+  topics,
+  isLoading = false,
+  loadingItems = 10,
+  totalTopics,
+}) => {
   const dispatch = useAppDispatch();
   const [topicsSelected, setTopicsSelected] = useState<Topic[]>([]);
+
+  const isSelectAll = useMemo(() => {
+    if (!totalTopics) return false;
+    return topicsSelected.length >= totalTopics;
+  }, [topicsSelected.length, totalTopics]);
 
   const handleSelectTopic = (topic: Topic) => {
     setTopicsSelected((prevTopicsSelected) => {
@@ -36,9 +47,13 @@ const TopicContainer: FC<Props> = ({ topics, isLoading = false, loadingItems = 1
   };
 
   const handleRemoveTopicsSelected = () => setTopicsSelected([]);
+  const handleSelectAllTopics = () =>
+    setTopicsSelected((prevTopicsSelected) => [...prevTopicsSelected, ...topics]);
 
   const handleDeleteManyTopics = async () => {
-    const result = await sweetAlert.confirm({ text: `Delete ${topicsSelected.length} topics` });
+    const result = await sweetAlert.confirm({
+      text: `Do you want to delete ${topicsSelected.length} topics`,
+    });
 
     if (result.isConfirmed) {
       const topicIds = topicsSelected.map((topic) => topic._id);
@@ -90,6 +105,14 @@ const TopicContainer: FC<Props> = ({ topics, isLoading = false, loadingItems = 1
             onClick={handleRemoveTopicsSelected}
           >
             Cancel
+          </Button>
+          <Button
+            status="success"
+            icon={<FontAwesomeIcon icon={faSquareCheck} />}
+            onClick={handleSelectAllTopics}
+            disabled={isSelectAll}
+          >
+            Select All
           </Button>
           <Button
             status="error"

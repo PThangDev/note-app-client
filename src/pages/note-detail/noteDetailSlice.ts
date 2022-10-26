@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
 
 import { noteAPI } from 'src/services';
 import { BaseDataResponse, ErrorResponse, Note, RejectValue } from 'src/types';
+import { sweetAlert } from 'src/utils';
 
 interface InitialStateProps {
   isLoading: boolean;
@@ -49,7 +49,7 @@ const noteDetailSlice = createSlice({
       })
       .addCase(fetchGetNoteDetail.rejected, (state, action) => {
         state.isLoading = false;
-        toast.error(action.payload?.message);
+        sweetAlert.error(action.payload?.message);
       });
   },
 });

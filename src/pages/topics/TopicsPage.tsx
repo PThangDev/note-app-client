@@ -41,7 +41,8 @@ const TopicsPage: FC<Props> = (props) => {
   return (
     <>
       <Helmet>
-        <title>Topics</title>
+        <title>{isLoading ? 'Loading...' : 'Topics'}</title>
+        <meta name="description" content="Note App - PThangDev"></meta>
       </Helmet>
       <div className={cx('wrapper')}>
         <div className={cx('header')}>
@@ -57,7 +58,7 @@ const TopicsPage: FC<Props> = (props) => {
         </div>
 
         <div className={cx('topics')}>
-          <TopicContainer topics={data} isLoading={isLoading} />
+          <TopicContainer topics={data} isLoading={isLoading} totalTopics={pagination.total} />
           <Pagination pagination={pagination} />
         </div>
       </div>

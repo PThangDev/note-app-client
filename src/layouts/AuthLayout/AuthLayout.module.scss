@@ -1,7 +1,10 @@
 @import 'src/themes/GlobalStyles/utils/responsive';
 
 body[theme='dark-mode'] .wrapper {
-  // background: var(--primary-color);
+  &::before {
+    background: url('../../assets/images/bg-main-dark.jpg') center no-repeat;
+    background-size: cover;
+  }
 }
 
 .wrapper {

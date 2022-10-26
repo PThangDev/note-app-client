@@ -19,7 +19,7 @@ import useGetNotes from 'src/hooks/useGetNotes';
 import { Button } from 'src/themes/UI';
 import { sweetAlert } from 'src/utils';
 import styles from './NotesPage.module.scss';
-import { fetchGetNotes, fetchToggleManyNotesToTrash } from './notesSlice';
+import { fetchToggleManyNotesToTrash } from './notesSlice';
 
 interface Props {}
 
@@ -43,16 +43,20 @@ const NotesPage: FC<Props> = (props) => {
   };
 
   const handleClearNotesSelected = () => setNotesSelected([]);
-  const handleSelectAllNotes = () => setNotesSelected(data.map((note) => note._id));
+  const handleSelectAllNotes = () =>
+    setNotesSelected((prevNotesSelected) => [
+      ...prevNotesSelected,
+      ...data.map((note) => note._id),
+    ]);
 
   const isSelectAll = useMemo(
-    () => notesSelected.length === data.length,
-    [data.length, notesSelected.length]
+    () => notesSelected.length >= pagination.total,
+    [notesSelected.length, pagination.total]
   );
 
   const handleMoveNotesToTrash = async () => {
     const result = await sweetAlert.confirm({
-      text: `Do you want to move ${notesSelected.length} to trash`,
+      text: `Do you want to move ${notesSelected.length} notes to trash`,
     });
 
     if (result.isConfirmed) {
@@ -75,6 +79,7 @@ const NotesPage: FC<Props> = (props) => {
     <>
       <Helmet>
         <title>Notes</title>
+        <meta name="description" content="Note App - PThangDev"></meta>
       </Helmet>
       <div className={cx('wrapper')}>
         <div className={cx('actions')}>
