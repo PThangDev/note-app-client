@@ -1,0 +1,15 @@
+.wrapper {
+}
+.header {
+  & > h2 {
+    font-size: var(--font-3xl);
+  }
+  & > p {
+    font-style: italic;
+    font-size: var(--font-sm);
+
+    span {
+      color: var(--primary-color);
+    }
+  }
+}

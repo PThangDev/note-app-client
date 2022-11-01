@@ -15,6 +15,7 @@
       &:focus,
       &:not(:placeholder-shown) {
         $color-active: var(--error-color);
+
         border-bottom-color: $color-active;
         & ~ .icon {
           color: $color-active;
@@ -36,6 +37,8 @@
 }
 .input-field {
   position: relative;
+  background: var(--text-field-bg);
+  color: var(--text-color);
 
   &.without-icon {
     input {
@@ -50,6 +53,9 @@
     padding: 0 35px;
     font-size: 1.6rem;
     transition: all 0.2s ease;
+    background: var(--text-field-bg);
+    color: var(--text-color);
+
     &:focus,
     &:not(:placeholder-shown) {
       $color-active: #4070f4;

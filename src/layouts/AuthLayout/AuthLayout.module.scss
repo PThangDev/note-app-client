@@ -1,5 +1,12 @@
 @import 'src/themes/GlobalStyles/utils/responsive';
 
+body[theme='dark-mode'] .wrapper {
+  &::before {
+    background: url('../../assets/images/bg-main-dark.jpg') center no-repeat;
+    background-size: cover;
+  }
+}
+
 .wrapper {
   height: 100vh;
   display: flex;
@@ -25,13 +32,15 @@
 .inner {
   border-radius: 10px;
   overflow: hidden;
-  background-color: var(--white-color);
+  background-color: var(--paper-bg);
   max-width: 520px;
   width: 95%;
   min-height: 300px;
   padding: 30px 40px;
   padding-bottom: 35px;
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+
+  color: var(--text-color);
 
   @include media-sm {
     padding: 20px 20px;

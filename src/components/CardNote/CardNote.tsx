@@ -57,7 +57,15 @@ const CardNote: FC<Props> = ({
   const contentRemoveAnchorTag = useMemo(() => {
     if (!content) return '';
 
-    const newContent = content.replaceAll(/#+/g, '');
+    // Replace anchor tag to paragraph tag or code block
+    const newContent = content
+      .replaceAll(/<a href=.+">/g, '<p>')
+      .replaceAll(/<a>/g, '<p>')
+      .replaceAll(
+        /\[.+\]\(.+\)/g,
+        (searchValue: string, replaceValue: string) => `\`${searchValue}\``
+      )
+      .replaceAll(/#+/g, '');
 
     return newContent;
   }, [content]);

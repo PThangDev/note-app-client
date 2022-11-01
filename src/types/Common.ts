@@ -46,3 +46,5 @@ export interface QueryParams {
 export interface RejectValue<T = unknown> {
   rejectValue: ErrorResponse<T>;
 }
+
+export type Theme = 'dark' | 'light';

@@ -24,12 +24,13 @@ const SearchPage: FC<Props> = (props) => {
         <title>{isLoading ? 'Searching...' : 'Search Results'}</title>
       </Helmet>
       <div className={cx('wrapper')}>
-        <NoteContainer
-          isLoading={isLoading}
-          header={{ text: 'Results' }}
-          notes={data}
-          loadingItems={8}
-        />
+        <div className={cx('header')}>
+          <h2>Results</h2>
+          <p>
+            ( Search keyword: <span>{params.q}</span> )
+          </p>
+        </div>
+        <NoteContainer isLoading={isLoading} notes={data} loadingItems={8} />
       </div>
     </>
   );

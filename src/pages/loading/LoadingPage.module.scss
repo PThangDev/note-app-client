@@ -1,8 +1,13 @@
+body[theme='dark-mode'] .wrapper {
+  background: url('../../assets/images/bg-main-dark.jpg') center no-repeat;
+}
+
 .wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   background: url('../../assets/images/bg-main.jpg') center no-repeat;
+  background-size: cover;
 
   position: absolute;
   width: 100%;

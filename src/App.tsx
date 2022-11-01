@@ -6,11 +6,14 @@ import 'tippy.js/dist/tippy.css';
 
 import GlobalStyles from 'src/themes';
 import ScrollToTop from './components/ScrollToTop';
+import useDarkMode from './hooks/useDarkMode';
 import { PageRoutes } from './routes';
 
 interface Props {}
 
 const App: FC<Props> = (props) => {
+  useDarkMode();
+
   return (
     <div className="app">
       <ToastContainer

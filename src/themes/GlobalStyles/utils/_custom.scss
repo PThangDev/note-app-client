@@ -47,9 +47,14 @@ body .wmde-markdown {
 
   table tr {
     background-color: var(--main-bg);
+    color: var(--text-color);
+
+    th {
+      font-size: var(--font-xl);
+    }
 
     &:nth-child(2n) {
-      background-color: rgb(206, 198, 198);
+      background-color: var(--even-tr-bg);
     }
   }
 
@@ -73,7 +78,22 @@ body .rc-md-editor {
   }
 }
 
-.w-md-editor-text {
+body .rc-md-editor {
+  .editor-container {
+    .sec-md .input {
+      background: var(--paper-bg);
+      color: var(--text-color);
+    }
+    .section-container {
+      background: var(--paper-bg);
+      & > * {
+        color: var(--text-color);
+      }
+    }
+  }
+}
+
+body .w-md-editor-text {
   // Remove padding in editor
   code[class*='language-'],
   pre[class*='language-'] {
@@ -128,13 +148,17 @@ body .rc-md-editor {
     width: 150%;
     height: 150%;
     border-radius: 50%;
-    background: var(--white-color) url('../../../assets/images/frog-sad.gif') center;
+    background: var(--paper-bg) url('../../../assets/images/frog-sad.gif') center;
     background-size: cover;
     z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
   }
+}
+.swal2-popup.swal2-modal {
+  background-color: var(--paper-bg);
+  color: var(--text-color);
 }
 // React colorful
 .react-colorful {
