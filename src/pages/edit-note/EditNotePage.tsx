@@ -18,7 +18,7 @@ const EditNotePage: FC<Props> = (props) => {
       <Helmet>
         <title>Edit note</title>
       </Helmet>
-      <div className={cx('wrapper')}>{data && <FormNote data={data} onClose={() => {}} />}</div>
+      <div className={cx('wrapper')}>{data && <FormNote data={data} />}</div>
     </>
   );
 };

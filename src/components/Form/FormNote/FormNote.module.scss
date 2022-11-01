@@ -1,3 +1,5 @@
+@import 'src/themes/GlobalStyles/utils/responsive';
+
 .wrapper {
   position: relative;
   display: flex;
@@ -42,6 +44,10 @@
 .heading {
   text-align: center;
   font-size: var(--font-3xl);
+
+  @include media-sm {
+    font-size: var(--font-2xl);
+  }
 }
 
 .title {
@@ -84,17 +90,28 @@
 .groups-body {
   display: flex;
   align-items: stretch;
+
+  @include media-md {
+    flex-direction: column;
+  }
 }
 
 .color-picker {
-  margin-left: 20px;
   flex: 1;
 }
 
 .card-preview {
   height: 318px;
   flex: 2;
-  width: 50%;
+  margin-right: 20px;
+
+  // width: 50%;
+
+  @include media-md {
+    flex: 1;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
 
   .card {
     height: 100%;

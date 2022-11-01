@@ -105,9 +105,9 @@ const TopicSelect: FC<Props> = ({ topics, onChangeTopicSelect }) => {
           <Button icon={<FontAwesomeIcon icon={faSquarePlus} />} onClick={handleOpenFormTopic}>
             Add Topic
           </Button>
-          <Button status="error" icon={<FontAwesomeIcon icon={faDeleteLeft} />}>
+          {/* <Button status="error" icon={<FontAwesomeIcon icon={faDeleteLeft} />}>
             Clear
-          </Button>
+          </Button> */}
         </div>
         <div className={cx('list')}>
           {data.map((topic) => (

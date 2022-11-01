@@ -16,7 +16,7 @@ const NewNotePage: FC<Props> = (props) => {
         <title>Create a new note</title>
       </Helmet>
       <div className={cx('wrapper')}>
-        <FormNote onClose={() => {}} />
+        <FormNote />
       </div>
     </>
   );

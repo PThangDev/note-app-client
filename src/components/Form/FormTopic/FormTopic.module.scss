@@ -1,7 +1,14 @@
+@import 'src/themes/GlobalStyles/utils/responsive';
+
 .wrapper {
   min-width: 700px;
   padding: 0 10px;
   padding-bottom: 10px;
+
+  @include media-md {
+    min-width: 88vw;
+    padding: 0;
+  }
 }
 
 .header {
@@ -15,11 +22,20 @@
   display: flex;
   align-items: stretch;
   margin-top: 30px;
+
+  @include media-md {
+    flex-direction: column;
+  }
 }
 
 .groups-left {
   flex: 1;
   margin-right: 20px;
+
+  @include media-md {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
 }
 .groups-right {
   flex: 2;

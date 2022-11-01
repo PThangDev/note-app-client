@@ -23,7 +23,6 @@ import TopicSelect from '../TopicSelect';
 import styles from './FormNote.module.scss';
 
 interface Props {
-  onClose?: () => void;
   data?: Note;
 }
 
@@ -31,7 +30,7 @@ const cx = classnames.bind(styles);
 
 const TIME_DEBOUNCE_DELAY = 300;
 
-const FormNote: FC<Props> = ({ data, onClose }) => {
+const FormNote: FC<Props> = ({ data }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -156,12 +155,12 @@ const FormNote: FC<Props> = ({ data, onClose }) => {
         <div className={cx('groups')}>
           <Container fluid style={{ padding: 0 }}>
             <Row nogutter>
-              <Col xl={6}>
+              <Col md={12} lg={12} xl={6}>
                 <div className={cx('groups-left')}>
                   <TopicSelect topics={topics} onChangeTopicSelect={handleChangeTopic} />
                 </div>
               </Col>
-              <Col xl={6}>
+              <Col md={12} lg={12} xl={6}>
                 <div className={cx('groups-right')}>
                   <h3>Choose color and preview card</h3>
                   <div className={cx('groups-body')}>
