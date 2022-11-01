@@ -1,3 +1,9 @@
+@import 'src/themes/GlobalStyles/utils/responsive';
+
 .wrapper {
   padding: 20px;
+
+  @include media-md {
+    padding: 5px;
+  }
 }

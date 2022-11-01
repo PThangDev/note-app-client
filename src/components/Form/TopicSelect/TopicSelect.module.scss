@@ -1,3 +1,5 @@
+@import 'src/themes/GlobalStyles/utils/responsive';
+
 $card-topic-gap: 5px;
 
 .wrapper {
@@ -8,9 +10,19 @@ $card-topic-gap: 5px;
   display: flex;
   font-weight: 600;
   margin-bottom: 10px;
+
+  @include media-md {
+    flex-direction: column;
+  }
+
   .heading {
     margin-bottom: 0px;
     margin-right: 5px;
+
+    @include media-md {
+      margin-right: 0;
+      margin-bottom: 5px;
+    }
   }
 }
 
@@ -40,10 +52,19 @@ $card-topic-gap: 5px;
   display: flex;
   align-items: stretch;
   margin-bottom: 10px;
+
+  @include media-sm {
+    flex-direction: column;
+  }
 }
 .search {
   flex: 1;
   margin-right: 15px;
+
+  @include media-sm {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
 }
 
 .list {
@@ -62,4 +83,8 @@ $card-topic-gap: 5px;
   margin-bottom: 10px;
 
   width: calc(50% - #{$spacer-horizontal} * 2);
+
+  @include media-md {
+    width: 100%;
+  }
 }
