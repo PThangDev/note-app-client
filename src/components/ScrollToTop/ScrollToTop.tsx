@@ -31,7 +31,7 @@ const ScrollToTop: FC<Props> = (props) => {
   if (!isVisible) return null;
 
   return (
-    <Tippy content="Scroll To Top" placement='left'>
+    <Tippy content="Scroll To Top" placement="left">
       <FontAwesomeIcon
         className={cx('icon')}
         icon={faCircleChevronUp}
